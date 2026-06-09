@@ -16,9 +16,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "YUNA - Gia Dụng Thông Minh",
   description: "Thiết bị gia dụng cao cấp YUNA - Chính hãng, chất lượng tốt nhất",
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
