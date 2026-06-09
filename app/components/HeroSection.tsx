@@ -14,6 +14,7 @@ export default function HeroSection() {
       tagline: "ƯU ĐÃI LÊN ĐẾN 40%",
       image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
       cta: "Mua Ngay",
+      link: "/dien-gia-dung",
       badge: "Xu Hướng 2026",
       badgeColor: "bg-[#6B8E23]"
     },
@@ -23,6 +24,7 @@ export default function HeroSection() {
       tagline: "BẢO HÀNH CHÍNH HÃNG 2 NĂM",
       image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1200&q=80",
       cta: "Khám Phá",
+      link: "/gia-dung-tien-ich",
       badge: "Bán Chạy Nhất",
       badgeColor: "bg-[#C59B27]"
     }
@@ -84,7 +86,7 @@ export default function HeroSection() {
                   </span>
                 </div>
                 <a
-                  href="#"
+                  href={slide.link}
                   className="self-start px-8 py-3 bg-[#6B8E23] hover:bg-[#5a781e] text-white font-bold rounded-lg transition-all transform hover:scale-[1.02] shadow-md text-sm md:text-base"
                 >
                   {slide.cta}
@@ -147,12 +149,12 @@ export default function HeroSection() {
               <p className="text-xs text-gray-200 mb-4 max-w-[200px]">
                 Nơi khơi nguồn ấm áp, nâng tầm bữa ăn gia đình
               </p>
-              <a
-                href="#"
-                className="self-start text-xs font-bold text-white border-b-2 border-white hover:border-[#C59B27] hover:text-[#C59B27] transition-all pb-0.5"
-              >
-                XEM BỘ SƯU TẬP
-              </a>
+               <a
+                 href="/gia-dung-nha-bep"
+                 className="self-start text-xs font-bold text-white border-b-2 border-white hover:border-[#C59B27] hover:text-[#C59B27] transition-all pb-0.5"
+               >
+                 XEM BỘ SƯU TẬP
+               </a>
             </div>
           </div>
 
@@ -177,12 +179,12 @@ export default function HeroSection() {
               <p className="text-xs text-gray-200 mb-4 max-w-[200px]">
                 Tối ưu hóa không gian, tiết kiệm thời gian
               </p>
-              <a
-                href="#"
-                className="self-start text-xs font-bold text-white border-b-2 border-white hover:border-[#C59B27] hover:text-[#C59B27] transition-all pb-0.5"
-              >
-                XEM CHI TIẾT
-              </a>
+               <a
+                 href="/gia-dung-tien-ich"
+                 className="self-start text-xs font-bold text-white border-b-2 border-white hover:border-[#C59B27] hover:text-[#C59B27] transition-all pb-0.5"
+               >
+                 XEM CHI TIẾT
+               </a>
             </div>
           </div>
         </div>
