@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart, Eye } from "lucide-react";
 import { supabase, getProductImage, getCategoryLabel } from "../../lib/supabase";
@@ -213,13 +214,14 @@ export default function ProductGrid() {
 
             {/* Product Image Area */}
             <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
-              <Link href={"/product/" + product.id} className="w-full h-full block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <Link href={"/product/" + product.id} className="w-full h-full block relative">
+                <Image
                   src={getProductImage(product.image)}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </Link>
               {/* Hover Actions */}

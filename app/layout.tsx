@@ -14,8 +14,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YUNA - Gia Dụng Thông Minh",
-  description: "Thiết bị gia dụng cao cấp YUNA - Chính hãng, chất lượng tốt nhất",
+  title: "YUNA - Gia Dụng Thông Minh & Tiện Ích Hiện Đại",
+  description: "Chuyên cung cấp các giải pháp dọn dẹp hiện đại, robot hút bụi, máy lọc không khí và đồ gia dụng thông minh chính hãng cho gia đình bạn.",
+  keywords: ['gia dung thong minh', 'yuna', 'robot hut bui', 'thiet bi tien ich', 'yuna gia dung'],
+  openGraph: {
+    title: "YUNA - Gia Dụng Thông Minh & Tiện Ích Hiện Đại",
+    description: "Chuyên cung cấp các giải pháp dọn dẹp hiện đại, robot hút bụi, máy lọc không khí và đồ gia dụng thông minh chính hãng cho gia đình bạn.",
+    locale: 'vi_VN',
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'YUNA - Gia Dụng Thông Minh',
+      }
+    ],
+  },
 };
 
 export default function RootLayout({
