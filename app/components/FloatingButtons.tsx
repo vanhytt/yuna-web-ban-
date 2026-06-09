@@ -21,7 +21,7 @@ export default function FloatingButtons() {
 
       {/* 2. Chat Facebook Button */}
       <a
-        href="https://m.me/yunavietnam"
+        href="https://www.facebook.com/yunavietnamfanpage/"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2.5 px-4 py-2.5 bg-[#1877F2] hover:bg-[#166FE5] text-white font-bold rounded-full shadow-lg transition-all transform hover:scale-[1.05] hover:-translate-y-0.5 text-xs md:text-sm group"

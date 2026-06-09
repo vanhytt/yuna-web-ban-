@@ -44,7 +44,7 @@ export default function Footer() {
             THÔNG TIN LIÊN HỆ
           </h4>
           <p className="leading-relaxed mb-2 text-white/50">
-            <strong className="text-white/70">Địa chỉ:</strong> Khu đô thị mới, Hà Nội, Việt Nam
+            <strong className="text-white/70">Địa chỉ:</strong> Số 2CK1/7 khu đô thị làng nghề Vạn Phúc, Vạn Phúc, Hà Đông, Hà Nội
           </p>
           <p className="leading-relaxed mb-2 text-white/50">
             <strong className="text-white/70">Hotline:</strong> 0977 500 651
