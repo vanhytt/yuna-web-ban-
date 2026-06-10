@@ -180,7 +180,7 @@ export default function Header() {
             </div>
             <div className="flex items-center gap-3 border-l border-gray-200 pl-4">
               <a
-                href="#"
+                href="https://www.facebook.com/yunavietnamfanpage/"
                 className="text-gray-400 hover:text-blue-600 transition-colors"
                 aria-label="Facebook"
               >
@@ -189,7 +189,7 @@ export default function Header() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.tiktok.com/@yunavietnamm?_r=1&_t=ZS-975BbJaGGNU"
                 className="text-gray-400 hover:text-black transition-colors"
                 aria-label="TikTok"
               >
@@ -203,12 +203,12 @@ export default function Header() {
                 </svg>
               </a>
               <a
-                href="#"
-                className="text-gray-400 hover:text-red-600 transition-colors"
-                aria-label="YouTube"
+                href="https://shopee.vn/yunavietnam68?entryPoint=ShopBySearch&searchKeyword=yunavietnam"
+                className="text-gray-400 hover:text-[#EE4D2D] transition-colors"
+                aria-label="Shopee"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  <path d="M19.7 6.4h-3.2C16 3.2 14.2 1 12 1S8 3.2 7.5 6.4H4.3C3.6 6.4 3 7 3 7.7v12.2C3 21.3 4.2 23 5.7 23h12.6c1.5 0 2.7-1.7 2.7-3.1V7.7c0-.7-.6-1.3-1.3-1.3zM12 3c1.1 0 2 1.5 2.2 3.4H9.8C10 4.5 10.9 3 12 3zm0 13c-2.4 0-4.3-1.8-4.3-4.1h1.7c0 1.3 1.2 2.4 2.6 2.4s2.6-1.1 2.6-2.4h1.7c0 2.3-1.9 4.1-4.3 4.1z" />
                 </svg>
               </a>
             </div>
