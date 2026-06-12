@@ -18,27 +18,19 @@ import {
   Package,
   Baby,
   Gem,
-  LifeBuoy
+  LifeBuoy,
+  CookingPot
 } from "lucide-react";
 
 export default function CategorySidebar() {
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
 
   const categories = [
-    { icon: <Coffee className="w-4 h-4 text-gray-500" />, label: "Cốc - Bình giữ nhiệt - Bình nước", href: "/coc-binh-giu-nhiet", hasSub: true },
-    { icon: <Wine className="w-4 h-4 text-gray-500" />, label: "Hộp đựng rượu vang", href: "/hop-dung-ruou-vang", hasSub: true },
-    { icon: <Award className="w-4 h-4 text-gray-500" />, label: "Biển tên - Huy hiệu - Vinh danh", href: "/bien-ten-huy-hieu-vinh-danh", hasSub: true },
-    { icon: <BookOpen className="w-4 h-4 text-gray-500" />, label: "Bút - Sổ - Hộp namecard", href: "/but-so-hop-namecard", hasSub: true },
-    { icon: <Laptop className="w-4 h-4 text-gray-500" />, label: "Quà tặng IT", href: "/qua-tang-it", hasSub: false },
-    { icon: <Briefcase className="w-4 h-4 text-gray-500" />, label: "Balo - Túi - Ví - Cặp", href: "/balo-tui-vi-cap", hasSub: true },
-    { icon: <Watch className="w-4 h-4 text-gray-500" />, label: "Vòng tay - Quạt - Móc khóa", href: "/vong-tay-quat-moc-khoa", hasSub: true },
-    { icon: <Umbrella className="w-4 h-4 text-gray-500" />, label: "Ô - Áo - Mũ - Thẻ hành lý", href: "/o-ao-mu-the-hanh-ly", hasSub: true },
-    { icon: <Flame className="w-4 h-4 text-gray-500" />, label: "Gạt tàn - Bật lửa - Lót ly", href: "/gat-tan-bat-lua-lot-ly", hasSub: true },
-    { icon: <Package className="w-4 h-4 text-gray-500" />, label: "Bộ quà tặng - Bộ giftset", href: "/bo-qua-tang-bo-giftset", hasSub: true },
-    { icon: <Watch className="w-4 h-4 text-gray-500" />, label: "Quà tặng đồng hồ", href: "/qua-tang-dong-ho", hasSub: true },
-    { icon: <Baby className="w-4 h-4 text-gray-500" />, label: "Quà tặng dành cho trẻ em", href: "/qua-tang-danh-cho-tre-em", hasSub: true },
-    { icon: <Gem className="w-4 h-4 text-gray-500" />, label: "Quà tặng cao cấp", href: "/qua-tang-cao-cap", hasSub: true },
-    { icon: <LifeBuoy className="w-4 h-4 text-gray-500" />, label: "Bộ sản phẩm bơm hơi", href: "/bo-san-pham-bom-hoi", hasSub: true },
+    { icon: <Package className="w-4 h-4 text-gray-500" />, label: "Điện gia dụng", href: "/dien-gia-dung", hasSub: true },
+    { icon: <CookingPot className="w-4 h-4 text-gray-500" />, label: "Gia dụng nhà bếp", href: "/g  ia-dung-nha-bep", hasSub: true },
+    { icon: <Coffee className="w-4 h-4 text-gray-500" />, label: "Gia dụng tiện ích", href: "/gia-dung-tien-ich", hasSub: true },
+    { icon: <Gift className="w-4 h-4 text-gray-500" />, label: "Quà tặng và phụ kiện", href: "/qua-tang-va-phu-kien", hasSub: true },
+
   ];
 
   return (
