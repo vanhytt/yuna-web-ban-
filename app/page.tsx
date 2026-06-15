@@ -14,9 +14,11 @@ export default function Home() {
       <Header />
       <Navbar />
 
+      {/* Hero Banner — full-width, outside the constrained main container */}
+      <HeroSection />
+
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
-        <HeroSection />
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
         <ProductGrid />
         <VideoReviewSlider />
       </main>
