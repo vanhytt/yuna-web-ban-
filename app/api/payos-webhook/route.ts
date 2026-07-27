@@ -44,31 +44,13 @@ export async function POST(request: NextRequest) {
       // Bỏ qua nếu không lấy được chi tiết
     }
 
-    // Đọc metadata đơn hàng do client gửi kèm trong X-Order-Meta header
-    const orderMetaHeader = request.headers.get("x-order-meta");
-    if (orderMetaHeader) {
-      try {
-        const meta = JSON.parse(orderMetaHeader);
-        buyerName = meta.name || "";
-        buyerPhone = meta.phone || "";
-        buyerAddress = meta.address || "";
-        productsList = meta.productsList || "";
-      } catch {
-        // header không parse được — bỏ qua
-      }
-    }
-
-    // Chuẩn bị payload gửi về Google Sheet
+    // Chuẩn bị payload cập nhật trạng thái gửi về Google Sheet
     const sheetPayload = {
-      timestamp: new Date().toLocaleString("vi-VN"),
-      orderId: description, // dạng "PBxxxxxx"
-      name: buyerName,
-      phone: buyerPhone,
-      address: buyerAddress,
-      productsList,
+      action: "update_status",
+      orderId: description || `PB${orderCode}`,
+      status: "ĐÃ THANH TOÁN (Tiền đã về)",
       totalPrice: amount,
       paymentMethod: "payOS QR",
-      status: "ĐÃ THANH TOÁN (Tiền đã về)",
     };
 
     // Đẩy về Google Sheets qua webhook nội bộ
@@ -86,10 +68,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({
-      status: "success",
-      message: `Đã xử lý thanh toán cho đơn ${description}`,
-    });
+    // Trả về response thành công đúng chuẩn của payOS và yêu cầu của người dùng
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Lỗi xử lý payOS webhook:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

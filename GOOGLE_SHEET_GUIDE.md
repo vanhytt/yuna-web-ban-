@@ -12,14 +12,69 @@ Mở bảng tính Google Sheets của bạn, chọn **Tiện ích mở rộng (E
 // Google Apps Script nhận dữ liệu đặt hàng từ website PLOYBAY
 function doPost(e) {
   try {
-    // Phục hồi và phân tích payload từ request POST
+    // Phân tích payload từ request POST
     var jsonString = e.postData.contents;
     var data = JSON.parse(jsonString);
     
     // Mở active sheet
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    // Đọc các giá trị đơn hàng
+    // HỖ TRỢ CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG (Dùng cho PayOS Webhook khi thanh toán thành công)
+    if (data.action === "update_status") {
+      var orderId = data.orderId || "";
+      var newStatus = data.status || "";
+      
+      if (!orderId) {
+        return ContentService.createTextOutput(JSON.stringify({
+          "status": "error",
+          "message": "Thiếu orderId để cập nhật!"
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+      
+      var lastRow = sheet.getLastRow();
+      var foundRow = -1;
+      
+      if (lastRow > 1) {
+        // Đọc toàn bộ cột Mã đơn hàng (Cột B - Cột thứ 2) từ dòng 2 đến dòng cuối
+        var range = sheet.getRange(2, 2, lastRow - 1, 1);
+        var values = range.getValues();
+        
+        for (var i = 0; i < values.length; i++) {
+          if (String(values[i][0]).trim() === String(orderId).trim()) {
+            foundRow = i + 2; // cộng 2 do mảng 0-indexed và bắt đầu từ dòng 2
+            break;
+          }
+        }
+      }
+      
+      if (foundRow !== -1) {
+        // Cập nhật ô Trạng thái (Cột I - Cột thứ 9)
+        sheet.getRange(foundRow, 9).setValue(newStatus);
+        return ContentService.createTextOutput(JSON.stringify({
+          "status": "success",
+          "message": "Đã cập nhật trạng thái đơn hàng " + orderId + " thành: " + newStatus
+        })).setMimeType(ContentService.MimeType.JSON);
+      } else {
+        // Nếu không tìm thấy đơn hàng gốc, tạo một dòng mới để tránh mất thông tin
+        sheet.appendRow([
+          new Date().toLocaleString('vi-VN'),
+          orderId,
+          "Khách ẩn danh (PayOS)",
+          "",
+          "Xem chi tiết trên cổng PayOS",
+          "Thanh toán QR qua PayOS",
+          data.totalPrice || 0,
+          data.paymentMethod || "payOS QR",
+          newStatus
+        ]);
+        return ContentService.createTextOutput(JSON.stringify({
+          "status": "success",
+          "message": "Không tìm thấy đơn hàng gốc, đã tự động append dòng mới cho đơn " + orderId
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    
+    // TẠO ĐƠN HÀNG MỚI (MẶC ĐỊNH)
     var timestamp = data.timestamp || new Date().toLocaleString('vi-VN');
     var orderId = data.orderId || "";
     var name = data.name || "";
@@ -29,9 +84,6 @@ function doPost(e) {
     var totalPrice = data.totalPrice ? Number(data.totalPrice) : 0;
     var paymentMethod = data.paymentMethod || "";
     var status = data.status || "Chờ xác nhận";
-    
-    // Format tổng tiền để hiển thị đẹp hơn trong Sheet (ví dụ: 1.500.000)
-    // Hoặc bạn có thể để nguyên dạng số tùy mục đích thống kê
     
     // Thêm dòng mới vào Google Sheets
     // Thứ tự các cột: [Thời gian, Mã đơn hàng, Tên khách hàng, SĐT, Địa chỉ, Sản phẩm, Tổng tiền, PTTT, Trạng thái]
@@ -47,14 +99,12 @@ function doPost(e) {
       status
     ]);
     
-    // Trả về phản hồi thành công (JSON)
     return ContentService.createTextOutput(JSON.stringify({
       "status": "success",
       "message": "Đơn hàng " + orderId + " đã được ghi nhận thành công!"
     })).setMimeType(ContentService.MimeType.JSON);
     
   } catch (error) {
-    // Trả về lỗi nếu xảy ra sự cố
     return ContentService.createTextOutput(JSON.stringify({
       "status": "error",
       "message": error.toString()
