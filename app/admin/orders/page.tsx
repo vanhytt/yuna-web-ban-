@@ -62,13 +62,13 @@ export default function OrdersAdminPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Tìm mã ĐH, khách hàng, SĐT..."
-              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
             />
           </div>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] bg-white cursor-pointer"
+            className="px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] bg-white cursor-pointer"
           >
             <option value="Tất cả">Tất cả trạng thái</option>
             <option value="Chờ xử lý">Chờ xử lý</option>

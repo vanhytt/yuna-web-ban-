@@ -39,7 +39,7 @@ export default function NewsDetailPage() {
       setLoading(true);
 
       if (!checkConnection()) {
-        const saved = localStorage.getItem("yuna_admin_posts");
+        const saved = localStorage.getItem("ploybay_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -64,7 +64,7 @@ export default function NewsDetailPage() {
         setPost(data as Post);
       } catch (err) {
         console.warn("Lỗi khi tải bài viết chi tiết:", err);
-        const saved = localStorage.getItem("yuna_admin_posts");
+        const saved = localStorage.getItem("ploybay_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -110,7 +110,7 @@ export default function NewsDetailPage() {
         <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <h1 className="text-2xl font-bold text-gray-900">Không tìm thấy bài viết</h1>
           <p className="text-gray-500 mt-3">Bài viết bạn đang mở không tồn tại hoặc đã bị xóa.</p>
-          <Link href="/tin-tuc" className="inline-flex mt-6 rounded-xl bg-[#6B8E23] px-4 py-2.5 text-white font-semibold hover:bg-[#5a781e] transition-colors">Quay lại Tin tức</Link>
+          <Link href="/tin-tuc" className="inline-flex mt-6 rounded-xl bg-[#C59B27] px-4 py-2.5 text-white font-semibold hover:bg-[#a17b1d] transition-colors">Quay lại Tin tức</Link>
         </main>
         <Footer />
         <FloatingButtons />
@@ -127,7 +127,7 @@ export default function NewsDetailPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
         <div className="relative h-[320px] sm:h-[380px] md:h-[450px] w-full">
           <Image
-            src={post.thumbnail || "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=1600&q=80"}
+            src={post.thumbnail || "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=1600&q=80"}
             alt={post.title}
             fill
             className="object-cover"
@@ -142,16 +142,16 @@ export default function NewsDetailPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
           <article className="rounded-[28px] border border-gray-200 bg-white shadow-xl p-6 md:p-8 lg:p-10">
             <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
-              <Link href="/" className="hover:text-[#6B8E23] transition-colors">Trang chủ</Link>
+              <Link href="/" className="hover:text-[#C59B27] transition-colors">Trang chủ</Link>
               <span>/</span>
-              <Link href="/tin-tuc" className="hover:text-[#6B8E23] transition-colors">Tin tức</Link>
+              <Link href="/tin-tuc" className="hover:text-[#C59B27] transition-colors">Tin tức</Link>
               <span>/</span>
-              <span className="text-[#6B8E23] font-semibold line-clamp-1">{post.title}</span>
+              <span className="text-[#C59B27] font-semibold line-clamp-1">{post.title}</span>
             </nav>
 
             <div className="mb-8 border-b border-gray-100 pb-6">
-              <span className="inline-flex rounded-full bg-[#6B8E23] px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-sm">
-                {post.category || "TIN TỨC YUNA"}
+              <span className="inline-flex rounded-full bg-[#C59B27] px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-sm">
+                {post.category || "TIN TỨC PLOYBAY"}
               </span>
 
               <h1 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-gray-900 leading-tight">
@@ -159,8 +159,8 @@ export default function NewsDetailPage() {
               </h1>
 
               <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-600 md:text-base">
-                <span className="inline-flex items-center gap-2 rounded-full bg-[#F5F7EE] px-3 py-1.5 font-medium text-[#4b5d1f]">
-                  Viết bởi {post.author || "Yuna Editor"}
+                <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5 font-medium text-[#B45309]">
+                  Viết bởi {post.author || "PLOYBAY Editor"}
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5 text-gray-600">
                   {post.created_at ? new Date(post.created_at).toLocaleDateString("vi-VN") : "Mới đăng"}
@@ -171,19 +171,19 @@ export default function NewsDetailPage() {
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] items-start">
               <div className="space-y-6 text-gray-700">
                 <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                  {post.content?.replace(/<[^>]+>/g, " ").slice(0, 260) || "Khám phá câu chuyện, mẹo hay và những sản phẩm mới nhất từ Yuna để gia đình bạn luôn tiện nghi và hiện đại hơn."}
+                  {post.content?.replace(/<[^>]+>/g, " ").slice(0, 260) || "Khám phá những câu chuyện thương hiệu, xu hướng thời trang quý ông và cẩm nang bảo quản phụ kiện da cao cấp từ PLOYBAY."}
                 </p>
 
-                <div className="rounded-2xl border border-[#E8EDDE] bg-[#F7FAF0] p-4 text-sm md:text-base text-gray-700 shadow-sm">
-                  <p className="font-semibold text-[#4b5d1f] mb-2">Gợi ý đọc thêm</p>
-                  <p>Hãy cùng theo dõi những chia sẻ mới nhất về đời sống gia đình, kỹ thuật làm đẹp căn bếp và các sản phẩm tiện ích đang được Yuna yêu thích.</p>
+                <div className="rounded-2xl border border-amber-100 bg-amber-50/30 p-4 text-sm md:text-base text-gray-700 shadow-sm">
+                  <p className="font-semibold text-[#B45309] mb-2">Gợi ý đọc thêm</p>
+                  <p>Hãy cùng theo dõi những chia sẻ mới nhất về phong cách sống của quý ông, bí quyết phối đồ da và cẩm nang lựa chọn quà tặng đẳng cấp từ PLOYBAY.</p>
                 </div>
               </div>
 
-              <aside className="rounded-3xl bg-gradient-to-br from-[#6B8E23] to-[#4d6720] p-5 text-white shadow-lg">
-                <p className="text-xs uppercase tracking-[0.3em] text-[#EDF4D8]">Bài viết nổi bật</p>
+              <aside className="rounded-3xl bg-gradient-to-br from-[#C59B27] to-[#8c6d17] p-5 text-white shadow-lg">
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-100">Bài viết nổi bật</p>
                 <h2 className="mt-3 text-xl font-bold leading-snug">{post.title}</h2>
-                <p className="mt-3 text-sm text-[#EEF5E1] leading-relaxed">{post.content?.replace(/<[^>]+>/g, " ").slice(0, 180) || "Bài viết được tối ưu để hiển thị rõ ràng, dễ đọc và hấp dẫn hơn trên mọi thiết bị."}</p>
+                <p className="mt-3 text-sm text-amber-50/90 leading-relaxed">{post.content?.replace(/<[^>]+>/g, " ").slice(0, 180) || "Bài viết được tối ưu để hiển thị rõ ràng, dễ đọc và hấp dẫn hơn trên mọi thiết bị."}</p>
               </aside>
             </div>
 

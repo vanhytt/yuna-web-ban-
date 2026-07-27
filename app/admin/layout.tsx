@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   Menu,
   LogOut,
-  Video,
   Loader2,
 } from "lucide-react";
 
@@ -21,7 +20,6 @@ const navItems = [
   { href: "/admin/products", label: "Quản lý sản phẩm", icon: Package },
   { href: "/admin/orders", label: "Quản lý đơn hàng", icon: ShoppingCart },
   { href: "/admin/posts", label: "Quản lý bài viết", icon: FileText },
-  { href: "/admin/videos", label: "Quản lý Video", icon: Video },
   { href: "/admin/settings", label: "Cài đặt", icon: Settings },
 ];
 
@@ -63,7 +61,7 @@ export default function AdminLayout({
           {!collapsed && (
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-widest text-white">
-                YUNA
+                PLOYBAY
               </span>
               <span className="text-[10px] text-slate-400 uppercase tracking-widest -mt-0.5">
                 Admin Panel
@@ -95,7 +93,7 @@ export default function AdminLayout({
                     href={item.href}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150 group ${
                       isActive
-                        ? "bg-[#6B8E23] text-white"
+                        ? "bg-[#C59B27] text-white"
                         : "text-slate-400 hover:bg-slate-800 hover:text-white"
                     }`}
                     title={collapsed ? item.label : undefined}
@@ -146,11 +144,11 @@ export default function AdminLayout({
             </span>
           </h1>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#6B8E23] flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-8 h-8 rounded-full bg-[#C59B27] flex items-center justify-center text-white text-xs font-bold">
               A
             </div>
             <span className="text-sm text-slate-700 font-medium hidden sm:block">
-              Admin Yuna
+              Admin PLOYBAY
             </span>
           </div>
         </header>

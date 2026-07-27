@@ -1,235 +1,132 @@
-# 📊 Hướng Dẫn Kết Nối Google Sheets với YUNA Web
+# HƯỚNG DẪN KẾT NỐI GOOGLE SHEETS BẰNG GOOGLE APPS SCRIPT
 
-## 🎯 Tổng Quan
-
-Hệ thống sẽ gửi dữ liệu đơn hàng từ Form "Đăng ký tư vấn" trực tiếp vào Google Sheets thông qua Google Apps Script Webhook.
+Tài liệu này hướng dẫn cách kết nối giỏ hàng trên website PLOYBAY với Google Sheets để quản lý đơn hàng tự động thông qua Google Apps Script.
 
 ---
 
-## 📋 Bước 1: Chuẩn Bị Google Sheet
+## 1. MÃ GOOGLE APPS SCRIPT (GAS)
 
-### 1.1 Tạo Google Sheet mới
-1. Truy cập [Google Sheets](https://sheets.google.com)
-2. Nhấn **"+"** để tạo Spreadsheet mới
-3. Đặt tên: **"YUNA Orders"** (hoặc tên khác tùy thích)
-4. Bấm **"Tạo"**
-
-### 1.2 Tạo Header (Tiêu đề Cột)
-Tại dòng 1, tạo các cột sau:
-- **A1**: Thời gian
-- **B1**: Họ Tên
-- **C1**: Số Điện Thoại
-- **D1**: Địa Chỉ
-- **E1**: Danh Sách Sản Phẩm
-- **F1**: Tổng Tiền
-
-Ví dụ:
-```
-| Thời gian | Họ Tên | Số Điện Thoại | Địa Chỉ | Danh Sách Sản Phẩm | Tổng Tiền |
-|-----------|--------|---------------|--------|------------------|-----------|
-```
-
----
-
-## 🔧 Bước 2: Tạo Google Apps Script
-
-### 2.1 Mở Apps Script Editor
-1. Tại **Google Sheet** của bạn, nhấn **"Tiện ích mở rộng"** ⬆️
-2. Chọn **"Apps Script"**
-3. Một tab mới sẽ mở ra
-
-### 2.2 Xóa Hết Code Cũ
-Xóa toàn bộ code mặc định trong editor.
-
-### 2.3 Copy-Paste Đoạn Code Dưới Đây
+Mở bảng tính Google Sheets của bạn, chọn **Tiện ích mở rộng (Extensions)** > **Apps Script**, xóa toàn bộ mã mặc định và dán đoạn mã dưới đây vào:
 
 ```javascript
+// Google Apps Script nhận dữ liệu đặt hàng từ website PLOYBAY
 function doPost(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSheet();
+    // Phục hồi và phân tích payload từ request POST
+    var jsonString = e.postData.contents;
+    var data = JSON.parse(jsonString);
     
-    // Parse JSON từ request body
-    const data = JSON.parse(e.postData.contents);
+    // Mở active sheet
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    // Lấy dữ liệu từ JSON
-    const timestamp = data.timestamp || new Date().toLocaleString('vi-VN');
-    const name = data.name || '';
-    const phone = data.phone || '';
-    const address = data.address || '';
-    const productsList = data.productsList || '';
-    const totalPrice = data.totalPrice ? data.totalPrice.toLocaleString('vi-VN') + '₫' : '0₫';
+    // Đọc các giá trị đơn hàng
+    var timestamp = data.timestamp || new Date().toLocaleString('vi-VN');
+    var orderId = data.orderId || "";
+    var name = data.name || "";
+    var phone = data.phone || "";
+    var address = data.address || "";
+    var productsList = data.productsList || "";
+    var totalPrice = data.totalPrice ? Number(data.totalPrice) : 0;
+    var paymentMethod = data.paymentMethod || "";
+    var status = data.status || "Chờ xác nhận";
     
-    // Append dòng mới vào sheet
+    // Format tổng tiền để hiển thị đẹp hơn trong Sheet (ví dụ: 1.500.000)
+    // Hoặc bạn có thể để nguyên dạng số tùy mục đích thống kê
+    
+    // Thêm dòng mới vào Google Sheets
+    // Thứ tự các cột: [Thời gian, Mã đơn hàng, Tên khách hàng, SĐT, Địa chỉ, Sản phẩm, Tổng tiền, PTTT, Trạng thái]
     sheet.appendRow([
       timestamp,
+      orderId,
       name,
-      phone,
+      "'" + phone, // Thêm dấu nháy đơn để Google Sheets không làm mất số 0 ở đầu SĐT
       address,
       productsList,
-      totalPrice
+      totalPrice,
+      paymentMethod,
+      status
     ]);
     
-    // Auto-fit column width
-    sheet.autoResizeColumns(1, 6);
+    // Trả về phản hồi thành công (JSON)
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "success",
+      "message": "Đơn hàng " + orderId + " đã được ghi nhận thành công!"
+    })).setMimeType(ContentService.MimeType.JSON);
     
-    // Return response với CORS headers
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        status: 'success',
-        message: 'Dữ liệu đã được lưu vào Google Sheets',
-        timestamp: timestamp
-      }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .addHeader('Access-Control-Allow-Origin', '*')
-      .addHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-      .addHeader('Access-Control-Allow-Headers', 'Content-Type');
-      
   } catch (error) {
-    Logger.log('Lỗi: ' + error.toString());
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        status: 'error',
-        message: error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .addHeader('Access-Control-Allow-Origin', '*')
-      .addHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-      .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+    // Trả về lỗi nếu xảy ra sự cố
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "error",
+      "message": error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
-function doOptions(e) {
-  return ContentService
-    .createTextOutput()
-    .addHeader('Access-Control-Allow-Origin', '*')
-    .addHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-    .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+// Hàm test thử cấu trúc ghi dữ liệu trực tiếp trong Apps Script console
+function testAppend() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([
+    new Date().toLocaleString('vi-VN'),
+    "PB-12345",
+    "Khách hàng Test",
+    "'0987654321",
+    "123 Đường Test, Quận 1, TP. HCM",
+    "Sản phẩm Test (SL: 1, Giá: 100.000₫)",
+    100000,
+    "COD",
+    "Chờ xác nhận"
+  ]);
 }
-
-    function testWebhook() {
-    const testData = {
-        timestamp: new Date().toLocaleString('vi-VN'),
-        name: 'Nguyễn Văn A',
-        phone: '0968296458',
-        address: 'Hà Nội',
-        productsList: 'Chảo Inox (SL: 2, Giá: 450.000₫) | Bình Đun (SL: 1, Giá: 380.000₫)',
-        totalPrice: 1280000
-    };
-    
-    const sheet = SpreadsheetApp.getActiveSheet();
-    sheet.appendRow([
-        testData.timestamp,
-        testData.name,
-        testData.phone,
-        testData.address,
-        testData.productsList,
-        testData.totalPrice.toLocaleString('vi-VN') + '₫'
-    ]);
-    
-    Logger.log('Test dữ liệu đã được thêm vào Sheet!');
-    }
 ```
 
 ---
 
-## 🚀 Bước 3: Tạo Web App Deployment
+## 2. CÁC BƯỚC DEPLOY APPS SCRIPT DƯỚI DẠNG "WEB APP"
 
-### 3.1 Deploy Code
-1. Ở menu trên cùng, nhấn **"Deploy"** (hoặc ⬆️ icon)
-2. Chọn **"Triển khai mới"**
-3. Chọn type: **"Web App"**
-4. **Execute as**: Chọn tài khoản Google của bạn
-5. **Who has access**: Chọn **"Anyone"**
-6. Nhấn **"Deploy"**
+Để website có thể gửi yêu cầu `POST` đến Google Sheet, bạn cần xuất bản script dưới dạng ứng dụng Web công khai theo các bước sau:
 
-### 3.2 Cho Phép Quyền
-- Sẽ xuất hiện popup yêu cầu quyền
-- Nhấn **"Cho phép"** và xác nhận
-
-### 3.3 Copy Webhook URL
-Sau deploy, sẽ thấy:
-```
-Deployment ID: Abc...
-Web App URL: https://script.google.com/macros/d/Abc.../usercopy
-```
-
-**Copy cái "Web App URL"** này.
+1. **Đặt tên cho dự án Apps Script**: Thay đổi chữ "Dự án không có tiêu đề" thành `PLOYBAY Order Webhook`.
+2. **Lưu dự án**: Bấm biểu tượng nút **Lưu (Save - hình đĩa mềm)** hoặc nhấn `Ctrl + S`.
+3. **Triển khai (Deploy)**: 
+   - Nhấn nút **Triển khai (Deploy)** ở góc trên bên phải > Chọn **Triển khai mới (New deployment)**.
+   - Bấm vào biểu tượng bánh răng **Loại triển khai (Select type)** > Chọn **Ứng dụng web (Web app)**.
+4. **Cấu hình Web App**:
+   - **Mô tả (Description)**: Nhập gì đó tùy ý, ví dụ: `v1.0.0`.
+   - **Thực thi dưới dạng (Execute as)**: Chọn **Tôi (Email của bạn)**.
+   - **Ai có quyền truy cập (Who has access)**: Chọn **Bất kỳ ai (Anyone)**. *(Lưu ý: Bắt buộc chọn "Bất kỳ ai" thì API từ website mới có quyền gửi đơn mà không bị lỗi xác thực)*.
+5. **Tiến hành Deploy**:
+   - Nhấn nút **Triển khai (Deploy)**.
+   - Google sẽ yêu cầu cấp quyền truy cập tài khoản (Authorize Access). Hãy nhấn **Ủy quyền truy cập (Authorize Access)**.
+   - Chọn tài khoản Google của bạn.
+   - Nếu có cảnh báo *"Google chưa xác minh ứng dụng này"*, nhấn vào chữ **Nâng cao (Advanced)** ở góc dưới bên trái > Chọn **Đi tới PLOYBAY Order Webhook (Không an toàn) / Go to PLOYBAY Order Webhook (unsafe)**.
+   - Bấm **Cho phép (Allow)**.
+6. **Sao chép URL Webhook**:
+   - Sau khi hoàn thành, Google sẽ cấp cho bạn một **URL Ứng dụng web (Web app URL)** có định dạng dạng như:
+     `https://script.google.com/macros/s/AKfycb.../exec`
+   - Bấm **Sao chép (Copy)** URL này.
 
 ---
 
-## 🔑 Bước 4: Cấu Hình .env.local
+## 3. CẤU HÌNH TRÊN WEB CODE (FILE .ENV)
 
-### 4.1 Mở File `.env.local` của Project
-Tại thư mục gốc (`d:\dev\yuna\yuna-web`), mở file `.env.local`
+1. Mở file cấu hình môi trường `.env` hoặc `.env.local` ở thư mục gốc của dự án.
+2. Thêm hoặc cập nhật biến môi trường `NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL` với URL đã sao chép ở trên:
 
-### 4.2 Cập Nhật Webhook URL
-Tìm dòng:
 ```env
-NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL=YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL_HERE
+NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL="https://script.google.com/macros/s/AKfycb.../exec"
 ```
 
-Thay thế bằng URL của bạn, ví dụ:
-```env
-NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/d/1BxiMVs0XRA5nxxxxxVBxxxxUkxxxxzzzz/usercopy
-```
-
-### 4.3 Lưu File
+3. Khởi động lại Server hoặc Build lại ứng dụng để Next.js cập nhật biến môi trường mới:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## ✅ Bước 5: Test Hệ Thống
+## 4. CẤU TRÚC TIÊU ĐỀ BẢNG TÍNH GOOGLE SHEETS KHUYÊN DÙNG
 
-### 5.1 Test Bằng Script Sẵn
-Tại **Apps Script**, chạy hàm `testWebhook()`:
-1. Nhấn **"Run"** (hoặc F5)
-2. Chọn `testWebhook`
-3. Xem dòng test xuất hiện trong Google Sheet
+Tại dòng số 1 của trang tính, hãy chuẩn bị các cột theo đúng thứ tự sau:
 
-### 5.2 Test Từ Web
-1. Khởi động dev server: `npm run dev`
-2. Truy cập: `http://localhost:3000`
-3. Thêm sản phẩm vào giỏ
-4. Nhấn vào icon Giỏ → Nhập thông tin → Bấm "Đăng ký tư vấn"
-5. Xem dữ liệu xuất hiện trong Google Sheet ✨
-
----
-
-## 🐛 Troubleshooting
-
-### Lỗi: "Webhook URL chưa được cấu hình"
-- Kiểm tra file `.env.local` có `NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL` chưa?
-- Restart dev server sau khi cập nhật `.env.local`
-
-### Lỗi: "Lỗi gửi dữ liệu. Vui lòng thử lại!"
-- Kiểm tra URL Webhook có đúng không?
-- Kiểm tra Google Sheet có bị khóa không?
-- Mở console (F12) xem chi tiết lỗi
-
-### Dữ liệu không xuất hiện trong Sheet
-1. Kiểm tra Apps Script có Deploy chưa?
-2. Kiểm tra "Who has access" có phải "Anyone" không?
-3. Làm mới Google Sheet (F5)
-4. Xem **Execution log** trong Apps Script
-
----
-
-## 📝 Ghi Chú
-
-- **Thời gian**: Tự động lấy từ hệ thống
-- **Danh sách sản phẩm**: Ghi chi tiết tên, số lượng, giá tiền
-- **Tổng tiền**: Tính toán tự động từ CartContext
-- **Google Sheet**: Tự động mở rộng chiều rộng cột
-
----
-
-## 💡 Mở Rộng Tương Lai
-
-Có thể thêm:
-- Email notification khi có đơn hàng mới
-- Gắn với Google Forms
-- Tích hợp Google Chat/Slack
-- Export dữ liệu thành PDF
-
----
-
-**Hỏi đáp**: Nếu gặp vấn đề, kiểm tra console (F12) hoặc xem log trong Apps Script! 🎊
+| A (Cột 1) | B (Cột 2) | C (Cột 3) | D (Cột 4) | E (Cột 5) | F (Cột 6) | G (Cột 7) | H (Cột 8) | I (Cột 9) |
+|---|---|---|---|---|---|---|---|---|
+| **Thời gian** | **Mã đơn hàng** | **Tên khách hàng** | **SĐT** | **Địa chỉ** | **Sản phẩm** | **Tổng tiền** | **PTTT** | **Trạng thái** |

@@ -21,12 +21,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "YUNA - Gia Dụng Thông Minh & Tiện Ích Hiện Đại",
-  description: "Chuyên cung cấp các giải pháp dọn dẹp hiện đại, robot hút bụi, máy lọc không khí và đồ gia dụng thông minh chính hãng cho gia đình bạn.",
-  keywords: ['gia dung thong minh', 'yuna', 'robot hut bui', 'thiet bi tien ich', 'yuna gia dung'],
+  title: "PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
+  description: "Thương hiệu quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.",
+  keywords: ['ploybay', 'vi da nam cao cap', 'that lung da nam', 'qua tang quy ong', 'phu kien da nam', 'qua tang nam gioi'],
   openGraph: {
-    title: "YUNA - Gia Dụng Thông Minh & Tiện Ích Hiện Đại",
-    description: "Chuyên cung cấp các giải pháp dọn dẹp hiện đại, robot hút bụi, máy lọc không khí và đồ gia dụng thông minh chính hãng cho gia đình bạn.",
+    title: "PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
+    description: "Thương hiệu quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.",
     locale: 'vi_VN',
     type: 'website',
     images: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'YUNA - Gia Dụng Thông Minh',
+        alt: 'PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp',
       }
     ],
   },

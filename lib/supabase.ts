@@ -15,10 +15,10 @@ if (typeof window !== 'undefined') {
 }
 
 const categoryLabelMap: Record<string, string> = {
-  "dien-gia-dung": "Điện gia dụng",
-  "gia-dung-nha-bep": "Gia dụng Nhà Bếp",
-  "gia-dung-tien-ich": "Gia dụng Tiện ích",
-  "qua-tang-va-phu-kien": "Quà tặng và Phụ kiện",
+  "vi-da-cao-cap": "Ví da cao cấp",
+  "that-lung-da": "Thắt lưng da",
+  "bo-qua-tang": "Bộ quà tặng (Giftset)",
+  "phu-kien-da": "Phụ kiện da",
 };
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
@@ -35,7 +35,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 export function normalizeCategorySlug(value: string | null | undefined): string {
   const raw = (value || "").trim();
 
-  if (!raw) return "dien-gia-dung";
+  if (!raw) return "vi-da-cao-cap";
 
   const normalized = raw
     .toLowerCase()
@@ -44,17 +44,23 @@ export function normalizeCategorySlug(value: string | null | undefined): string 
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-  if (normalized.includes("dien-gia-dung") || normalized.includes("gia-dung-thong-minh") || normalized.includes("thong-minh")) {
-    return "dien-gia-dung";
+  if (normalized.includes("vi-da") || normalized.includes("vi") || normalized.includes("wallet")) {
+    return "vi-da-cao-cap";
   }
 
-  if (normalized.includes("nha-bep")) return "gia-dung-nha-bep";
-  if (normalized.includes("tien-ich")) return "gia-dung-tien-ich";
-  if (normalized.includes("qua-tang") || normalized.includes("phu-kien") || normalized.includes("gift")) {
-    return "qua-tang-va-phu-kien";
+  if (normalized.includes("that-lung") || normalized.includes("belt") || normalized.includes("day-lung")) {
+    return "that-lung-da";
   }
 
-  return normalized || "dien-gia-dung";
+  if (normalized.includes("giftset") || normalized.includes("bo-qua-tang") || normalized.includes("qua-tang-quy-ong") || normalized.includes("set-qua")) {
+    return "bo-qua-tang";
+  }
+
+  if (normalized.includes("phu-kien") || normalized.includes("accessory")) {
+    return "phu-kien-da";
+  }
+
+  return normalized || "vi-da-cao-cap";
 }
 
 export function getCategoryLabel(value: string | null | undefined): string {

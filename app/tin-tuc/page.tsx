@@ -23,20 +23,20 @@ interface Post {
 const fallbackPosts: Post[] = [
   {
     id: 1,
-    title: "5 Lý do chảo inox được ưa chuộng",
-    content: "Chảo inox là lựa chọn phổ biến trong gia đình nhờ độ bền, an toàn và dễ vệ sinh.",
-    thumbnail: "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=600&q=80",
-    category: "Tin tức Yuna",
-    author: "Yuna Editor",
+    title: "Cách phân biệt ví da thật và da giả chi tiết nhất",
+    content: "Để không mua nhầm các sản phẩm giả da kém chất lượng, PLOYBAY chia sẻ đến bạn những mẹo đơn giản để phân biệt ví da thật và giả bằng mắt thường và xúc giác.",
+    thumbnail: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
+    category: "Tin tức PLOYBAY",
+    author: "PLOYBAY Editor",
     status: "Công khai",
   },
   {
     id: 2,
-    title: "Mẹo giữ đồ gia dụng luôn sáng bóng",
-    content: "Hãy áp dụng những cách đơn giản để đồ gia dụng luôn đẹp như mới.",
-    thumbnail: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80",
-    category: "Tin tức Yuna",
-    author: "Yuna Editor",
+    title: "Bí quyết bảo quản thắt lưng da luôn như mới",
+    content: "Thắt lưng da nam cao cấp nếu không biết cách bảo quản sẽ dễ bị ẩm mốc, rạn nứt. Hãy lưu lại ngay những bí quyết cực đơn giản giúp món phụ kiện của bạn luôn bền đẹp.",
+    thumbnail: "https://images.unsplash.com/photo-1624222247344-550fb8ecf78d?w=600&q=80",
+    category: "Tin tức PLOYBAY",
+    author: "PLOYBAY Editor",
     status: "Công khai",
   },
 ];
@@ -56,7 +56,7 @@ export default function NewsPage() {
       setLoading(true);
 
       if (!checkConnection()) {
-        const saved = localStorage.getItem("yuna_admin_posts");
+        const saved = localStorage.getItem("ploybay_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -83,7 +83,7 @@ export default function NewsPage() {
         if (data && data.length > 0) {
           setPosts(data as Post[]);
         } else {
-          const saved = localStorage.getItem("yuna_admin_posts");
+          const saved = localStorage.getItem("ploybay_admin_posts");
           if (saved) {
             try {
               const parsed = JSON.parse(saved);
@@ -97,7 +97,7 @@ export default function NewsPage() {
         }
       } catch (err) {
         console.warn("Lỗi khi tải danh sách tin tức:", err);
-        const saved = localStorage.getItem("yuna_admin_posts");
+        const saved = localStorage.getItem("ploybay_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -123,14 +123,14 @@ export default function NewsPage() {
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-          <Link href="/" className="hover:text-[#6B8E23] transition-colors">Trang chủ</Link>
+          <Link href="/" className="hover:text-[#C59B27] transition-colors">Trang chủ</Link>
           <span>/</span>
-          <span className="text-[#6B8E23] font-semibold">Tin tức</span>
+          <span className="text-[#C59B27] font-semibold">Tin tức</span>
         </nav>
 
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 uppercase tracking-widest">Tin tức</h1>
-          <p className="text-gray-500 mt-2">Cập nhật thông tin, mẹo hay và sản phẩm mới nhất từ Yuna.</p>
+          <p className="text-gray-500 mt-2">Cập nhật thông tin, xu hướng thời trang và cẩm nang phụ kiện da nam từ PLOYBAY.</p>
         </div>
 
         {loading ? (
@@ -163,17 +163,17 @@ export default function NewsPage() {
                   </div>
                 </Link>
 
-                <div className="p-5 flex flex-col gap-3">
-                  <span className="text-xs uppercase tracking-[0.2em] text-[#6B8E23] font-semibold">{post.category || "Tin tức"}</span>
-                  <Link href={`/tin-tuc/${post.id}`} className="group">
-                    <h2 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#6B8E23] transition-colors line-clamp-2">{post.title}</h2>
-                  </Link>
-                  <p className="text-sm text-gray-600 line-clamp-3">{post.content?.replace(/<[^>]+>/g, " ").slice(0, 180)}...</p>
-                  <div className="pt-2 flex items-center justify-between text-xs text-gray-500">
-                    <span>{post.author || "Yuna"}</span>
-                    <span>{post.created_at ? new Date(post.created_at).toLocaleDateString("vi-VN") : "Mới"}</span>
-                  </div>
-                </div>
+                 <div className="p-5 flex flex-col gap-3">
+                   <span className="text-xs uppercase tracking-[0.2em] text-[#C59B27] font-semibold">{post.category || "Tin tức"}</span>
+                   <Link href={`/tin-tuc/${post.id}`} className="group">
+                     <h2 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#C59B27] transition-colors line-clamp-2">{post.title}</h2>
+                   </Link>
+                   <p className="text-sm text-gray-600 line-clamp-3">{post.content?.replace(/<[^>]+>/g, " ").slice(0, 180)}...</p>
+                   <div className="pt-2 flex items-center justify-between text-xs text-gray-500">
+                     <span>{post.author || "PLOYBAY"}</span>
+                     <span>{post.created_at ? new Date(post.created_at).toLocaleDateString("vi-VN") : "Mới"}</span>
+                   </div>
+                 </div>
               </article>
             ))}
           </div>

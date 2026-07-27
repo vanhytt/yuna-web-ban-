@@ -39,7 +39,7 @@ export default function CartPage() {
           <div className="mb-6">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[#6B8E23] transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[#8B5A2B] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Tiếp tục mua sắm
@@ -70,7 +70,7 @@ export default function CartPage() {
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-[#6B8E23] text-white font-semibold rounded-lg hover:bg-[#5a781e] transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-[#8B5A2B] text-white font-semibold rounded-lg hover:bg-[#704820] transition-colors"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Mua sắm ngay
@@ -113,7 +113,7 @@ export default function CartPage() {
                       <div>
                         <Link
                           href={`/product/${item.id}`}
-                          className="text-lg font-bold text-gray-800 hover:text-[#6B8E23] transition-colors line-clamp-2"
+                          className="text-lg font-bold text-gray-800 hover:text-[#8B5A2B] transition-colors line-clamp-2"
                         >
                           {item.title}
                         </Link>
@@ -202,7 +202,7 @@ export default function CartPage() {
                   </div>
 
                   {/* Checkout Button */}
-                  <button className="w-full py-4 bg-[#6B8E23] text-white font-bold text-lg rounded-lg hover:bg-[#5a781e] transition-colors shadow-lg shadow-[#6B8E23]/20">
+                  <button className="w-full py-4 bg-[#8B5A2B] text-white font-bold text-lg rounded-lg hover:bg-[#704820] transition-colors shadow-lg shadow-[#8B5A2B]/20">
                     Tiến hành thanh toán
                   </button>
 

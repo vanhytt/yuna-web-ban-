@@ -14,39 +14,24 @@ interface Product {
   reviewsCount: number;
   image: string;
   status: "Còn hàng" | "Hết hàng";
-  video_url: string;
   description: string;
 }
 
 /* ───────── CATEGORY MAP (slug → display name) ───────── */
 const categoryDisplayMap: Record<string, string> = {
-  "dien-gia-dung": "Điện gia dụng",
-  "gia-dung-nha-bep": "Gia dụng Nhà Bếp",
-  "gia-dung-tien-ich": "Gia dụng Tiện ích",
-  "qua-tang-va-phu-kien": "Quà tặng và Phụ kiện",
-  "coc-binh-giu-nhiet": "Cốc - Bình giữ nhiệt - Bình nước",
-  "hop-dung-ruou-vang": "Hộp đựng rượu vang",
-  "bien-ten-huy-hieu-vinh-danh": "Biển tên - Huy hiệu - Vinh danh",
-  "but-so-hop-namecard": "Bút - Sổ - Hộp namecard",
-  "qua-tang-it": "Quà tặng IT",
-  "balo-tui-vi-cap": "Balo - Túi - Ví - Cặp",
-  "vong-tay-quat-moc-khoa": "Vòng tay - Quạt - Móc khóa",
-  "o-ao-mu-the-hanh-ly": "Ô - Áo - Mũ - Thẻ hành lý",
-  "gat-tan-bat-lua-lot-ly": "Gạt tàn - Bật lửa - Lót ly",
-  "bo-qua-tang-bo-giftset": "Bộ quà tặng - Bộ giftset",
-  "qua-tang-dong-ho": "Quà tặng đồng hồ",
-  "qua-tang-danh-cho-tre-em": "Quà tặng dành cho trẻ em",
-  "qua-tang-cao-cap": "Quà tặng cao cấp",
-  "bo-san-pham-bom-hoi": "Bộ sản phẩm bơm hơi",
+  "vi-da-cao-cap": "Ví da cao cấp",
+  "that-lung-da": "Thắt lưng da",
+  "bo-qua-tang": "Bộ quà tặng (Giftset)",
+  "phu-kien-da": "Phụ kiện da"
 };
 
 const PRODUCT_IMAGES_BUCKET = "product-images";
 
 const navbarCategoryOptions = [
-  { value: "dien-gia-dung", label: "Điện gia dụng" },
-  { value: "gia-dung-nha-bep", label: "Gia dụng Nhà Bếp" },
-  { value: "gia-dung-tien-ich", label: "Gia dụng Tiện ích" },
-  { value: "qua-tang-va-phu-kien", label: "Quà tặng và Phụ kiện" },
+  { value: "vi-da-cao-cap", label: "Ví da cao cấp" },
+  { value: "that-lung-da", label: "Thắt lưng da" },
+  { value: "bo-qua-tang", label: "Bộ quà tặng (Giftset)" },
+  { value: "phu-kien-da", label: "Phụ kiện da" }
 ];
 
 function fmt(n: number) {
@@ -70,12 +55,11 @@ export default function ProductsAdminPage() {
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [formData, setFormData] = useState<Partial<Product>>({
     name: "",
-    category: "dien-gia-dung",
+    category: "vi-da-cao-cap",
     originalPrice: 0,
     salePrice: 0,
     image: "",
     status: "Còn hàng",
-    video_url: "",
     description: ""
   });
 
@@ -101,7 +85,7 @@ export default function ProductsAdminPage() {
 
   /* ── Helper: load from localStorage ── */
   const loadFromLocalStorage = () => {
-    const saved = localStorage.getItem("yuna_admin_products");
+    const saved = localStorage.getItem("ploybay_admin_products");
     if (saved) {
       try {
         setProducts(JSON.parse(saved));
@@ -136,12 +120,11 @@ export default function ProductsAdminPage() {
         const mapped: Product[] = data.map((item) => ({
           id: item.id,
           name: item.name,
-          category: item.category || "dien-gia-dung",
+          category: item.category || "vi-da-cao-cap",
           originalPrice: Number(item.original_price || item.price),
           salePrice: Number(item.price),
           image: item.image || "",
           status: item.status === "Hết hàng" ? "Hết hàng" : "Còn hàng",
-          video_url: item.video_url || "",
           description: item.description || "",
           rating: Number(item.rating || 5.0),
           reviewsCount: Number(item.reviews_count || 0)
@@ -168,12 +151,11 @@ export default function ProductsAdminPage() {
     setModalMode("add");
     setFormData({
       name: "",
-      category: "dien-gia-dung",
+      category: "vi-da-cao-cap",
       originalPrice: 0,
       salePrice: 0,
       image: "",
       status: "Còn hàng",
-      video_url: "",
       description: ""
     });
     setUploadedImages([]);
@@ -342,7 +324,7 @@ export default function ProductsAdminPage() {
     // Luôn cập nhật localStorage dù Supabase thành công hay thất bại
     const updated = products.filter((p) => p.id !== id);
     setProducts(updated);
-    localStorage.setItem("yuna_admin_products", JSON.stringify(updated));
+    localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -354,12 +336,11 @@ export default function ProductsAdminPage() {
 
     const payload = {
       name: formData.name,
-      category: formData.category || "dien-gia-dung",
+      category: formData.category || "vi-da-cao-cap",
       price: Number(formData.salePrice),
       original_price: Number(formData.originalPrice || formData.salePrice),
       image: formData.image || "",
       status: formData.status,
-      video_url: formData.video_url || "",
       description: formData.description || "",
       rating: formData.rating || 5.0,
       reviews_count: formData.reviewsCount || 0
@@ -370,14 +351,13 @@ export default function ProductsAdminPage() {
       const newProduct: Product = {
         id: newId,
         name: formData.name,
-        category: formData.category || "dien-gia-dung",
+        category: formData.category || "vi-da-cao-cap",
         originalPrice: Number(formData.originalPrice || formData.salePrice),
         salePrice: Number(formData.salePrice),
         rating: formData.rating || 5.0,
         reviewsCount: formData.reviewsCount || 0,
         image: payload.image,
         status: formData.status as any,
-        video_url: payload.video_url,
         description: payload.description
       };
 
@@ -392,13 +372,13 @@ export default function ProductsAdminPage() {
           // Fallback: lưu vào localStorage khi Supabase lỗi
           const updated = [...products, newProduct];
           setProducts(updated);
-          localStorage.setItem("yuna_admin_products", JSON.stringify(updated));
+          localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
           showToast("Supabase chưa sẵn sàng. Đã lưu sản phẩm offline!", "info");
         }
       } else {
         const updated = [...products, newProduct];
         setProducts(updated);
-        localStorage.setItem("yuna_admin_products", JSON.stringify(updated));
+        localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
         showToast("Đã thêm sản phẩm thành công (Offline)!", "success");
       }
     } else {
@@ -417,13 +397,13 @@ export default function ProductsAdminPage() {
           // Fallback: cập nhật localStorage khi Supabase lỗi
           const updated = products.map((p) => (p.id === formData.id ? (formData as Product) : p));
           setProducts(updated);
-          localStorage.setItem("yuna_admin_products", JSON.stringify(updated));
+          localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
           showToast("Supabase chưa sẵn sàng. Đã cập nhật sản phẩm offline!", "info");
         }
       } else {
         const updated = products.map((p) => (p.id === formData.id ? (formData as Product) : p));
         setProducts(updated);
-        localStorage.setItem("yuna_admin_products", JSON.stringify(updated));
+        localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
         showToast("Đã cập nhật sản phẩm thành công (Offline)!", "success");
       }
     }
@@ -477,11 +457,11 @@ export default function ProductsAdminPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-800">Quản lý sản phẩm</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Thêm, sửa, xóa sản phẩm và tích hợp Video Review thực tế</p>
+          <p className="text-xs text-slate-500 mt-0.5">Thêm, sửa, xóa sản phẩm</p>
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#6B8E23] hover:bg-[#5a781e] text-white text-sm font-semibold rounded-xl transition-colors shadow-sm self-start sm:self-auto cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#8B5A2B] hover:bg-[#704820] text-white text-sm font-semibold rounded-xl transition-colors shadow-sm self-start sm:self-auto cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Thêm sản phẩm
@@ -497,7 +477,7 @@ export default function ProductsAdminPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Tìm kiếm sản phẩm, danh mục..."
-            className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+            className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
           />
         </div>
         <div className="text-xs text-slate-500 font-medium self-end md:self-auto">
@@ -514,7 +494,6 @@ export default function ProductsAdminPage() {
                 <th className="px-6 py-4">Sản phẩm</th>
                 <th className="px-6 py-4">Danh mục</th>
                 <th className="px-6 py-4">Giá bán</th>
-                <th className="px-6 py-4">Video Review</th>
                 <th className="px-6 py-4">Trạng thái</th>
                 <th className="px-6 py-4 text-right">Thao tác</th>
               </tr>
@@ -563,20 +542,6 @@ export default function ProductsAdminPage() {
                         <p className="font-bold text-[#D32F2F]">{fmt(product.salePrice)}</p>
                         <p className="text-xs text-slate-400 line-through mt-0.5">{fmt(product.originalPrice)}</p>
                       </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      {product.video_url ? (
-                        <a
-                          href={product.video_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs text-[#6B8E23] hover:underline font-semibold"
-                        >
-                          Xem Video
-                        </a>
-                      ) : (
-                        <span className="text-xs text-slate-400 italic">Chưa gắn</span>
-                      )}
                     </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex px-2 py-0.5 rounded-full text-[11px] font-bold ${
@@ -639,8 +604,8 @@ export default function ProductsAdminPage() {
                   required
                   value={formData.name || ""}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Ví dụ: Nồi inox 3 đáy Yuna..."
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                  placeholder="Ví dụ: Ví da nam Handmade Epsom..."
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
                 />
               </div>
 
@@ -652,7 +617,7 @@ export default function ProductsAdminPage() {
                     required
                     value={formData.salePrice || 0}
                     onChange={(e) => setFormData({ ...formData, salePrice: Number(e.target.value) })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
                   />
                 </div>
                 <div>
@@ -661,7 +626,7 @@ export default function ProductsAdminPage() {
                     type="number"
                     value={formData.originalPrice || 0}
                     onChange={(e) => setFormData({ ...formData, originalPrice: Number(e.target.value) })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
                   />
                 </div>
               </div>
@@ -670,9 +635,9 @@ export default function ProductsAdminPage() {
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Danh mục</label>
                   <select
-                    value={formData.category || "dien-gia-dung"}
+                    value={formData.category || "vi-da-cao-cap"}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] bg-white"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] bg-white"
                   >
                     {categoryOptions.map((opt) => (
                       <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -684,7 +649,7 @@ export default function ProductsAdminPage() {
                   <select
                     value={formData.status || "Còn hàng"}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] bg-white"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] bg-white"
                   >
                     <option value="Còn hàng">Còn hàng</option>
                     <option value="Hết hàng">Hết hàng</option>
@@ -709,7 +674,7 @@ export default function ProductsAdminPage() {
                           className="w-full h-full object-cover"
                         />
                         {idx === 0 && (
-                          <span className="absolute top-1.5 left-1.5 bg-[#6B8E23] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md shadow-xs">
+                          <span className="absolute top-1.5 left-1.5 bg-[#8B5A2B] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md shadow-xs">
                             Ảnh chính
                           </span>
                         )}
@@ -756,7 +721,7 @@ export default function ProductsAdminPage() {
                   onDrop={handleDrop}
                   className={`relative border-2 border-dashed rounded-2xl p-6 transition-colors flex flex-col items-center justify-center text-center cursor-pointer ${
                     dragActive
-                      ? "border-[#6B8E23] bg-[#6B8E23]/5"
+                      ? "border-[#8B5A2B] bg-[#8B5A2B]/5"
                       : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50"
                   }`}
                 >
@@ -771,7 +736,7 @@ export default function ProductsAdminPage() {
 
                   {isUploading ? (
                     <div className="flex flex-col items-center gap-2">
-                      <Loader2 className="w-8 h-8 text-[#6B8E23] animate-spin" />
+                      <Loader2 className="w-8 h-8 text-[#8B5A2B] animate-spin" />
                       <p className="text-sm font-semibold text-slate-600">Đang tải lên ảnh...</p>
                     </div>
                   ) : (
@@ -811,22 +776,11 @@ export default function ProductsAdminPage() {
                           }
                         }}
                         placeholder='["https://...", "https://..."] hoặc URL đơn lẻ'
-                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
                       />
                     </div>
                   </details>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Link Video Review Thực Tế</label>
-                <input
-                  type="text"
-                  value={formData.video_url || ""}
-                  onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
-                  placeholder="Ví dụ: Link video TikTok, Shopee, YouTube..."
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
-                />
               </div>
 
               <div>
@@ -836,7 +790,7 @@ export default function ProductsAdminPage() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Nhập thông số hoặc mô tả ngắn..."
                   rows={3}
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B]"
                 />
               </div>
 
@@ -851,7 +805,7 @@ export default function ProductsAdminPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#6B8E23] hover:bg-[#5a781e] text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-[#8B5A2B] hover:bg-[#704820] text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer"
                 >
                   Lưu thay đổi
                 </button>

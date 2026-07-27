@@ -1,15 +1,13 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#1a2910] text-white/60 py-10 border-t border-[#6B8E23]/20 text-xs md:text-sm font-sans mt-0">
+    <footer id="footer" className="w-full bg-[#131110] text-white/60 py-10 border-t border-[#8C6239]/20 text-xs md:text-sm font-sans mt-0">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h4 className="text-[#C59B27] font-bold mb-3 text-base tracking-wide">
-            VỀ YUNA VIỆT NAM
+            VỀ PLOYBAY
           </h4>
           <p className="leading-relaxed text-white/50">
-            YUNA là thương hiệu chuyên cung cấp các giải pháp gia dụng thông
-            minh, tiện ích cho gia đình Việt. Cam kết chất lượng, bảo hành
-            chính hãng và hỗ trợ khách hàng tận tâm.
+            PLOYBAY là thương hiệu chuyên cung cấp các sản phẩm quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.
           </p>
         </div>
         <div>
@@ -18,22 +16,22 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-white/50 hover:text-[#6B8E23] transition-colors">
+              <a href="#" className="text-white/50 hover:text-[#8C6239] transition-colors">
                 Chính sách bảo hành
               </a>
             </li>
             <li>
-              <a href="#" className="text-white/50 hover:text-[#6B8E23] transition-colors">
+              <a href="#" className="text-white/50 hover:text-[#8C6239] transition-colors">
                 Chính sách đổi trả
               </a>
             </li>
             <li>
-              <a href="#" className="text-white/50 hover:text-[#6B8E23] transition-colors">
+              <a href="#" className="text-white/50 hover:text-[#8C6239] transition-colors">
                 Chính sách vận chuyển
               </a>
             </li>
             <li>
-              <a href="#" className="text-white/50 hover:text-[#6B8E23] transition-colors">
+              <a href="#" className="text-white/50 hover:text-[#8C6239] transition-colors">
                 Hướng dẫn thanh toán
               </a>
             </li>
@@ -47,10 +45,10 @@ export default function Footer() {
             <strong className="text-white/70">Địa chỉ:</strong> Số 2CK1/7 khu đô thị làng nghề Vạn Phúc, Vạn Phúc, Hà Đông, Hà Nội
           </p>
           <p className="leading-relaxed mb-2 text-white/50">
-            <strong className="text-white/70">Hotline:</strong> 0977 500 651
+            <strong className="text-white/70">Hotline:</strong> 09xx xxx xxx
           </p>
           <p className="leading-relaxed text-white/50">
-            <strong className="text-white/70">Email:</strong> yunavietnam.info@gmail.com
+            <strong className="text-white/70">Email:</strong> contact@ploybay.vn
           </p>
           <div className="mt-5">
             <h5 className="text-white/40 font-medium mb-3 text-xs uppercase tracking-widest">
@@ -59,10 +57,8 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               {/* Facebook */}
               <a
-                href="https://www.facebook.com/yunavietnamfanpage/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-[#1877F2] flex items-center justify-center text-white hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 shadow-md shadow-[#1877F2]/20"
+                href="#"
+                className="w-10 h-10 rounded-lg bg-[#8C6239]/20 border border-[#8C6239]/30 flex items-center justify-center text-white hover:bg-[#8C6239] hover:-translate-y-0.5 transition-all duration-200 shadow-md"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -71,10 +67,8 @@ export default function Footer() {
               </a>
               {/* TikTok */}
               <a
-                href="https://www.tiktok.com/@yunavietnamm?_r=1&_t=ZS-975BbJaGGNU"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-200 shadow-md shadow-black/10"
+                href="#"
+                className="w-10 h-10 rounded-lg bg-[#8C6239]/20 border border-[#8C6239]/30 flex items-center justify-center text-white hover:bg-[#8C6239] hover:-translate-y-0.5 transition-all duration-200 shadow-md"
                 aria-label="TikTok"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -83,10 +77,8 @@ export default function Footer() {
               </a>
               {/* Shopee */}
               <a
-                href="https://shopee.vn/yunavietnam68?entryPoint=ShopBySearch&searchKeyword=yunavietnam"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-[#EE4D2D] flex items-center justify-center text-white hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 shadow-md shadow-[#EE4D2D]/20"
+                href="#"
+                className="w-10 h-10 rounded-lg bg-[#8C6239]/20 border border-[#8C6239]/30 flex items-center justify-center text-white hover:bg-[#8C6239] hover:-translate-y-0.5 transition-all duration-200 shadow-md"
                 aria-label="Shopee"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -97,8 +89,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-[#6B8E23]/20 text-center text-xs text-white/30">
-        &copy; {new Date().getFullYear()} YUNA Việt Nam. All rights reserved.
+      <div className="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-[#8C6239]/20 text-center text-xs text-white/30">
+        &copy; {new Date().getFullYear()} PLOYBAY. All rights reserved.
       </div>
     </footer>
   );

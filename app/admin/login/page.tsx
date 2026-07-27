@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
   if (checking) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <Loader2 className="w-8 h-8 text-[#6B8E23] animate-spin" />
+        <Loader2 className="w-8 h-8 text-[#C59B27] animate-spin" />
       </div>
     );
   }
@@ -84,11 +84,11 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo & Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#6B8E23] text-white mb-4 shadow-lg shadow-[#6B8E23]/20">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#C59B27] text-white mb-4 shadow-lg shadow-[#C59B27]/20">
             <Lock className="w-8 h-8" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-            YUNA Admin Portal
+            PLOYBAY Admin Portal
           </h1>
           <p className="text-slate-400 text-sm">
             Đăng nhập để truy cập hệ thống quản trị
@@ -110,8 +110,8 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder="admin@yuna.vn"
-                  className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-[#6B8E23] focus:ring-2 focus:ring-[#6B8E23]/20 transition-colors"
+                  placeholder="admin@ploybay.vn"
+                  className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-[#C59B27] focus:ring-2 focus:ring-[#C59B27]/20 transition-colors"
                   disabled={loading}
                 />
               </div>
@@ -130,7 +130,7 @@ export default function AdminLoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-[#6B8E23] focus:ring-2 focus:ring-[#6B8E23]/20 transition-colors"
+                  className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-[#C59B27] focus:ring-2 focus:ring-[#C59B27]/20 transition-colors"
                   disabled={loading}
                 />
               </div>
@@ -148,7 +148,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-[#6B8E23] hover:bg-[#5a781e] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[#6B8E23]/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#C59B27] hover:bg-[#a17b1d] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[#C59B27]/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -169,7 +169,7 @@ export default function AdminLoginPage() {
 
         {/* Additional Info */}
         <p className="text-center text-xs text-slate-500 mt-6">
-          © 2026 YUNA. Hệ thống quản trị nội bộ.
+          © 2026 PLOYBAY. Hệ thống quản trị nội bộ.
         </p>
       </div>
     </div>

@@ -18,33 +18,33 @@ interface Post {
 const initialPosts: Post[] = [
   {
     id: 1,
-    title: "5 LÝ DO CHẢO INOX ĐƯỢC ƯA CHUỘNG?",
-    category: "Mẹo nhà bếp",
-    author: "Yuna Editor",
+    title: "CÁCH CHĂM SÓC VÀ BẢO QUẢN VÍ DA THẬT LUÔN NHƯ MỚI",
+    category: "Kiến thức đồ da",
+    author: "PLOYBAY Editor",
     date: "08/06/2026",
     status: "Công khai",
-    thumbnail: "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=400&q=80",
-    content: "Chảo inox 3 đáy hoặc đa lớp được ưa chuộng nhờ khả năng truyền nhiệt tốt, bền bỉ và an toàn vệ sinh thực phẩm."
+    thumbnail: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
+    content: "Ví da thật cần được bảo quản ở nơi khô ráo, tránh ánh nắng trực tiếp và làm sạch định kỳ bằng dung dịch chuyên dụng để giữ được độ mềm mại."
   },
   {
     id: 2,
-    title: "MẸO GIỮ ĐỒ GIA DỤNG LUÔN SÁNG BÓNG",
-    category: "Chăm sóc gia đình",
-    author: "Yuna Editor",
+    title: "BÍ QUYẾT CHỌN THẮT LƯNG DA NAM PHÙ HỢP VỚI TRANG PHỤC",
+    category: "Phong cách quý ông",
+    author: "PLOYBAY Editor",
     date: "08/06/2026",
     status: "Công khai",
-    thumbnail: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80",
-    content: "Đồ gia dụng inox sẽ luôn bền đẹp như mới nếu bạn thường xuyên vệ sinh bằng giấm, chanh hoặc baking soda."
+    thumbnail: "https://images.unsplash.com/photo-1624222247344-550fb8ecf7db?w=400&q=80",
+    content: "Thắt lưng da nên có màu sắc và chất liệu đồng điệu với đôi giày bạn đang đi để tạo nên một tổng thể lịch lãm và chỉn chu nhất."
   },
   {
     id: 3,
-    title: "90% GIA ĐÌNH VẪN ĐANG DÙNG CHẢO CHỐNG DÍNH BỊ TRẦY MÀ KHÔNG BIẾT ĐIỀU NÀY",
-    category: "Cảnh báo sức khỏe",
-    author: "Admin Yuna",
+    title: "GỢI Ý SET QUÀ TẶNG DOANH NHÂN SANG TRỌNG VÀ Ý NGHĨA",
+    category: "Tin tức quà tặng",
+    author: "Admin PLOYBAY",
     date: "07/06/2026",
     status: "Công khai",
-    thumbnail: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&q=80",
-    content: "Chảo chống dính bị bong tróc lớp phủ Teflon khi đun nấu ở nhiệt độ cao có thể giải phóng chất độc hại vào thức ăn."
+    thumbnail: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80",
+    content: "Set quà tặng ví da phối cùng thắt lưng cao cấp từ PLOYBAY là lựa chọn hàng đầu để tri ân đối tác, khách hàng và cấp trên."
   }
 ];
 
@@ -60,8 +60,8 @@ export default function PostsAdminPage() {
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [formData, setFormData] = useState<Partial<Post>>({
     title: "",
-    category: "Mẹo nhà bếp",
-    author: "Yuna Editor",
+    category: "Kiến thức đồ da",
+    author: "PLOYBAY Editor",
     status: "Công khai",
     thumbnail: "",
     content: ""
@@ -85,7 +85,7 @@ export default function PostsAdminPage() {
 
     if (!hasConfig) {
       // Load from LocalStorage if offline, or fallback to initialPosts
-      const saved = localStorage.getItem("yuna_admin_posts");
+      const saved = localStorage.getItem("ploybay_admin_posts");
       if (saved) {
         try {
           setPosts(JSON.parse(saved));
@@ -118,10 +118,10 @@ export default function PostsAdminPage() {
             id: item.id,
             title: item.title,
             category: item.category || "Chưa phân loại",
-            author: item.author || "Admin Yuna",
+            author: item.author || "Admin PLOYBAY",
             date: formattedDate,
             status: item.status === "Nháp" ? "Nháp" : "Công khai",
-            thumbnail: item.thumbnail || "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=400&q=80",
+            thumbnail: item.thumbnail || "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
             content: item.content || ""
           };
         });
@@ -132,7 +132,7 @@ export default function PostsAdminPage() {
     } catch (err) {
       console.warn("Lỗi khi kết nối Supabase:", err);
       showToast("Không thể kết nối Supabase. Đang hiển thị bài viết offline.", "info");
-      const saved = localStorage.getItem("yuna_admin_posts");
+      const saved = localStorage.getItem("ploybay_admin_posts");
       setPosts(saved ? JSON.parse(saved) : initialPosts);
     } finally {
       setLoading(false);
@@ -147,10 +147,10 @@ export default function PostsAdminPage() {
     setModalMode("add");
     setFormData({
       title: "",
-      category: "Mẹo nhà bếp",
-      author: "Yuna Editor",
+      category: "Kiến thức đồ da",
+      author: "PLOYBAY Editor",
       status: "Công khai",
-      thumbnail: "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=400&q=80",
+      thumbnail: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
       content: ""
     });
     setIsModalOpen(true);
@@ -180,7 +180,7 @@ export default function PostsAdminPage() {
 
     const updated = posts.filter((p) => p.id !== id);
     setPosts(updated);
-    localStorage.setItem("yuna_admin_posts", JSON.stringify(updated));
+    localStorage.setItem("ploybay_admin_posts", JSON.stringify(updated));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -193,10 +193,10 @@ export default function PostsAdminPage() {
     const payload = {
       title: formData.title,
       content: formData.content,
-      category: formData.category || "Mẹo nhà bếp",
-      author: formData.author || "Yuna Editor",
+      category: formData.category || "Kiến thức đồ da",
+      author: formData.author || "PLOYBAY Editor",
       status: formData.status,
-      thumbnail: formData.thumbnail || "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=400&q=80"
+      thumbnail: formData.thumbnail || "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80"
     };
 
     if (modalMode === "add") {
@@ -209,8 +209,8 @@ export default function PostsAdminPage() {
       const newPost: Post = {
         id: newId,
         title: formData.title,
-        category: formData.category || "Mẹo nhà bếp",
-        author: formData.author || "Yuna Editor",
+        category: formData.category || "Kiến thức đồ da",
+        author: formData.author || "PLOYBAY Editor",
         date: formattedDate,
         status: formData.status as any,
         thumbnail: payload.thumbnail,
@@ -232,7 +232,7 @@ export default function PostsAdminPage() {
 
       const updated = [...posts, newPost];
       setPosts(updated);
-      localStorage.setItem("yuna_admin_posts", JSON.stringify(updated));
+      localStorage.setItem("ploybay_admin_posts", JSON.stringify(updated));
     } else {
       // Edit Mode
       if (isSupabaseConfigured) {
@@ -253,7 +253,7 @@ export default function PostsAdminPage() {
 
       const updated = posts.map((p) => (p.id === formData.id ? (formData as Post) : p));
       setPosts(updated);
-      localStorage.setItem("yuna_admin_posts", JSON.stringify(updated));
+      localStorage.setItem("ploybay_admin_posts", JSON.stringify(updated));
     }
 
     setIsModalOpen(false);
@@ -305,11 +305,11 @@ export default function PostsAdminPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-800">Quản lý bài viết</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Viết, sửa, xóa các bài viết tin tức và cẩm nang gia đình</p>
+          <p className="text-xs text-slate-500 mt-0.5">Viết, sửa, xóa các bài viết tin tức và cẩm nang quà tặng, phong cách quý ông</p>
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#6B8E23] hover:bg-[#5a781e] text-white text-sm font-semibold rounded-xl transition-colors shadow-sm self-start sm:self-auto cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#C59B27] hover:bg-[#a17b1d] text-white text-sm font-semibold rounded-xl transition-colors shadow-sm self-start sm:self-auto cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Thêm bài viết
@@ -325,7 +325,7 @@ export default function PostsAdminPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Tìm kiếm tiêu đề, danh mục..."
-            className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+            className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
           />
         </div>
         <div className="text-xs text-slate-500 font-medium self-end md:self-auto">
@@ -441,8 +441,8 @@ export default function PostsAdminPage() {
                   required
                   value={formData.title || ""}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Ví dụ: 5 lý do chảo inox được ưa chuộng..."
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                  placeholder="Ví dụ: Cách phân biệt ví da thật và giả..."
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
                 />
               </div>
 
@@ -450,23 +450,23 @@ export default function PostsAdminPage() {
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Chuyên mục</label>
                   <select
-                    value={formData.category || "Mẹo nhà bếp"}
+                    value={formData.category || "Kiến thức đồ da"}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] bg-white"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27] bg-white"
                   >
-                    <option value="Mẹo nhà bếp">Mẹo nhà bếp</option>
-                    <option value="Chăm sóc gia đình">Chăm sóc gia đình</option>
-                    <option value="Cảnh báo sức khỏe">Cảnh báo sức khỏe</option>
-                    <option value="Tin tức Yuna">Tin tức Yuna</option>
+                    <option value="Phong cách quý ông">Phong cách quý ông</option>
+                    <option value="Kiến thức đồ da">Kiến thức đồ da</option>
+                    <option value="Tin tức quà tặng">Tin tức quà tặng</option>
+                    <option value="Tin tức PLOYBAY">Tin tức PLOYBAY</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Tác giả</label>
                   <input
                     type="text"
-                    value={formData.author || "Yuna Editor"}
+                    value={formData.author || "PLOYBAY Editor"}
                     onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
                   />
                 </div>
               </div>
@@ -477,7 +477,7 @@ export default function PostsAdminPage() {
                   <select
                     value={formData.status || "Công khai"}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] bg-white"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27] bg-white"
                   >
                     <option value="Công khai">Công khai</option>
                     <option value="Nháp">Nháp</option>
@@ -490,7 +490,7 @@ export default function PostsAdminPage() {
                     value={formData.thumbnail || ""}
                     onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
                     placeholder="https://images.unsplash.com/..."
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
                   />
                 </div>
               </div>
@@ -503,7 +503,7 @@ export default function PostsAdminPage() {
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   placeholder="Nhập nội dung bài viết chi tiết ở đây..."
                   rows={8}
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23]"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
                 />
               </div>
 
@@ -518,7 +518,7 @@ export default function PostsAdminPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#6B8E23] hover:bg-[#5a781e] text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-[#C59B27] hover:bg-[#a17b1d] text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer"
                 >
                   Lưu bài viết
                 </button>

@@ -15,7 +15,7 @@ export default function HeroSection() {
   const ease = "transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]";
 
   return (
-    <section className="relative w-full min-h-[88vh] bg-[#070e03] overflow-hidden flex items-center">
+    <section className="relative w-full min-h-[88vh] bg-[#131110] overflow-hidden flex items-center">
       {/* ── STRUCTURED DATA (JSON-LD) FOR SEO ── */}
       <script
         type="application/ld+json"
@@ -23,32 +23,28 @@ export default function HeroSection() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "YUNA Vietnam",
-            "url": "https://yuna.vn",
-            "logo": "https://yuna.vn/icon.png",
-            "description": "YUNA chuyên cung cấp các giải pháp thiết bị điện gia dụng, gia dụng nhà bếp, gia dụng tiện ích thông minh chính hãng cho gia đình Việt.",
+            "name": "PLOYBAY",
+            "url": "https://ploybay.vn",
+            "logo": "https://ploybay.vn/icon.png",
+            "description": "PLOYBAY mang đến các sản phẩm ví da, thắt lưng da nam thủ công tinh xảo, phối sẵn các set quà tặng sang trọng, lịch lãm - giải pháp quà tặng hoàn hảo dành riêng cho quý ông.",
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+84-977-500-651",
+              "telephone": "+84-9xx-xxx-xxx",
               "contactType": "customer service",
-              "email": "yunavietnam.info@gmail.com",
+              "email": "contact@ploybay.vn",
               "areaServed": "VN",
               "availableLanguage": "Vietnamese"
             },
-            "sameAs": [
-              "https://www.facebook.com/yunavietnamfanpage/",
-              "https://www.tiktok.com/@yunavietnamm",
-              "https://shopee.vn/yunavietnam68"
-            ]
+            "sameAs": []
           })
         }}
       />
 
       {/* ── AMBIENT RADIAL GLOW ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-[650px] h-[650px] bg-[#6B8E23]/[0.08] rounded-full blur-[120px]" />
+        <div className="absolute -top-40 -left-40 w-[650px] h-[650px] bg-[#8C6239]/[0.08] rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#C59B27]/[0.06] rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#6B8E23]/[0.04] rounded-full blur-[80px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#8C6239]/[0.04] rounded-full blur-[80px]" />
       </div>
 
       {/* ── FILM GRAIN TEXTURE ── */}
@@ -76,9 +72,9 @@ export default function HeroSection() {
             className={`${ease} ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
             style={{ transitionDelay: "0ms" }}
           >
-            <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#6B8E23]/30 bg-[#6B8E23]/[0.08] text-[#9fc75a] text-[10px] uppercase tracking-[0.22em] font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#9fc75a] animate-pulse shrink-0" />
-              Gia dụng thông minh · Việt Nam
+            <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#8C6239]/30 bg-[#8C6239]/[0.08] text-[#d4af37] text-[10px] uppercase tracking-[0.22em] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse shrink-0" />
+              QUÀ TẶNG PHỤ KIỆN DA NAM CAO CẤP
             </span>
           </div>
 
@@ -90,15 +86,12 @@ export default function HeroSection() {
               fontFamily: "var(--font-playfair), Georgia, serif",
             }}
           >
-            <span className="sr-only">YUNA - Thiết Bị Gia Dụng Thông Minh Cao Cấp: </span>
-            <span className="block text-white text-[2.6rem] sm:text-[3.4rem] md:text-[3.8rem] lg:text-[4rem] xl:text-[4.5rem] leading-[1.05] font-bold tracking-tight">
-              Nâng tầm
+            <span className="sr-only">PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp: </span>
+            <span className="block text-white text-[2.2rem] sm:text-[3rem] md:text-[3.4rem] lg:text-[3.6rem] xl:text-[4rem] leading-[1.1] font-bold tracking-tight">
+              Khẳng định bản lĩnh
             </span>
-            <span className="block text-[#C59B27] text-[2.6rem] sm:text-[3.4rem] md:text-[3.8rem] lg:text-[4rem] xl:text-[4.5rem] leading-[1.05] font-bold italic tracking-tight">
-              không gian sống
-            </span>
-            <span className="block text-white text-[2.6rem] sm:text-[3.4rem] md:text-[3.8rem] lg:text-[4rem] xl:text-[4.5rem] leading-[1.05] font-bold tracking-tight">
-              mỗi ngày
+            <span className="block text-[#C59B27] text-[2.2rem] sm:text-[3rem] md:text-[3.4rem] lg:text-[3.6rem] xl:text-[4rem] leading-[1.1] font-bold italic tracking-tight">
+              Tinh tế trong từng món quà
             </span>
           </h1>
 
@@ -112,12 +105,12 @@ export default function HeroSection() {
 
           {/* Description */}
           <p
-            className={`text-white/50 text-[14.5px] md:text-[15px] leading-[1.8] max-w-[440px] ${ease} ${
+            className={`text-white/60 text-[14.5px] md:text-[15px] leading-[1.8] max-w-[480px] ${ease} ${
               visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "270ms" }}
           >
-            <strong>YUNA</strong> mang đến các giải pháp <strong>gia dụng thực dụng</strong>, tối ưu hóa sự tiện nghi và tiết kiệm thời gian quý báu cho mỗi gia đình Việt.
+            <strong>PLOYBAY</strong> Từ đầu những năm 2000, khi những món quà còn giản dị, chúng tôi bắt đầu tạo nên những sản phẩm da đầu tiên bằng tất cả sự tỉ mỉ và tâm huyết. Không chỉ là ví da hay thắt lưng, mỗi sản phẩm đều được chọn lựa kĩ từ chất liệu, thiết kế cho tới từng đường may hoàn thiện. Chúng tôi tin rằng, những món quà đẹp nhất không nằm ở giá trị vật chất mà là cảm xúc khi người nhận mở món quà ra. Mỗi chiếc hộp được trao đi là một kỉ niệm được lưu giữ. Và chúng tôi tự hào khi trở thành một phần trong khoảnh khắc ấy. Hơn 20 năm đồng hành cùng khách hàng, chúng tôi vẫn giữ trọn vẹn giá trị đầu. Sang trọng và tinh tế
           </p>
 
           {/* CTA Buttons */}
@@ -129,12 +122,12 @@ export default function HeroSection() {
           >
             {/* Primary — button-in-button pattern */}
             <Link
-              href="/dien-gia-dung"
-              title="Mua sắm thiết bị điện gia dụng thông minh YUNA chính hãng"
-              className="group inline-flex items-center justify-between gap-2 pl-6 pr-2 py-2 bg-[#6B8E23] hover:bg-[#5c7b1d] text-white font-semibold rounded-full text-sm tracking-wide transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.025] active:scale-[0.97] shadow-xl shadow-[#6B8E23]/20 w-fit"
+              href="/vi-da-cao-cap"
+              title="Khám phá bộ sưu tập ví da nam cao cấp PLOYBAY"
+              className="group inline-flex items-center justify-between gap-2 pl-6 pr-2 py-2 bg-[#8C6239] hover:bg-[#734d29] text-white font-semibold rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-[#8C6239]/20 w-fit"
             >
-              <span>Mua ngay</span>
-              <span className="w-8 h-8 rounded-full bg-white/15 group-hover:bg-white/20 flex items-center justify-center shrink-0 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px">
+              <span>Khám phá bộ sưu tập</span>
+              <span className="w-8 h-8 rounded-full bg-white/15 group-hover:bg-white/20 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-px">
                 <svg
                   className="w-3.5 h-3.5"
                   fill="none"
@@ -153,11 +146,11 @@ export default function HeroSection() {
 
             {/* Secondary */}
             <Link
-              href="/gioi-thieu"
-              title="Tìm hiểu thêm câu chuyện thương hiệu và sứ mệnh của gia dụng YUNA"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/12 hover:border-white/28 text-white/60 hover:text-white/90 rounded-full text-sm font-medium tracking-wide transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white/[0.04] w-fit"
+              href="/bo-qua-tang"
+              title="Chọn set quà tặng da sang trọng cho quý ông"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/12 hover:border-white/28 text-white/70 hover:text-white/95 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:bg-white/[0.04] hover:scale-[1.02] active:scale-[0.98] w-fit"
             >
-              Tìm hiểu thêm
+              Chọn quà ngay
             </Link>
           </div>
 
@@ -205,12 +198,8 @@ export default function HeroSection() {
             <div className="w-6 h-px bg-white/[0.12]" />
 
             <a
-              href="https://www.facebook.com/yunavietnamfanpage/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook YUNA"
-              title="Theo dõi YUNA Vietnam trên Facebook"
-              className="w-8 h-8 rounded-full border border-white/[0.09] hover:border-blue-500/50 hover:bg-blue-600/10 flex items-center justify-center text-white/35 hover:text-blue-400 transition-all duration-300 hover:scale-110"
+              href="#"
+              className="w-8 h-8 rounded-full border border-white/[0.09] hover:border-[#8C6239]/50 hover:bg-[#8C6239]/10 flex items-center justify-center text-white/35 hover:text-[#8C6239] transition-all duration-300 hover:scale-110"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -218,25 +207,17 @@ export default function HeroSection() {
             </a>
 
             <a
-              href="https://www.tiktok.com/@yunavietnamm?_r=1&_t=ZS-975BbJaGGNU"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok YUNA"
-              title="Theo dõi các video review gia dụng YUNA trên TikTok"
+              href="#"
               className="w-8 h-8 rounded-full border border-white/[0.09] hover:border-white/35 hover:bg-white/[0.05] flex items-center justify-center text-white/35 hover:text-white transition-all duration-300 hover:scale-110"
             >
-              <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.74-3.94-1.78-.22-.22-.4-.45-.58-.7v5.89c.04 2.23-.74 4.54-2.4 5.97-1.92 1.67-4.73 2.05-7.04 1.25-2.85-1-4.71-3.95-4.47-7.07.19-2.61 2-5.06 4.63-5.69 1.15-.28 2.37-.18 3.48.24v4.16c-.84-.36-1.8-.46-2.67-.14-1.22.42-2.12 1.74-2.02 3.05.12 1.45 1.43 2.62 2.87 2.45 1.52-.07 2.64-1.47 2.58-2.98V.02z" />
               </svg>
             </a>
 
             <a
-              href="https://shopee.vn/yunavietnam68?entryPoint=ShopBySearch&searchKeyword=yunavietnam"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Shopee YUNA"
-              title="Mua sắm trực tuyến các sản phẩm YUNA chính hãng trên Shopee"
-              className="w-8 h-8 rounded-full border border-white/[0.09] hover:border-[#EE4D2D]/50 hover:bg-[#EE4D2D]/10 flex items-center justify-center text-white/35 hover:text-[#EE4D2D] transition-all duration-300 hover:scale-110"
+              href="#"
+              className="w-8 h-8 rounded-full border border-white/[0.09] hover:border-[#8C6239]/50 hover:bg-[#8C6239]/10 flex items-center justify-center text-white/35 hover:text-[#8C6239] transition-all duration-300 hover:scale-110"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M19.7 6.4h-3.2C16 3.2 14.2 1 12 1S8 3.2 7.5 6.4H4.3C3.6 6.4 3 7 3 7.7v12.2C3 21.3 4.2 23 5.7 23h12.6c1.5 0 2.7-1.7 2.7-3.1V7.7c0-.7-.6-1.3-1.3-1.3zM12 3c1.1 0 2 1.5 2.2 3.4H9.8C10 4.5 10.9 3 12 3zm0 13c-2.4 0-4.3-1.8-4.3-4.1h1.7c0 1.3 1.2 2.4 2.6 2.4s2.6-1.1 2.6-2.4h1.7c0 2.3-1.9 4.1-4.3 4.1z" />
@@ -260,24 +241,25 @@ export default function HeroSection() {
           <div className="relative p-2 bg-white/[0.025] ring-1 ring-white/[0.07] rounded-[2.5rem]">
             {/* Inner core */}
             <div
-              className="relative overflow-hidden rounded-[2rem] w-full aspect-[3/4] md:aspect-[4/5]"
+              className="relative overflow-hidden rounded-[2rem] w-full aspect-[3/4] md:aspect-[4/5] flex items-center justify-center bg-black/40"
               style={{
                 boxShadow: "inset 0 1px 1px rgba(255,255,255,0.06)",
               }}
             >
               <Image
-                src="https://i.pinimg.com/736x/18/0d/e9/180de9e2db8641926032c1c5bcb54f94.jpg"
-                alt="Không gian bếp hiện đại với các sản phẩm gia dụng thông minh cao cấp của YUNA Vietnam"
+                src="/logo.png"
+                alt="PLOYBAY Logo"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 43vw"
-                className="object-cover object-center"
+                className="object-contain p-12"
+                unoptimized
               />
 
               {/* Inner vignette — bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070e03]/65 via-[#070e03]/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#131110]/65 via-[#131110]/10 to-transparent" />
               {/* Inner vignette — sides */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#070e03]/20 via-transparent to-[#070e03]/10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#131110]/20 via-transparent to-[#131110]/10" />
 
               {/* ── Floating warranty badge (bottom-left) — double bezel ── */}
               <div className="absolute bottom-5 left-5">
@@ -285,14 +267,14 @@ export default function HeroSection() {
                 <div className="p-1.5 bg-black/20 ring-1 ring-white/[0.09] rounded-2xl">
                   {/* badge inner core */}
                   <div
-                    className="bg-[#0a1405]/85 rounded-[calc(0.75rem)] px-4 py-3 flex items-center gap-3"
+                    className="bg-[#131110]/95 rounded-[calc(0.75rem)] px-4 py-3 flex items-center gap-3"
                     style={{
                       boxShadow: "inset 0 1px 0px rgba(255,255,255,0.07)",
                     }}
                   >
-                    <div className="w-8 h-8 rounded-full bg-[#6B8E23]/15 border border-[#6B8E23]/25 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-[#8C6239]/15 border border-[#8C6239]/25 flex items-center justify-center shrink-0">
                       <svg
-                        className="w-4 h-4 text-[#9fc75a]"
+                        className="w-4 h-4 text-[#C59B27]"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="1.5"
@@ -309,8 +291,8 @@ export default function HeroSection() {
                       <p className="text-white text-[12px] font-semibold leading-tight">
                         Bảo hành chính hãng
                       </p>
-                      <p className="text-white/35 text-[10px] mt-0.5 leading-tight">
-                        12 tháng · Hỗ trợ tại nhà
+                      <p className="text-white/50 text-[10px] mt-0.5 leading-tight">
+                        12 tháng · Cam kết da thật
                       </p>
                     </div>
                   </div>
@@ -325,16 +307,16 @@ export default function HeroSection() {
             aria-label="Thông tin liên hệ"
           >
             <a
-              href="mailto:yunavietnam.info@gmail.com"
+              href="mailto:contact@ploybay.vn"
               className="text-white/25 hover:text-white/50 text-[10px] tracking-wide transition-colors duration-300"
             >
-              yunavietnam.info@gmail.com
+              contact@ploybay.vn
             </a>
             <a
-              href="tel:0977500651"
+              href="tel:09xxxxxxxx"
               className="text-white/25 hover:text-white/50 text-[10px] tracking-wide transition-colors duration-300"
             >
-              0977 500 651
+              09xx xxx xxx
             </a>
           </div>
         </div>
@@ -357,7 +339,7 @@ export default function HeroSection() {
       </div>
 
       {/* ── BOTTOM EDGE FADE TO PAGE BG ── */}
-      <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#FDFBF7]/[0.06] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#131110]/[0.06] to-transparent pointer-events-none" />
     </section>
   );
 }

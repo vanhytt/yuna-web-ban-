@@ -16,28 +16,27 @@ interface NewsArticle {
 const fallbackArticles: NewsArticle[] = [
   {
     id: 1,
-    title: "5 LÝ DO CHẢO INOX ĐƯỢC ƯA CHUỘNG?",
+    title: "CÁCH PHÂN BIỆT VÍ DA THẬT VÀ DA GIẢ CHI TIẾT NHẤT",
     sapo:
-      "Chảo inox ngày càng được nhiều gia đình tin dùng bởi độ bền cao, an toàn cho sức khỏe và dễ vệ sinh. Khám phá ngay 5 lý do khiến chảo inox trở thành lựa chọn hàng đầu trong gian bếp hiện đại.",
-    image: "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=600&q=80",
-    slug: "5-ly-do-chao-inox-duoc-ua-chuong",
+      "Để không mua nhầm các sản phẩm giả da kém chất lượng, PLOYBAY chia sẻ đến bạn những mẹo đơn giản để phân biệt ví da thật và giả bằng mắt thường và xúc giác.",
+    image: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
+    slug: "cach-phan-biet-vi-da-that-va-da-gia-chi-tiet-nhat",
   },
   {
     id: 2,
-    title: "MẸO GIỮ ĐỒ GIA DỤNG LUÔN SÁNG BÓNG",
+    title: "BÍ QUYẾT BẢO QUẢN THẮT LƯNG DA LUÔN NHƯ MỚI",
     sapo:
-      "Những bí quyết đơn giản giúp đồ gia dụng nhà bạn luôn sáng bóng như mới dù sử dụng hàng ngày. Chỉ cần vài thao tác nhỏ, bộ đồ bếp của bạn sẽ luôn lấp lánh và bền đẹp theo thời gian.",
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80",
-    slug: "meo-giu-do-gia-dung-luon-sang-bong",
+      "Thắt lưng da nam cao cấp nếu không biết cách bảo quản sẽ dễ bị ẩm mốc, rạn nứt. Hãy lưu lại ngay những bí quyết cực đơn giản giúp món phụ kiện của bạn luôn bền đẹp.",
+    image: "https://images.unsplash.com/photo-1624222247344-550fb8ecf78d?w=600&q=80",
+    slug: "bi-quyet-bao-quan-that-lung-da-luon-nhu-moi",
   },
   {
     id: 3,
-    title:
-      "90% GIA ĐÌNH VẪN ĐANG DÙNG CHẢO CHỐNG DÍNH BỊ TRẦY MÀ KHÔNG BIẾT ĐIỀU NÀY",
+    title: "GỢI Ý SET QUÀ TẶNG QUÝ ÔNG LỊCH LÃM VÀ Ý NGHĨA",
     sapo:
-      "Nhiều người không biết rằng chảo chống dính bị trầy xước có thể gây nguy hiểm cho sức khỏe. Hãy cùng tìm hiểu dấu hiệu nhận biết và cách xử lý đúng đắn để bảo vệ gia đình bạn.",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600&q=80",
-    slug: "90-gia-dinh-van-dung-chao-chong-dinh-bi-tray",
+      "Chọn quà tặng cho nam giới chưa bao giờ là dễ dàng. Dưới đây là những set quà tặng ví da, thắt lưng phối sẵn sang trọng và tinh tế phù hợp cho mọi dịp lễ đặc biệt.",
+    image: "https://images.unsplash.com/photo-1549439602-43ebca2327af?w=600&q=80",
+    slug: "goi-y-set-qua-tang-quy-ong-lich-lam-va-y-nghia",
   },
 ];
 
@@ -54,7 +53,7 @@ export default function NewsGrid() {
     const loadArticles = async () => {
       if (!checkConnection()) {
         // Fallback to local storage if saved there by admin, otherwise static fallback
-        const saved = localStorage.getItem("yuna_admin_posts");
+        const saved = localStorage.getItem("ploybay_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -90,7 +89,7 @@ export default function NewsGrid() {
             id: item.id,
             title: item.title,
             sapo: item.content || "",
-            image: item.thumbnail || "https://images.unsplash.com/photo-1584990347449-a2d4c2b68783?w=600&q=80",
+            image: item.thumbnail || "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
             slug: item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
           }));
           setArticles(mapped);
@@ -111,11 +110,11 @@ export default function NewsGrid() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="flex items-center justify-center gap-4 mb-10">
-          <div className="flex-1 max-w-[120px] h-[2px] bg-[#6B8E23]" />
+          <div className="flex-1 max-w-[120px] h-[2px] bg-[#C59B27]" />
           <h2 className="text-2xl md:text-3xl font-bold text-black tracking-widest uppercase whitespace-nowrap">
             TIN TỨC - BÀI VIẾT
           </h2>
-          <div className="flex-1 max-w-[120px] h-[2px] bg-[#6B8E23]" />
+          <div className="flex-1 max-w-[120px] h-[2px] bg-[#C59B27]" />
         </div>
 
         {/* News Grid */}
@@ -142,7 +141,7 @@ export default function NewsGrid() {
 
               {/* Content */}
               <div className="pt-4 flex flex-col gap-2">
-                <h3 className="text-sm md:text-base font-bold text-black uppercase leading-snug group-hover:text-[#6B8E23] transition-colors duration-200 line-clamp-2">
+                <h3 className="text-sm md:text-base font-bold text-black uppercase leading-snug group-hover:text-[#C59B27] transition-colors duration-200 line-clamp-2">
                   {article.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">

@@ -23,24 +23,10 @@ interface Product {
 
 /* ───────── CATEGORY MAP ───────── */
 const categoryMap: Record<string, string> = {
-  "dien-gia-dung": "Điện gia dụng",
-  "gia-dung-nha-bep": "Gia dụng Nhà Bếp",
-  "gia-dung-tien-ich": "Gia dụng Tiện ích",
-  "qua-tang-va-phu-kien": "Quà tặng và Phụ kiện",
-  "coc-binh-giu-nhiet": "Cốc - Bình giữ nhiệt - Bình nước",
-  "hop-dung-ruou-vang": "Hộp đựng rượu vang",
-  "bien-ten-huy-hieu-vinh-danh": "Biển tên - Huy hiệu - Vinh danh",
-  "but-so-hop-namecard": "Bút - Sổ - Hộp namecard",
-  "qua-tang-it": "Quà tặng IT",
-  "balo-tui-vi-cap": "Balo - Túi - Ví - Cặp",
-  "vong-tay-quat-moc-khoa": "Vòng tay - Quạt - Móc khóa",
-  "o-ao-mu-the-hanh-ly": "Ô - Áo - Mũ - Thẻ hành lý",
-  "gat-tan-bat-lua-lot-ly": "Gạt tàn - Bật lửa - Lót ly",
-  "bo-qua-tang-bo-giftset": "Bộ quà tặng - Bộ giftset",
-  "qua-tang-dong-ho": "Quà tặng đồng hồ",
-  "qua-tang-danh-cho-tre-em": "Quà tặng dành cho trẻ em",
-  "qua-tang-cao-cap": "Quà tặng cao cấp",
-  "bo-san-pham-bom-hoi": "Bộ sản phẩm bơm hơi",
+  "vi-da-cao-cap": "Ví da cao cấp",
+  "that-lung-da": "Thắt lưng da",
+  "bo-qua-tang": "Bộ quà tặng (Giftset)",
+  "phu-kien-da": "Phụ kiện da",
 };
 
 /* ───────── FILTER OPTIONS ───────── */
@@ -90,7 +76,7 @@ export default function CategoryPage({
   useEffect(() => {
     const loadProducts = async () => {
       if (!checkConnection()) {
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -99,7 +85,7 @@ export default function CategoryPage({
               name: item.name,
               price: item.salePrice,
               originalPrice: item.originalPrice,
-              brand: "Yuna",
+              brand: "PLOYBAY",
               image: item.image,
               category: [item.category],
             }));
@@ -125,14 +111,14 @@ export default function CategoryPage({
             name: item.name,
             price: Number(item.price),
             originalPrice: item.original_price ? Number(item.original_price) : undefined,
-            brand: "Yuna",
+            brand: "PLOYBAY",
             image: item.image || "",
-            category: [item.category || "dien-gia-dung"],
+            category: [item.category || "vi-da-cao-cap"],
           }));
           setProducts(mapped);
         } else {
           // Supabase trả về 0 sản phẩm → fallback về localStorage
-          const saved = localStorage.getItem("yuna_admin_products");
+          const saved = localStorage.getItem("ploybay_admin_products");
           if (saved) {
             try {
               const parsed = JSON.parse(saved);
@@ -141,7 +127,7 @@ export default function CategoryPage({
                 name: item.name,
                 price: item.salePrice || item.price || 0,
                 originalPrice: item.originalPrice || item.original_price,
-                brand: "Yuna",
+                brand: "PLOYBAY",
                 image: item.image,
                 category: [normalizeCategorySlug(item.category)],
               }));
@@ -153,7 +139,7 @@ export default function CategoryPage({
         }
       } catch (err) {
         console.warn("Lỗi khi tải sản phẩm từ Supabase:", err);
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -162,7 +148,7 @@ export default function CategoryPage({
               name: item.name,
               price: item.salePrice,
               originalPrice: item.originalPrice,
-              brand: "Yuna",
+              brand: "PLOYBAY",
               image: item.image,
               category: [item.category],
             }));
@@ -244,7 +230,7 @@ export default function CategoryPage({
                 type="checkbox"
                 checked={selectedPrices.includes(idx)}
                 onChange={() => togglePrice(idx)}
-                className="w-4 h-4 rounded border-gray-300 text-[#6B8E23] focus:ring-[#6B8E23] accent-[#6B8E23]"
+                className="w-4 h-4 rounded border-gray-300 text-[#C59B27] focus:ring-[#C59B27] accent-[#C59B27]"
               />
               <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
                 {range.label}
@@ -258,7 +244,7 @@ export default function CategoryPage({
       <div className="flex flex-col gap-2 pt-2">
         <button
           onClick={clearFilters}
-          className="w-full py-2.5 px-4 border-2 border-[#6B8E23] text-[#6B8E23] rounded-lg text-sm font-semibold hover:bg-[#6B8E23]/5 transition-colors"
+          className="w-full py-2.5 px-4 border-2 border-[#C59B27] text-[#C59B27] rounded-lg text-sm font-semibold hover:bg-[#C59B27]/5 transition-colors"
         >
           Xóa bộ lọc
         </button>
@@ -274,31 +260,31 @@ export default function CategoryPage({
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-          <a href="/" className="hover:text-[#6B8E23] transition-colors">
+          <a href="/" className="hover:text-[#C59B27] transition-colors">
             Trang chủ
           </a>
           <span>/</span>
-          <span className="text-[#6B8E23] font-semibold">{categoryName}</span>
+          <span className="text-[#C59B27] font-semibold">{categoryName}</span>
         </nav>
 
         {/* Page title */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="flex-1 max-w-[60px] h-[2px] bg-[#6B8E23]" />
+          <div className="flex-1 max-w-[60px] h-[2px] bg-[#C59B27]" />
           <h1 className="text-xl md:text-2xl font-bold text-gray-900 tracking-widest uppercase whitespace-nowrap">
             {categoryName}
           </h1>
-          <div className="flex-1 max-w-[60px] h-[2px] bg-[#6B8E23]" />
+          <div className="flex-1 max-w-[60px] h-[2px] bg-[#C59B27]" />
         </div>
 
         {/* Mobile filter toggle */}
         <button
           onClick={() => setMobileFilterOpen(true)}
-          className="lg:hidden flex items-center gap-2 mb-4 px-4 py-2.5 rounded-lg border border-[#6B8E23] text-[#6B8E23] text-sm font-semibold hover:bg-[#6B8E23]/5 transition-colors"
+          className="lg:hidden flex items-center gap-2 mb-4 px-4 py-2.5 rounded-lg border border-[#C59B27] text-[#C59B27] text-sm font-semibold hover:bg-[#C59B27]/5 transition-colors"
         >
           <SlidersHorizontal className="w-4 h-4" />
           Bộ lọc
           {activeFilterCount > 0 && (
-            <span className="bg-[#6B8E23] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+            <span className="bg-[#C59B27] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
               {activeFilterCount}
             </span>
           )}
@@ -332,7 +318,7 @@ export default function CategoryPage({
           <aside className="hidden lg:block w-[260px] shrink-0">
             <div className="sticky top-6 bg-white rounded-xl border border-gray-200 p-5">
               <h2 className="font-bold text-base text-gray-900 uppercase tracking-wide mb-5 flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-[#6B8E23]" />
+                <SlidersHorizontal className="w-4 h-4 text-[#C59B27]" />
                 Bộ lọc sản phẩm
               </h2>
               {FilterSidebar}
@@ -354,7 +340,7 @@ export default function CategoryPage({
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-transparent pl-3 pr-8 py-1.5 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] cursor-pointer"
+                  className="appearance-none bg-transparent pl-3 pr-8 py-1.5 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27] cursor-pointer"
                 >
                   {sortOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -395,11 +381,11 @@ export default function CategoryPage({
 
                     {/* Info */}
                     <div className="p-4 flex flex-col gap-2">
-                      <span className="text-[11px] text-[#6B8E23] font-semibold uppercase tracking-wider">
+                      <span className="text-[11px] text-[#C59B27] font-semibold uppercase tracking-wider">
                         {product.brand}
                       </span>
                       <Link href={`/product/${product.id}`} className="block">
-                        <h3 className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#6B8E23] transition-colors">
+                        <h3 className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#C59B27] transition-colors">
                           {product.name}
                         </h3>
                       </Link>
@@ -415,7 +401,7 @@ export default function CategoryPage({
                       </div>
                       <button
                         onClick={() => alert(`Đã thêm vào giỏ hàng: ${product.name}`)}
-                        className="mt-2 w-full flex items-center justify-center gap-2 py-2.5 bg-[#6B8E23] hover:bg-[#5a781e] text-white text-sm font-semibold rounded-lg transition-colors duration-200"
+                        className="mt-2 w-full flex items-center justify-center gap-2 py-2.5 bg-[#C59B27] hover:bg-[#a17b1d] text-white text-sm font-semibold rounded-lg transition-colors duration-200"
                       >
                         <ShoppingCart className="w-4 h-4" />
                         Thêm vào giỏ hàng
@@ -436,7 +422,7 @@ export default function CategoryPage({
                   Hãy thử thay đổi bộ lọc hoặc{" "}
                   <button
                     onClick={clearFilters}
-                    className="text-[#6B8E23] font-semibold hover:underline"
+                    className="text-[#C59B27] font-semibold hover:underline"
                   >
                     xóa bộ lọc
                   </button>

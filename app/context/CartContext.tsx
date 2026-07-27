@@ -30,7 +30,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     if (typeof window !== 'undefined') {
       try {
-        const savedCart = localStorage.getItem('yuna-cart');
+        const savedCart = localStorage.getItem('ploybay-cart');
         // Handle edge cases: null, "undefined", "null", empty string
         if (savedCart && savedCart !== 'undefined' && savedCart !== 'null' && savedCart.trim() !== '') {
           const parsedCart = JSON.parse(savedCart);
@@ -41,7 +41,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       } catch (error) {
         console.error('Error loading cart from localStorage:', error);
         // Clear corrupted data
-        localStorage.removeItem('yuna-cart');
+        localStorage.removeItem('ploybay-cart');
         setCart([]);
       }
       setIsLoaded(true);
@@ -51,7 +51,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Lưu vào localStorage mỗi khi cart thay đổi
   useEffect(() => {
     if (isLoaded && typeof window !== 'undefined') {
-      localStorage.setItem('yuna-cart', JSON.stringify(cart));
+      localStorage.setItem('ploybay-cart', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 

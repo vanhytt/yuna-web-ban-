@@ -36,7 +36,7 @@ export default function Header() {
 
     const loadProducts = async () => {
       if (!checkConnection()) {
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -46,7 +46,7 @@ export default function Header() {
                 name: item.name,
                 price: Number(item.salePrice ?? item.price ?? 0),
                 originalPrice: item.originalPrice ?? item.original_price ?? undefined,
-                brand: "Yuna",
+                brand: "PLOYBAY",
                 image: item.image || "",
                 category: [item.category || ""].filter(Boolean),
               }));
@@ -73,7 +73,7 @@ export default function Header() {
             name: item.name,
             price: Number(item.price || 0),
             originalPrice: item.original_price ? Number(item.original_price) : undefined,
-            brand: "Yuna",
+            brand: "PLOYBAY",
             image: item.image || "",
             category: [item.category || ""].filter(Boolean),
           }));
@@ -81,7 +81,7 @@ export default function Header() {
         }
       } catch (err) {
         console.warn("Lỗi khi tải sản phẩm cho tìm kiếm:", err);
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -91,7 +91,7 @@ export default function Header() {
                 name: item.name,
                 price: Number(item.salePrice ?? item.price ?? 0),
                 originalPrice: item.originalPrice ?? item.original_price ?? undefined,
-                brand: "Yuna",
+                brand: "PLOYBAY",
                 image: item.image || "",
                 category: [item.category || ""].filter(Boolean),
               }));
@@ -152,36 +152,36 @@ export default function Header() {
           {/* Left Contact Info */}
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <a
-              href="mailto:yunavietnam.info@gmail.com"
-              className="flex items-center gap-1.5 hover:text-[#6B8E23] transition-colors"
+              href="mailto:contact@ploybay.vn"
+              className="flex items-center gap-1.5 hover:text-[#8C6239] transition-colors"
             >
               <Mail className="w-4 h-4 text-gray-400" />
-              <span>yunavietnam.info@gmail.com</span>
+              <span>contact@ploybay.vn</span>
             </a>
             <a
-              href="tel:0977500651"
-              className="flex items-center gap-1.5 hover:text-[#6B8E23] transition-colors font-medium"
+              href="tel:09xxxxxxxx"
+              className="flex items-center gap-1.5 hover:text-[#8C6239] transition-colors font-medium"
             >
               <Phone className="w-4 h-4 text-gray-400" />
-              <span>0977 500 651</span>
+              <span>09xx xxx xxx</span>
             </a>
           </div>
 
           {/* Right Policies & Socials */}
           <div className="flex items-center gap-4 md:gap-6">
             <div className="hidden sm:flex items-center gap-4">
-              <a href="#" className="hover:text-[#6B8E23] transition-colors">
+              <a href="#" className="hover:text-[#8C6239] transition-colors">
                 Chính sách mua hàng
               </a>
               <span className="text-gray-300">|</span>
-              <a href="#" className="hover:text-[#6B8E23] transition-colors">
+              <a href="#" className="hover:text-[#8C6239] transition-colors">
                 Hỗ trợ khách hàng
               </a>
             </div>
             <div className="flex items-center gap-3 border-l border-gray-200 pl-4">
               <a
-                href="https://www.facebook.com/yunavietnamfanpage/"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                href="#"
+                className="text-gray-400 hover:text-[#8C6239] transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -189,11 +189,10 @@ export default function Header() {
                 </svg>
               </a>
               <a
-                href="https://www.tiktok.com/@yunavietnamm?_r=1&_t=ZS-975BbJaGGNU"
-                className="text-gray-400 hover:text-black transition-colors"
+                href="#"
+                className="text-gray-400 hover:text-[#8C6239] transition-colors"
                 aria-label="TikTok"
               >
-                {/* Custom TikTok SVG since Lucide doesn't have TikTok by default in older versions */}
                 <svg
                   className="w-3.5 h-3.5 fill-current"
                   viewBox="0 0 24 24"
@@ -203,8 +202,8 @@ export default function Header() {
                 </svg>
               </a>
               <a
-                href="https://shopee.vn/yunavietnam68?entryPoint=ShopBySearch&searchKeyword=yunavietnam"
-                className="text-gray-400 hover:text-[#EE4D2D] transition-colors"
+                href="#"
+                className="text-gray-400 hover:text-[#8C6239] transition-colors"
                 aria-label="Shopee"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -221,16 +220,9 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <div className="relative h-14 md:h-16 w-44 md:w-56">
-              <Image
-                src="/images/logo.png"
-                alt="Yuna Vietnam Logo"
-                fill
-                sizes="(max-width: 768px) 176px, 224px"
-                className="object-contain object-left"
-                priority
-              />
-            </div>
+            <span className="text-3xl md:text-4xl font-serif font-extrabold tracking-[0.2em] text-[#1c1917] hover:text-[#8C6239] transition-colors">
+              PLOYBAY
+            </span>
           </a>
         </div>
 
@@ -247,11 +239,11 @@ export default function Header() {
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setShowDropdown(true)}
               onBlur={handleBlur}
-              className="w-full pl-4 pr-12 py-2.5 rounded-lg border border-gray-200 focus:outline-hidden focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] text-sm bg-gray-50 transition-all placeholder:text-gray-400"
+              className="w-full pl-4 pr-12 py-2.5 rounded-lg border border-gray-200 focus:outline-hidden focus:border-[#8C6239] focus:ring-1 focus:ring-[#8C6239] text-sm bg-gray-50 transition-all placeholder:text-gray-400"
             />
             <button
               type="submit"
-              className="absolute right-3 text-gray-400 hover:text-[#6B8E23] transition-colors"
+              className="absolute right-3 text-gray-400 hover:text-[#8C6239] transition-colors"
               aria-label="Search"
             >
               <Search className="w-5 h-5" />
@@ -298,7 +290,7 @@ export default function Header() {
                   </div>
                   <button
                     onClick={handleSearch}
-                    className="w-full text-center py-2.5 border-t border-gray-100 text-xs font-semibold text-[#6B8E23] hover:bg-gray-50 transition-colors"
+                    className="w-full text-center py-2.5 border-t border-gray-100 text-xs font-semibold text-[#8C6239] hover:bg-gray-50 transition-colors"
                   >
                     Xem tất cả kết quả cho "{searchQuery}"
                   </button>
@@ -318,10 +310,10 @@ export default function Header() {
           <div className="hidden sm:flex flex-col text-right">
             <span className="text-xs text-gray-500">Chăm sóc khách hàng</span>
             <a
-              href="tel:0977500651"
-              className="text-[#D32F2F] font-bold text-lg hover:underline transition-all"
+              href="tel:09xxxxxxxx"
+              className="text-[#8C6239] font-bold text-lg hover:underline transition-all"
             >
-              0977 500 651
+              09xx xxx xxx
             </a>
           </div>
 
@@ -331,7 +323,7 @@ export default function Header() {
              className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[#FDFBF7] hover:bg-gray-100 transition-colors border border-gray-100 relative group ml-auto md:ml-0 cursor-pointer"
            >
              <div className="relative">
-               <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-[#6B8E23] transition-colors" />
+               <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-[#8C6239] transition-colors" />
                {totalItems > 0 && (
                  <span className="absolute -top-2.5 -right-2.5 bg-[#C59B27] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                    {totalItems}

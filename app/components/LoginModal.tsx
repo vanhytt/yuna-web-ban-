@@ -26,7 +26,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
       {/* Modal */}
       <div className="relative z-10 w-full max-w-[420px] mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden animate-[scaleIn_250ms_ease]">
         {/* Header */}
-        <div className="relative bg-[#1a2910] px-6 py-8 text-center">
+        <div className="relative bg-[#1A1A1A] px-6 py-8 text-center">
           <button
             onClick={onClose}
             className="absolute top-3 right-3 p-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors"
@@ -34,7 +34,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
             <X className="w-5 h-5" />
           </button>
           <div className="w-14 h-14 bg-[#C59B27] rounded-full flex items-center justify-center mx-auto mb-3">
-            <span className="text-white font-extrabold text-lg tracking-tight">yn</span>
+            <span className="text-white font-extrabold text-lg tracking-tight">pb</span>
           </div>
           <h2 className="text-white font-bold text-xl uppercase tracking-widest">
             Đăng nhập
@@ -54,7 +54,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email của bạn"
-              className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] transition-colors"
+              className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] transition-colors"
             />
           </div>
 
@@ -66,7 +66,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Mật khẩu"
-              className="w-full pl-10 pr-11 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#6B8E23] focus:ring-1 focus:ring-[#6B8E23] transition-colors"
+              className="w-full pl-10 pr-11 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#8B5A2B] focus:ring-1 focus:ring-[#8B5A2B] transition-colors"
             />
             <button
               type="button"
@@ -81,14 +81,14 @@ export default function LoginModal({ isOpen, onClose }: Props) {
           <div className="text-right">
             <a
               href="#"
-              className="text-sm text-[#6B8E23] font-semibold hover:underline"
+              className="text-sm text-[#8B5A2B] font-semibold hover:underline"
             >
               Quên mật khẩu?
             </a>
           </div>
 
           {/* Submit */}
-          <button className="w-full py-3.5 bg-[#6B8E23] hover:bg-[#5a781e] text-white font-bold text-sm uppercase tracking-wider rounded-xl transition-colors duration-200">
+          <button className="w-full py-3.5 bg-[#8B5A2B] hover:bg-[#704820] text-white font-bold text-sm uppercase tracking-wider rounded-xl transition-colors duration-200">
             Đăng nhập
           </button>
 
@@ -135,7 +135,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
             Chưa có tài khoản?{" "}
             <a
               href="#"
-              className="text-[#6B8E23] font-bold hover:underline"
+              className="text-[#8B5A2B] font-bold hover:underline"
             >
               Đăng ký ngay
             </a>

@@ -64,7 +64,7 @@ export default function ProductGrid() {
       setLoading(true);
 
       if (!checkConnection()) {
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         const parsed = safeParseJSON(saved);
         if (isMounted) setProducts(parsed);
         if (isMounted) setLoading(false);
@@ -103,13 +103,13 @@ export default function ProductGrid() {
             setProducts(mapped);
           }
         } else {
-          const saved = localStorage.getItem("yuna_admin_products");
+          const saved = localStorage.getItem("ploybay_admin_products");
           const parsed = safeParseJSON(saved);
           if (isMounted) setProducts(parsed);
         }
       } catch (err) {
         console.warn("Lỗi khi tải sản phẩm từ Supabase:", err);
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         const parsed = safeParseJSON(saved);
         if (isMounted) setProducts(parsed);
       } finally {
@@ -166,10 +166,10 @@ export default function ProductGrid() {
       <div className="flex flex-col items-center mb-8">
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-tight relative pb-3 text-center">
           SẢN PHẨM NỔI BẬT
-          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#6B8E23] rounded-full" />
+          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#C59B27] rounded-full" />
         </h2>
         <p className="text-sm text-gray-500 mt-2 text-center">
-          Những thiết bị gia dụng bán chạy nhất của YUNA - Cam kết chính hãng và chất lượng hàng đầu
+          Sản phẩm ví da, thắt lưng da cao cấp PLOYBAY - Sự lựa chọn hoàn hảo của quý ông
         </p>
       </div>
 
@@ -200,7 +200,7 @@ export default function ProductGrid() {
           >
             {/* Tag Badge */}
             {product.tag && (
-              <span className="absolute top-3 left-3 z-10 bg-[#6B8E23] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+              <span className="absolute top-3 left-3 z-10 bg-[#C59B27] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
                 {product.tag}
               </span>
             )}
@@ -214,12 +214,12 @@ export default function ProductGrid() {
 
             {/* Product Image Area */}
             <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
-              <Link href={"/product/" + product.id} className="w-full h-full block relative">
+              <Link href={"/product/" + product.id} className="w-full h-full block relative overflow-hidden">
                 <Image
                   src={getProductImage(product.image)}
                   alt={product.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
@@ -228,18 +228,18 @@ export default function ProductGrid() {
               <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
                 <Link
                   href={"/product/" + product.id}
-                  className="w-10 h-10 rounded-full bg-white text-gray-700 hover:text-[#6B8E23] flex items-center justify-center shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-white text-gray-700 hover:text-[#C59B27] flex items-center justify-center shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label="Quick View"
                 >
                   <Eye className="w-5 h-5" />
                 </Link>
                  <button
-                   onClick={(e) => handleAddToCart(e, product)}
-                   className="w-10 h-10 rounded-full bg-[#6B8E23] text-white hover:bg-[#5a781e] flex items-center justify-center shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75"
-                   aria-label="Add to Cart"
-                 >
-                   <ShoppingCart className="w-5 h-5" />
-                 </button>
+                    onClick={(e) => handleAddToCart(e, product)}
+                    className="w-10 h-10 rounded-full bg-[#C59B27] text-white hover:bg-[#a17b1d] flex items-center justify-center shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 hover:scale-110 active:scale-95 cursor-pointer"
+                    aria-label="Add to Cart"
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                  </button>
               </div>
             </div>
 
@@ -249,7 +249,7 @@ export default function ProductGrid() {
                 {product.category}
               </span>
               <Link href={"/product/" + product.id} className="block">
-                 <h3 className="text-xs md:text-sm font-bold text-gray-800 line-clamp-2 min-h-[32px] md:min-h-[40px] group-hover:text-[#6B8E23] transition-colors">
+                 <h3 className="text-xs md:text-sm font-bold text-gray-800 line-clamp-2 min-h-[32px] md:min-h-[40px] group-hover:text-[#C59B27] transition-colors">
                    {product.name}
                  </h3>
                </Link>

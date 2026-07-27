@@ -20,81 +20,80 @@ interface Product {
   image: string;
   category: string[];
   description?: string;
-  video_url?: string;
 }
 
 const allProducts: Product[] = [
   {
     id: 1,
-    name: "Robot hút bụi thông minh YUNA X10 Pro",
-    price: 5950000,
-    originalPrice: 8500000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1618134278327-a39709ec7414?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-thong-minh"],
+    name: "Ví da nam Premium Classic Handcrafted",
+    price: 850000,
+    originalPrice: 1200000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
+    category: ["vi-da-cao-cap"],
   },
   {
     id: 2,
-    name: "Máy lọc không khí YUNA Pure Air 5",
-    price: 2940000,
-    originalPrice: 4200000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1601628768048-9343f5eabfe0?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-thong-minh"],
+    name: "Ví đứng Saffiano Black Edition",
+    price: 1250000,
+    originalPrice: 1800000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80",
+    category: ["vi-da-cao-cap"],
   },
   {
     id: 3,
-    name: "Nồi chiên không dầu đa năng YUNA 6.5L",
-    price: 1990000,
-    originalPrice: 3100000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1621972750749-0fbb1abb7736?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-nha-bep"],
+    name: "Thắt lưng da bò nguyên tấm Luxury Brass",
+    price: 950000,
+    originalPrice: 1450000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1624222247344-550fb8ecf78d?w=600&q=80",
+    category: ["that-lung-da"],
   },
   {
     id: 4,
-    name: "Quạt tích điện thông minh YUNA Breeze F1",
-    price: 1190000,
-    originalPrice: 1800000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1618945833293-10e3fa3f565c?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-tien-ich"],
+    name: "Thắt lưng công sở khóa tự động Premium",
+    price: 790000,
+    originalPrice: 1150000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80",
+    category: ["that-lung-da"],
   },
   {
     id: 5,
-    name: "Máy làm sữa hạt đa năng YUNA Nutri Max",
-    price: 1850000,
-    originalPrice: 2900000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-nha-bep"],
+    name: "Giftset Quý Ông Lịch Lãm (Ví & Thắt lưng)",
+    price: 1750000,
+    originalPrice: 2500000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1549439602-43ebca2327af?w=600&q=80",
+    category: ["bo-qua-tang"],
   },
   {
     id: 6,
-    name: "Ấm siêu tốc giữ nhiệt thông minh YUNA Kettle",
-    price: 650000,
-    originalPrice: 950000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1594227513513-d022b79930f3?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-tien-ich"],
+    name: "Giftset Quý Ông Thành Đạt Premium (Ví & Bút ký)",
+    price: 1490000,
+    originalPrice: 2100000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80",
+    category: ["bo-qua-tang"],
   },
   {
     id: 7,
-    name: "Bộ dao làm bếp thép Đức YUNA Chef Pro",
-    price: 1540000,
-    originalPrice: 2200000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-nha-bep"],
+    name: "Bao da chìa khóa Handmade Leather",
+    price: 350000,
+    originalPrice: 500000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&q=80",
+    category: ["phu-kien-da"],
   },
   {
     id: 8,
-    name: "Máy hút bụi cầm tay YUNA Handy H2",
-    price: 990000,
-    originalPrice: 1500000,
-    brand: "Yuna",
-    image: "https://images.unsplash.com/photo-1563161402-e414c7709c3e?auto=format&fit=crop&w=400&q=80",
-    category: ["gia-dung-tien-ich"],
+    name: "Bao đựng thẻ Minimalist Card Holder",
+    price: 420000,
+    originalPrice: 600000,
+    brand: "PLOYBAY",
+    image: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
+    category: ["phu-kien-da"],
   }
 ];
 
@@ -124,7 +123,7 @@ export default function ProductDetailPage({
       setLoading(true);
       
       const loadLocalFallback = () => {
-        const saved = localStorage.getItem("yuna_admin_products");
+        const saved = localStorage.getItem("ploybay_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -135,11 +134,10 @@ export default function ProductDetailPage({
                 name: found.name,
                 price: found.salePrice,
                 originalPrice: found.originalPrice,
-                brand: "Yuna",
+                brand: "PLOYBAY",
                 image: found.image,
                 category: [normalizeCategorySlug(found.category)],
-                description: found.description || "",
-                video_url: found.video_url || ""
+                description: found.description || ""
               };
               setProduct(prod);
               setActiveImage(getProductImage(prod.image));
@@ -156,8 +154,7 @@ export default function ProductDetailPage({
         if (foundStatic) {
           setProduct({
             ...foundStatic,
-            description: "Sản phẩm gia dụng chất lượng cao của YUNA, được sản xuất với dây chuyền hiện đại, đáp ứng mọi tiêu chuẩn chất lượng khắt khe nhất.",
-            video_url: ""
+            description: "Sản phẩm phụ kiện da nam cao cấp của PLOYBAY được chế tác hoàn toàn thủ công từ chất liệu da thật nhập khẩu thượng hạng, đem lại vẻ ngoài lịch lãm, tinh tế cho quý ông."
           });
           setActiveImage(getProductImage(foundStatic.image));
         } else {
@@ -187,11 +184,10 @@ export default function ProductDetailPage({
             name: data.name,
             price: Number(data.price),
             originalPrice: data.original_price ? Number(data.original_price) : undefined,
-            brand: "Yuna",
-            image: data.image || "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?auto=format&fit=crop&w=400&q=80",
+            brand: "PLOYBAY",
+            image: data.image || "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
             category: [normalizeCategorySlug(data.category)],
-            description: data.description || "",
-            video_url: data.video_url || ""
+            description: data.description || ""
           };
             setProduct(prod);
             setActiveImage(getProductImage(prod.image));
@@ -211,24 +207,6 @@ export default function ProductDetailPage({
 
   const formatPrice = (n: number) => {
     return n.toLocaleString("vi-VN") + "₫";
-  };
-
-  const getYoutubeEmbedUrl = (url: string) => {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : null;
-  };
-
-  const getTiktokEmbedUrl = (url: string) => {
-    if (!url) return null;
-    const match = url.match(/\/video\/(\d+)/);
-    return match ? `https://www.tiktok.com/embed/v2/${match[1]}` : null;
-  };
-
-  const isDirectVideo = (url: string) => {
-    if (!url) return false;
-    return url.match(/\.(mp4|webm|ogg)$/i) || url.includes("mixkit.co") || url.includes("video");
   };
 
   const handleAddToCart = () => {
@@ -260,7 +238,7 @@ export default function ProductDetailPage({
         <Header />
         <Navbar />
         <div className="flex-1 flex flex-col items-center justify-center py-20">
-          <Loader2 className="w-10 h-10 animate-spin text-[#6B8E23]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#8B5A2B]" />
           <p className="mt-4 text-gray-500 text-sm">Đang tải thông tin sản phẩm...</p>
         </div>
         <Footer />
@@ -276,7 +254,7 @@ export default function ProductDetailPage({
         <div className="flex-1 flex flex-col items-center justify-center py-20 px-4 text-center">
           <h2 className="text-2xl font-bold text-gray-800">Sản phẩm không tồn tại</h2>
           <p className="text-gray-500 mt-2 max-w-md">Sản phẩm bạn đang tìm kiếm không có hoặc đã bị gỡ bỏ.</p>
-          <Link href="/" className="mt-6 px-6 py-2.5 bg-[#6B8E23] text-white font-medium rounded-lg hover:bg-[#5a781e] transition-colors">
+          <Link href="/" className="mt-6 px-6 py-2.5 bg-[#8B5A2B] text-white font-medium rounded-lg hover:bg-[#704820] transition-colors">
             Quay lại Trang chủ
           </Link>
         </div>
@@ -303,15 +281,15 @@ export default function ProductDetailPage({
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-          <Link href="/" className="hover:text-[#6B8E23] transition-colors">
+          <Link href="/" className="hover:text-[#8B5A2B] transition-colors">
             Trang chủ
           </Link>
           <span>/</span>
-          <Link href={`/${product.category[0] || 'dien-gia-dung'}`} className="hover:text-[#6B8E23] transition-colors capitalize">
-            {getCategoryLabel(product.category[0] || 'dien-gia-dung')}
+          <Link href={`/${product.category[0] || 'vi-da-cao-cap'}`} className="hover:text-[#8B5A2B] transition-colors capitalize">
+            {getCategoryLabel(product.category[0] || 'vi-da-cao-cap')}
           </Link>
           <span>/</span>
-          <span className="text-[#6B8E23] font-semibold line-clamp-1">{product.name}</span>
+          <span className="text-[#8B5A2B] font-semibold line-clamp-1">{product.name}</span>
         </nav>
 
         {/* Product Details Section */}
@@ -344,7 +322,7 @@ export default function ProductDetailPage({
                     key={idx}
                     onClick={() => setActiveImage(thumbUrl)}
                     className={`relative w-20 h-20 rounded-xl overflow-hidden bg-gray-50 border-2 transition-all shrink-0 ${
-                      activeImage === thumbUrl ? "border-[#6B8E23]" : "border-gray-100 hover:border-gray-300"
+                      activeImage === thumbUrl ? "border-[#8B5A2B]" : "border-gray-100 hover:border-gray-300"
                     }`}
                   >
                     <Image
@@ -362,13 +340,13 @@ export default function ProductDetailPage({
 
             {/* Right Column (40%): Info & CTA */}
             <div className="lg:col-span-2 flex flex-col">
-              <span className="text-sm font-semibold uppercase tracking-wider text-[#6B8E23] mb-2">
+              <span className="text-sm font-semibold uppercase tracking-wider text-[#C59B27] mb-2">
                 Thương hiệu: {product.brand}
               </span>
               <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight mb-4">
                 {product.name}
               </h1>
-
+ 
               {/* Price Block */}
               <div className="bg-[#FDFBF7] rounded-2xl p-4 flex items-baseline gap-4 mb-6 border border-gray-100/50">
                 <span className="text-3xl font-extrabold text-[#D32F2F]">
@@ -380,21 +358,21 @@ export default function ProductDetailPage({
                   </span>
                 )}
               </div>
-
+ 
               {/* Brief Intro */}
               <div className="text-sm text-gray-600 space-y-3 mb-6 leading-relaxed">
                 <p>
-                  Sản phẩm gia dụng chất lượng cao của YUNA, được làm từ các vật liệu tuyển chọn bền bỉ, an toàn tuyệt đối cho sức khỏe của người tiêu dùng Việt Nam.
+                  Sản phẩm phụ kiện da nam cao cấp của PLOYBAY được chế tác từ chất liệu da thật nhập khẩu cao cấp, hoàn thiện tỉ mỉ bởi các nghệ nhân lành nghề, mang lại đẳng cấp và sự sang trọng cho phái mạnh.
                 </p>
                 <ul className="space-y-1.5 pl-1">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#6B8E23]" /> Thiết kế hiện đại, tiện lợi.
+                    <Check className="w-4 h-4 text-[#C59B27]" /> Da thật 100% nhập khẩu thượng hạng.
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#6B8E23]" /> Chất liệu thân thiện, dễ làm sạch.
+                    <Check className="w-4 h-4 text-[#C59B27]" /> Hoàn thiện thủ công tinh xảo, bền bỉ.
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#6B8E23]" /> Bảo hành chính hãng uy tín 12 tháng.
+                    <Check className="w-4 h-4 text-[#C59B27]" /> Bảo hành chính hãng da 12 tháng.
                   </li>
                 </ul>
               </div>
@@ -435,7 +413,7 @@ export default function ProductDetailPage({
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 flex items-center justify-center gap-2 py-4 bg-[#6B8E23] hover:bg-[#5a781e] text-white font-bold rounded-xl shadow-md transition-colors duration-200"
+                  className="flex-1 flex items-center justify-center gap-2 py-4 bg-[#8B5A2B] hover:bg-[#704820] text-white font-bold rounded-xl shadow-md transition-colors duration-200"
                 >
                   <ShoppingCart className="w-5 h-5" />
                   THÊM VÀO GIỎ HÀNG
@@ -448,7 +426,7 @@ export default function ProductDetailPage({
               {/* Assurances */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-gray-100 pt-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#6B8E23]/10 flex items-center justify-center text-[#6B8E23] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#8B5A2B]/10 flex items-center justify-center text-[#8B5A2B] shrink-0">
                     <Shield className="w-5 h-5" />
                   </div>
                   <div className="text-left">
@@ -457,7 +435,7 @@ export default function ProductDetailPage({
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#6B8E23]/10 flex items-center justify-center text-[#6B8E23] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#8B5A2B]/10 flex items-center justify-center text-[#8B5A2B] shrink-0">
                     <RefreshCw className="w-5 h-5" />
                   </div>
                   <div className="text-left">
@@ -466,7 +444,7 @@ export default function ProductDetailPage({
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#6B8E23]/10 flex items-center justify-center text-[#6B8E23] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#8B5A2B]/10 flex items-center justify-center text-[#8B5A2B] shrink-0">
                     <Truck className="w-5 h-5" />
                   </div>
                   <div className="text-left">
@@ -480,7 +458,7 @@ export default function ProductDetailPage({
           </div>
         </div>
 
-        {/* Bottom Section: Description & Video Review */}
+        {/* Bottom Section: Description */}
         <div className="grid grid-cols-1 gap-8 mt-12">
           {/* Description details */}
           <div className="bg-white rounded-2xl border border-gray-100 p-6 md:p-8 shadow-xs">
@@ -489,56 +467,9 @@ export default function ProductDetailPage({
             </h3>
             <div className="prose max-w-none text-gray-600 text-sm leading-relaxed whitespace-pre-line">
               {product.description || `Sản phẩm này hiện đang được cập nhật thông tin chi tiết. 
-              Vui lòng liên hệ với bộ phận chăm sóc khách hàng hoặc Hotline của YUNA để được tư vấn đầy đủ nhất.`}
+              Vui lòng liên hệ với bộ phận chăm sóc khách hàng hoặc Hotline của PLOYBAY để được tư vấn đầy đủ nhất.`}
             </div>
           </div>
-
-          {/* Video Review section */}
-          {product.video_url && (
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 md:p-8 shadow-xs">
-              <h3 className="text-lg font-bold text-gray-800 border-b border-gray-100 pb-4 mb-6 uppercase">
-                Video Review Thực Tế
-              </h3>
-              
-              <div className="max-w-3xl mx-auto rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-black aspect-video flex items-center justify-center relative">
-                {getYoutubeEmbedUrl(product.video_url) ? (
-                  <iframe
-                    className="w-full h-full absolute inset-0 border-0"
-                    src={getYoutubeEmbedUrl(product.video_url)!}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                ) : getTiktokEmbedUrl(product.video_url) ? (
-                  <iframe
-                    className="w-full h-full absolute inset-0 border-0"
-                    src={getTiktokEmbedUrl(product.video_url)!}
-                    title="TikTok video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                ) : isDirectVideo(product.video_url) ? (
-                  <video
-                    src={product.video_url}
-                    controls
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <div className="p-8 text-center flex flex-col items-center">
-                    <p className="text-gray-400 mb-4 text-sm">Xem video review trực tiếp tại đường dẫn dưới đây:</p>
-                    <a
-                      href={product.video_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-2.5 bg-[#6B8E23] hover:bg-[#5a781e] text-white font-medium rounded-lg text-sm transition-colors"
-                    >
-                      Mở Video Review
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </main>
 
