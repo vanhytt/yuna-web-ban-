@@ -39,7 +39,7 @@ export default function NewsDetailPage() {
       setLoading(true);
 
       if (!checkConnection()) {
-        const saved = localStorage.getItem("ploybay_admin_posts");
+        const saved = localStorage.getItem("swordsman_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -64,7 +64,7 @@ export default function NewsDetailPage() {
         setPost(data as Post);
       } catch (err) {
         console.warn("Lỗi khi tải bài viết chi tiết:", err);
-        const saved = localStorage.getItem("ploybay_admin_posts");
+        const saved = localStorage.getItem("swordsman_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -151,7 +151,7 @@ export default function NewsDetailPage() {
 
             <div className="mb-8 border-b border-gray-100 pb-6">
               <span className="inline-flex rounded-full bg-[#C59B27] px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-sm">
-                {post.category || "TIN TỨC PLOYBAY"}
+                {post.category || "TIN TỨC SWORDSMAN"}
               </span>
 
               <h1 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-gray-900 leading-tight">
@@ -160,7 +160,7 @@ export default function NewsDetailPage() {
 
               <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-600 md:text-base">
                 <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5 font-medium text-[#B45309]">
-                  Viết bởi {post.author || "PLOYBAY Editor"}
+                  Viết bởi {post.author || "Swordsman Editor"}
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5 text-gray-600">
                   {post.created_at ? new Date(post.created_at).toLocaleDateString("vi-VN") : "Mới đăng"}
@@ -171,12 +171,12 @@ export default function NewsDetailPage() {
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] items-start">
               <div className="space-y-6 text-gray-700">
                 <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                  {post.content?.replace(/<[^>]+>/g, " ").slice(0, 260) || "Khám phá những câu chuyện thương hiệu, xu hướng thời trang quý ông và cẩm nang bảo quản phụ kiện da cao cấp từ PLOYBAY."}
+                  {post.content?.replace(/<[^>]+>/g, " ").slice(0, 260) || "Khám phá những câu chuyện thương hiệu, xu hướng thời trang quý ông và cẩm nang bảo quản phụ kiện da cao cấp từ Swordsman."}
                 </p>
 
                 <div className="rounded-2xl border border-amber-100 bg-amber-50/30 p-4 text-sm md:text-base text-gray-700 shadow-sm">
                   <p className="font-semibold text-[#B45309] mb-2">Gợi ý đọc thêm</p>
-                  <p>Hãy cùng theo dõi những chia sẻ mới nhất về phong cách sống của quý ông, bí quyết phối đồ da và cẩm nang lựa chọn quà tặng đẳng cấp từ PLOYBAY.</p>
+                  <p>Hãy cùng theo dõi những chia sẻ mới nhất về phong cách sống của quý ông, bí quyết phối đồ da và cẩm nang lựa chọn quà tặng đẳng cấp từ Swordsman.</p>
                 </div>
               </div>
 

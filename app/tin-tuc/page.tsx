@@ -24,10 +24,10 @@ const fallbackPosts: Post[] = [
   {
     id: 1,
     title: "Cách phân biệt ví da thật và da giả chi tiết nhất",
-    content: "Để không mua nhầm các sản phẩm giả da kém chất lượng, PLOYBAY chia sẻ đến bạn những mẹo đơn giản để phân biệt ví da thật và giả bằng mắt thường và xúc giác.",
+    content: "Để không mua nhầm các sản phẩm giả da kém chất lượng, Swordsman chia sẻ đến bạn những mẹo đơn giản để phân biệt ví da thật và giả bằng mắt thường và xúc giác.",
     thumbnail: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
-    category: "Tin tức PLOYBAY",
-    author: "PLOYBAY Editor",
+    category: "Tin tức Swordsman",
+    author: "Swordsman Editor",
     status: "Công khai",
   },
   {
@@ -35,8 +35,8 @@ const fallbackPosts: Post[] = [
     title: "Bí quyết bảo quản thắt lưng da luôn như mới",
     content: "Thắt lưng da nam cao cấp nếu không biết cách bảo quản sẽ dễ bị ẩm mốc, rạn nứt. Hãy lưu lại ngay những bí quyết cực đơn giản giúp món phụ kiện của bạn luôn bền đẹp.",
     thumbnail: "https://images.unsplash.com/photo-1624222247344-550fb8ecf78d?w=600&q=80",
-    category: "Tin tức PLOYBAY",
-    author: "PLOYBAY Editor",
+    category: "Tin tức Swordsman",
+    author: "Swordsman Editor",
     status: "Công khai",
   },
 ];
@@ -56,7 +56,7 @@ export default function NewsPage() {
       setLoading(true);
 
       if (!checkConnection()) {
-        const saved = localStorage.getItem("ploybay_admin_posts");
+        const saved = localStorage.getItem("swordsman_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -83,7 +83,7 @@ export default function NewsPage() {
         if (data && data.length > 0) {
           setPosts(data as Post[]);
         } else {
-          const saved = localStorage.getItem("ploybay_admin_posts");
+          const saved = localStorage.getItem("swordsman_admin_posts");
           if (saved) {
             try {
               const parsed = JSON.parse(saved);
@@ -97,7 +97,7 @@ export default function NewsPage() {
         }
       } catch (err) {
         console.warn("Lỗi khi tải danh sách tin tức:", err);
-        const saved = localStorage.getItem("ploybay_admin_posts");
+        const saved = localStorage.getItem("swordsman_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -130,7 +130,7 @@ export default function NewsPage() {
 
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 uppercase tracking-widest">Tin tức</h1>
-          <p className="text-gray-500 mt-2">Cập nhật thông tin, xu hướng thời trang và cẩm nang phụ kiện da nam từ PLOYBAY.</p>
+          <p className="text-gray-500 mt-2">Cập nhật thông tin, xu hướng thời trang và cẩm nang phụ kiện da nam từ Swordsman.</p>
         </div>
 
         {loading ? (
@@ -170,7 +170,7 @@ export default function NewsPage() {
                    </Link>
                    <p className="text-sm text-gray-600 line-clamp-3">{post.content?.replace(/<[^>]+>/g, " ").slice(0, 180)}...</p>
                    <div className="pt-2 flex items-center justify-between text-xs text-gray-500">
-                     <span>{post.author || "PLOYBAY"}</span>
+                     <span>{post.author || "Swordsman"}</span>
                      <span>{post.created_at ? new Date(post.created_at).toLocaleDateString("vi-VN") : "Mới"}</span>
                    </div>
                  </div>

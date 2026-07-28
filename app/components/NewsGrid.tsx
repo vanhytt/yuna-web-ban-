@@ -18,7 +18,7 @@ const fallbackArticles: NewsArticle[] = [
     id: 1,
     title: "CÁCH PHÂN BIỆT VÍ DA THẬT VÀ DA GIẢ CHI TIẾT NHẤT",
     sapo:
-      "Để không mua nhầm các sản phẩm giả da kém chất lượng, PLOYBAY chia sẻ đến bạn những mẹo đơn giản để phân biệt ví da thật và giả bằng mắt thường và xúc giác.",
+      "Để không mua nhầm các sản phẩm giả da kém chất lượng, Swordsman chia sẻ đến bạn những mẹo đơn giản để phân biệt ví da thật và giả bằng mắt thường và xúc giác.",
     image: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
     slug: "cach-phan-biet-vi-da-that-va-da-gia-chi-tiet-nhat",
   },
@@ -53,7 +53,7 @@ export default function NewsGrid() {
     const loadArticles = async () => {
       if (!checkConnection()) {
         // Fallback to local storage if saved there by admin, otherwise static fallback
-        const saved = localStorage.getItem("ploybay_admin_posts");
+        const saved = localStorage.getItem("swordsman_admin_posts");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -120,35 +120,35 @@ export default function NewsGrid() {
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {articles.map((article, index) => (
-            <Link
-              key={article.id}
-              href={`/tin-tuc/${article.id}`}
-              className="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-            >
-              {/* Image Container */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl">
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  priority={index === 0}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  unoptimized
-                />
-              </div>
+             <Link
+               key={article.id}
+               href={`/tin-tuc/${article.id}`}
+               className="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
+             >
+               {/* Image Container */}
+               <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl">
+                 <Image
+                   src={article.image}
+                   alt={article.title}
+                   fill
+                   className="object-cover group-hover:scale-105 transition-transform duration-300"
+                   sizes="(max-width: 768px) 100vw, 33vw"
+                   priority={index === 0}
+                   loading={index === 0 ? "eager" : "lazy"}
+                   unoptimized
+                 />
+               </div>
 
-              {/* Content */}
-              <div className="pt-4 flex flex-col gap-2">
-                <h3 className="text-sm md:text-base font-bold text-black uppercase leading-snug group-hover:text-[#C59B27] transition-colors duration-200 line-clamp-2">
-                  {article.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">
-                  {article.sapo}
-                </p>
-              </div>
-            </Link>
+               {/* Content */}
+               <div className="p-4 flex-1 flex flex-col justify-center items-start gap-2">
+                 <h3 className="text-sm md:text-base font-bold text-black uppercase leading-snug group-hover:text-[#C59B27] transition-colors duration-200 line-clamp-2 text-left">
+                   {article.title}
+                 </h3>
+                 <p className="text-gray-500 text-sm leading-relaxed line-clamp-3 text-left">
+                   {article.sapo}
+                 </p>
+               </div>
+             </Link>
           ))}
         </div>
       </div>

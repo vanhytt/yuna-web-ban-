@@ -21,11 +21,11 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
+  title: "Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
   description: "Thương hiệu quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.",
-  keywords: ['ploybay', 'vi da nam cao cap', 'that lung da nam', 'qua tang quy ong', 'phu kien da nam', 'qua tang nam gioi'],
+  keywords: ['swordsman', 'vi da nam cao cap', 'that lung da nam', 'qua tang quy ong', 'phu kien da nam', 'qua tang nam gioi'],
   openGraph: {
-    title: "PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
+    title: "Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
     description: "Thương hiệu quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.",
     locale: 'vi_VN',
     type: 'website',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp',
+        alt: 'Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp',
       }
     ],
   },

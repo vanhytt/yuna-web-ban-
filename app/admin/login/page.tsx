@@ -88,7 +88,7 @@ export default function AdminLoginPage() {
             <Lock className="w-8 h-8" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-            PLOYBAY Admin Portal
+            Swordsman Admin Portal
           </h1>
           <p className="text-slate-400 text-sm">
             Đăng nhập để truy cập hệ thống quản trị
@@ -110,7 +110,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder="admin@ploybay.vn"
+                  placeholder="admin@swordsman.vn"
                   className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-[#C59B27] focus:ring-2 focus:ring-[#C59B27]/20 transition-colors"
                   disabled={loading}
                 />
@@ -169,7 +169,7 @@ export default function AdminLoginPage() {
 
         {/* Additional Info */}
         <p className="text-center text-xs text-slate-500 mt-6">
-          © 2026 PLOYBAY. Hệ thống quản trị nội bộ.
+          © 2026 Swordsman. Hệ thống quản trị nội bộ.
         </p>
       </div>
     </div>

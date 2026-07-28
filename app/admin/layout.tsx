@@ -7,7 +7,6 @@ import { supabase } from "../../lib/supabase";
 import {
   LayoutDashboard,
   Package,
-  ShoppingCart,
   FileText,
   Settings,
   ChevronLeft,
@@ -18,7 +17,6 @@ import {
 
 const navItems = [
   { href: "/admin/products", label: "Quản lý sản phẩm", icon: Package },
-  { href: "/admin/orders", label: "Quản lý đơn hàng", icon: ShoppingCart },
   { href: "/admin/posts", label: "Quản lý bài viết", icon: FileText },
   { href: "/admin/settings", label: "Cài đặt", icon: Settings },
 ];
@@ -61,7 +59,7 @@ export default function AdminLayout({
           {!collapsed && (
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-widest text-white">
-                PLOYBAY
+                Swordsman
               </span>
               <span className="text-[10px] text-slate-400 uppercase tracking-widest -mt-0.5">
                 Admin Panel
@@ -148,7 +146,7 @@ export default function AdminLayout({
               A
             </div>
             <span className="text-sm text-slate-700 font-medium hidden sm:block">
-              Admin PLOYBAY
+              Admin Swordsman
             </span>
           </div>
         </header>

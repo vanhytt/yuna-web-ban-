@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Tạo description (tối đa 25 ký tự cho payOS)
-    const description = `PB${orderCode}`;
+    const description = `SW${orderCode}`;
 
     // Tạo sản phẩm hiển thị trên Google Sheet
     const calculatedProductsList = body.productsList || (products as { title: string; quantity: number; price: number }[]).map(

@@ -20,7 +20,7 @@ const initialPosts: Post[] = [
     id: 1,
     title: "CÁCH CHĂM SÓC VÀ BẢO QUẢN VÍ DA THẬT LUÔN NHƯ MỚI",
     category: "Kiến thức đồ da",
-    author: "PLOYBAY Editor",
+    author: "Swordsman Editor",
     date: "08/06/2026",
     status: "Công khai",
     thumbnail: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
@@ -30,7 +30,7 @@ const initialPosts: Post[] = [
     id: 2,
     title: "BÍ QUYẾT CHỌN THẮT LƯNG DA NAM PHÙ HỢP VỚI TRANG PHỤC",
     category: "Phong cách quý ông",
-    author: "PLOYBAY Editor",
+    author: "Swordsman Editor",
     date: "08/06/2026",
     status: "Công khai",
     thumbnail: "https://images.unsplash.com/photo-1624222247344-550fb8ecf7db?w=400&q=80",
@@ -40,11 +40,11 @@ const initialPosts: Post[] = [
     id: 3,
     title: "GỢI Ý SET QUÀ TẶNG DOANH NHÂN SANG TRỌNG VÀ Ý NGHĨA",
     category: "Tin tức quà tặng",
-    author: "Admin PLOYBAY",
+    author: "Admin Swordsman",
     date: "07/06/2026",
     status: "Công khai",
     thumbnail: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80",
-    content: "Set quà tặng ví da phối cùng thắt lưng cao cấp từ PLOYBAY là lựa chọn hàng đầu để tri ân đối tác, khách hàng và cấp trên."
+    content: "Set quà tặng ví da phối cùng thắt lưng cao cấp từ Swordsman là lựa chọn hàng đầu để tri ân đối tác, khách hàng và cấp trên."
   }
 ];
 
@@ -61,7 +61,7 @@ export default function PostsAdminPage() {
   const [formData, setFormData] = useState<Partial<Post>>({
     title: "",
     category: "Kiến thức đồ da",
-    author: "PLOYBAY Editor",
+    author: "Swordsman Editor",
     status: "Công khai",
     thumbnail: "",
     content: ""
@@ -85,7 +85,7 @@ export default function PostsAdminPage() {
 
     if (!hasConfig) {
       // Load from LocalStorage if offline, or fallback to initialPosts
-      const saved = localStorage.getItem("ploybay_admin_posts");
+      const saved = localStorage.getItem("swordsman_admin_posts");
       if (saved) {
         try {
           setPosts(JSON.parse(saved));
@@ -118,7 +118,7 @@ export default function PostsAdminPage() {
             id: item.id,
             title: item.title,
             category: item.category || "Chưa phân loại",
-            author: item.author || "Admin PLOYBAY",
+            author: item.author || "Admin Swordsman",
             date: formattedDate,
             status: item.status === "Nháp" ? "Nháp" : "Công khai",
             thumbnail: item.thumbnail || "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
@@ -132,7 +132,7 @@ export default function PostsAdminPage() {
     } catch (err) {
       console.warn("Lỗi khi kết nối Supabase:", err);
       showToast("Không thể kết nối Supabase. Đang hiển thị bài viết offline.", "info");
-      const saved = localStorage.getItem("ploybay_admin_posts");
+      const saved = localStorage.getItem("swordsman_admin_posts");
       setPosts(saved ? JSON.parse(saved) : initialPosts);
     } finally {
       setLoading(false);
@@ -148,7 +148,7 @@ export default function PostsAdminPage() {
     setFormData({
       title: "",
       category: "Kiến thức đồ da",
-      author: "PLOYBAY Editor",
+      author: "Swordsman Editor",
       status: "Công khai",
       thumbnail: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
       content: ""
@@ -180,7 +180,7 @@ export default function PostsAdminPage() {
 
     const updated = posts.filter((p) => p.id !== id);
     setPosts(updated);
-    localStorage.setItem("ploybay_admin_posts", JSON.stringify(updated));
+    localStorage.setItem("swordsman_admin_posts", JSON.stringify(updated));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -194,7 +194,7 @@ export default function PostsAdminPage() {
       title: formData.title,
       content: formData.content,
       category: formData.category || "Kiến thức đồ da",
-      author: formData.author || "PLOYBAY Editor",
+      author: formData.author || "Swordsman Editor",
       status: formData.status,
       thumbnail: formData.thumbnail || "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80"
     };
@@ -210,7 +210,7 @@ export default function PostsAdminPage() {
         id: newId,
         title: formData.title,
         category: formData.category || "Kiến thức đồ da",
-        author: formData.author || "PLOYBAY Editor",
+        author: formData.author || "Swordsman Editor",
         date: formattedDate,
         status: formData.status as any,
         thumbnail: payload.thumbnail,
@@ -232,7 +232,7 @@ export default function PostsAdminPage() {
 
       const updated = [...posts, newPost];
       setPosts(updated);
-      localStorage.setItem("ploybay_admin_posts", JSON.stringify(updated));
+      localStorage.setItem("swordsman_admin_posts", JSON.stringify(updated));
     } else {
       // Edit Mode
       if (isSupabaseConfigured) {
@@ -253,7 +253,7 @@ export default function PostsAdminPage() {
 
       const updated = posts.map((p) => (p.id === formData.id ? (formData as Post) : p));
       setPosts(updated);
-      localStorage.setItem("ploybay_admin_posts", JSON.stringify(updated));
+      localStorage.setItem("swordsman_admin_posts", JSON.stringify(updated));
     }
 
     setIsModalOpen(false);
@@ -457,14 +457,14 @@ export default function PostsAdminPage() {
                     <option value="Phong cách quý ông">Phong cách quý ông</option>
                     <option value="Kiến thức đồ da">Kiến thức đồ da</option>
                     <option value="Tin tức quà tặng">Tin tức quà tặng</option>
-                    <option value="Tin tức PLOYBAY">Tin tức PLOYBAY</option>
+                    <option value="Tin tức Swordsman">Tin tức Swordsman</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Tác giả</label>
                   <input
                     type="text"
-                    value={formData.author || "PLOYBAY Editor"}
+                    value={formData.author || "Swordsman Editor"}
                     onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                     className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
                   />

@@ -64,55 +64,56 @@ export default function ProductGrid() {
       setLoading(true);
 
       if (!checkConnection()) {
-        const saved = localStorage.getItem("ploybay_admin_products");
+        const saved = localStorage.getItem("swordsman_admin_products");
         const parsed = safeParseJSON(saved);
         if (isMounted) setProducts(parsed);
         if (isMounted) setLoading(false);
         return;
       }
 
-      try {
-        const { data, error } = await supabase
-          .from("products")
-          .select("*")
-          .order("id", { ascending: true });
+       try {
+         const { data, error } = await supabase
+           .from("products")
+           .select("*")
+           .order("id", { ascending: true })
+           .limit(8);
 
         if (error) throw error;
 
         if (data && data.length > 0) {
-          const mapped: Product[] = data.map((item) => {
-            const originalPrice = Number(item.original_price || item.price);
-            const salePrice = Number(item.price);
-            const discount = originalPrice > salePrice ? Math.round(((originalPrice - salePrice) / originalPrice) * 100) : 0;
+           const mapped: Product[] = data.map((item) => {
+             const originalPrice = Number(item.original_price || item.price);
+             const salePrice = Number(item.price);
+             const discount = originalPrice > salePrice ? Math.round(((originalPrice - salePrice) / originalPrice) * 100) : 0;
 
-            return {
-              id: item.id,
-              name: item.name,
-              category: getCategoryLabel(item.category) || "Chưa phân loại",
-              originalPrice,
-              salePrice,
-              discount,
-              rating: Number(item.rating || 5.0),
-              reviewsCount: Number(item.reviews_count || 0),
-              image: item.image || "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?auto=format&fit=crop&w=400&q=80",
-              tag: originalPrice > salePrice ? "Khuyến Mãi" : undefined
-            };
-          });
+             return {
+               id: item.id,
+               name: item.name,
+               category: getCategoryLabel(item.category) || "Chưa phân loại",
+               originalPrice,
+               salePrice,
+               discount,
+               rating: Number(item.rating || 5.0),
+               reviewsCount: Number(item.reviews_count || 0),
+               image: item.image || "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?auto=format&fit=crop&w=400&q=80",
+               tag: originalPrice > salePrice ? "Khuyến Mãi" : undefined
+             };
+           }).slice(0, 8);
 
-          if (isMounted) {
-            setProducts(mapped);
-          }
-        } else {
-          const saved = localStorage.getItem("ploybay_admin_products");
-          const parsed = safeParseJSON(saved);
-          if (isMounted) setProducts(parsed);
-        }
-      } catch (err) {
-        console.warn("Lỗi khi tải sản phẩm từ Supabase:", err);
-        const saved = localStorage.getItem("ploybay_admin_products");
-        const parsed = safeParseJSON(saved);
-        if (isMounted) setProducts(parsed);
-      } finally {
+           if (isMounted) {
+             setProducts(mapped);
+           }
+         } else {
+           const saved = localStorage.getItem("swordsman_admin_products");
+           const parsed = safeParseJSON(saved).slice(0, 8);
+           if (isMounted) setProducts(parsed);
+         }
+       } catch (err) {
+         console.warn("Lỗi khi tải sản phẩm từ Supabase:", err);
+         const saved = localStorage.getItem("swordsman_admin_products");
+         const parsed = safeParseJSON(saved).slice(0, 8);
+         if (isMounted) setProducts(parsed);
+       } finally {
         if (isMounted) setLoading(false);
       }
     };
@@ -169,7 +170,7 @@ export default function ProductGrid() {
           <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#C59B27] rounded-full" />
         </h2>
         <p className="text-sm text-gray-500 mt-2 text-center">
-          Sản phẩm ví da, thắt lưng da cao cấp PLOYBAY - Sự lựa chọn hoàn hảo của quý ông
+          Sản phẩm ví da, thắt lưng da cao cấp Swordsman - Sự lựa chọn hoàn hảo của quý ông
         </p>
       </div>
 
@@ -191,9 +192,9 @@ export default function ProductGrid() {
             </div>
           ))}
         </div>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {products.map((product) => (
+       ) : (
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+           {products.map((product) => (
           <div
             key={product.id}
             className="group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden relative"

@@ -31,7 +31,7 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
   useEffect(() => {
     if (isOpen && cart.length > 0 && !orderId) {
       const rand = Math.floor(10000 + Math.random() * 90000); // 5 chữ số ngẫu nhiên
-      setOrderId(`PB-${rand}`);
+      setOrderId(`SW-${rand}`);
     } else if (cart.length === 0) {
       setOrderId("");
     }
@@ -92,7 +92,7 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
 
-        setToastMessage({ type: 'success', text: 'Đặt hàng thành công! PLOYBAY sẽ liên hệ bạn trong giây lát.' });
+        setToastMessage({ type: 'success', text: 'Đặt hàng thành công! Swordsman sẽ liên hệ bạn trong giây lát.' });
         setTimeout(() => {
           clearCart();
           setName(""); setPhone(""); setAddress(""); setOrderId("");

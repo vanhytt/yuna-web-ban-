@@ -19,7 +19,7 @@ const coreValues = [
   {
     icon: ShieldCheck,
     title: "Chất lượng hàng đầu",
-    desc: "Tất cả sản phẩm ví da, thắt lưng da của PLOYBAY đều được chế tác từ da thật tự nhiên cao cấp, trải qua quy trình kiểm tra nghiêm ngặt trước khi xuất xưởng.",
+    desc: "Tất cả sản phẩm ví da, thắt lưng da của Swordsman đều được chế tác từ da thật tự nhiên cao cấp, trải qua quy trình kiểm tra nghiêm ngặt trước khi xuất xưởng.",
   },
   {
     icon: Cpu,
@@ -83,7 +83,7 @@ export default function GioiThieuPage() {
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="flex-1 max-w-[60px] h-px bg-[#C59B27]/60" />
             <span className="text-[#C59B27] text-base font-bold tracking-[0.3em] uppercase">
-              PLOYBAY PREMIUM
+              Swordsman PREMIUM
             </span>
             <div className="flex-1 max-w-[60px] h-px bg-[#C59B27]/60" />
           </div>
@@ -109,15 +109,15 @@ export default function GioiThieuPage() {
             <div className="lg:col-span-3 space-y-5 text-gray-600 leading-[1.85] text-[15px]">
               <p>
                 <span className="font-bold text-[#C59B27] text-base">
-                  PLOYBAY
+                  Swordsman
                 </span>{" "}
                 được thành lập với sứ mệnh định hình lại phong cách quà tặng phụ kiện da nam cao cấp tại Việt Nam. Chúng tôi tin rằng mỗi chiếc ví da, thắt lưng da không chỉ đơn thuần là vật dụng hàng ngày mà còn là tuyên ngôn cá nhân về phong cách, sự lịch lãm và thành công của người đàn ông.
               </p>
               <p>
-                Trải qua hành trình nghiên cứu và chế tác tỉ mỉ, PLOYBAY đã từng bước khẳng định vị thế bằng dòng sản phẩm da thật 100% tinh xảo. Các set quà tặng (Giftset) phối sẵn sang trọng, chỉnh chu được chúng tôi thiết kế riêng nhằm mang đến giải pháp tặng quà hoàn hảo nhất cho quý đối tác, người thân hay chính bản thân bạn.
+                Trải qua hành trình nghiên cứu và chế tác tỉ mỉ, Swordsman đã từng bước khẳng định vị thế bằng dòng sản phẩm da thật 100% tinh xảo. Các set quà tặng (Giftset) phối sẵn sang trọng, chỉnh chu được chúng tôi thiết kế riêng nhằm mang đến giải pháp tặng quà hoàn hảo nhất cho quý đối tác, người thân hay chính bản thân bạn.
               </p>
               <p>
-                Mỗi sản phẩm PLOYBAY trao đi đều mang theo tâm huyết chế tác cùng cam kết dịch vụ vượt trội. Từ khâu tuyển chọn chất liệu da thuộc nhập khẩu cao cấp cho đến hộp quà đóng gói chỉn chu kèm thiệp viết tay cá nhân hóa.
+                Mỗi sản phẩm Swordsman trao đi đều mang theo tâm huyết chế tác cùng cam kết dịch vụ vượt trội. Từ khâu tuyển chọn chất liệu da thuộc nhập khẩu cao cấp cho đến hộp quà đóng gói chỉn chu kèm thiệp viết tay cá hóa.
               </p>
               <blockquote className="border-l-4 border-[#C59B27] pl-5 py-1 text-zinc-800 font-semibold italic text-base">
                 &ldquo;Đẳng cấp quà tặng quý ông — Lịch lãm trong từng chi tiết.&rdquo;
@@ -183,7 +183,7 @@ export default function GioiThieuPage() {
                 Tầm Nhìn
               </h3>
               <p className="text-gray-500 leading-relaxed text-[15px]">
-                Trở thành biểu tượng thương hiệu hàng đầu Việt Nam về quà tặng phụ kiện da nam. PLOYBAY hướng tới nâng cao tiêu chuẩn trải nghiệm quà tặng cao cấp qua các bộ giftset thủ công kết hợp hoàn mỹ giữa chất lượng, thẩm mỹ và sự trân trọng.
+                Trở thành biểu tượng thương hiệu hàng đầu Việt Nam về quà tặng phụ kiện da nam. Swordsman hướng tới nâng cao tiêu chuẩn trải nghiệm quà tặng cao cấp qua các bộ giftset thủ công kết hợp hoàn mỹ giữa chất lượng, thẩm mỹ và sự trân trọng.
               </p>
             </div>
           </div>
@@ -231,13 +231,13 @@ export default function GioiThieuPage() {
         </div>
       </section>
 
-      {/* ===== TẠI SAO CHỌN PLOYBAY ===== */}
+      {/* ===== TẠI SAO CHỌN SWORDSMAN ===== */}
       <section className="py-16 md:py-20 bg-zinc-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-center gap-4 mb-12">
             <div className="flex-1 max-w-[60px] h-[2px] bg-[#C59B27]" />
             <h2 className="text-xl md:text-2xl font-bold text-white tracking-widest uppercase whitespace-nowrap">
-              TẠI SAO CHỌN PLOYBAY?
+              TẠI SAO CHỌN SWORDSMAN?
             </h2>
             <div className="flex-1 max-w-[60px] h-[2px] bg-[#C59B27]" />
           </div>

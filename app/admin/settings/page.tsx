@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { Save, Settings } from "lucide-react";
 
 export default function SettingsAdminPage() {
-  const [siteName, setSiteName] = useState("PLOYBAY");
+  const [siteName, setSiteName] = useState("Swordsman");
   const [phone, setPhone] = useState("0977 500 651");
   const [address, setAddress] = useState("Hà Nội, Việt Nam");
-  const [email, setEmail] = useState("contact@ploybay.vn");
+  const [email, setEmail] = useState("contact@swordsman.vn");
   const [shippingFee, setShippingFee] = useState(30000);
 
   const handleSave = (e: React.FormEvent) => {
@@ -20,7 +20,7 @@ export default function SettingsAdminPage() {
       {/* Header */}
       <div>
         <h2 className="text-xl font-bold text-slate-800">Cài đặt cấu hình</h2>
-        <p className="text-xs text-slate-500 mt-0.5">Quản lý cấu hình chung cho website PLOYBAY</p>
+        <p className="text-xs text-slate-500 mt-0.5">Quản lý cấu hình chung cho website Swordsman</p>
       </div>
 
       {/* Form Card */}

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function HeroSection() {
   const [visible, setVisible] = useState(false);
@@ -23,15 +22,15 @@ export default function HeroSection() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "PLOYBAY",
-            "url": "https://ploybay.vn",
-            "logo": "https://ploybay.vn/icon.png",
-            "description": "PLOYBAY mang đến các sản phẩm ví da, thắt lưng da nam thủ công tinh xảo, phối sẵn các set quà tặng sang trọng, lịch lãm - giải pháp quà tặng hoàn hảo dành riêng cho quý ông.",
+            "name": "Swordsman",
+            "url": "https://swordsman.vn",
+            "logo": "https://swordsman.vn/icon.png",
+            "description": "Swordsman mang đến các sản phẩm ví da, thắt lưng da nam thủ công tinh xảo, phối sẵn các set quà tặng sang trọng, lịch lãm - giải pháp quà tặng hoàn hảo dành riêng cho quý ông.",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+84-9xx-xxx-xxx",
               "contactType": "customer service",
-              "email": "contact@ploybay.vn",
+              "email": "contact@swordsman.vn",
               "areaServed": "VN",
               "availableLanguage": "Vietnamese"
             },
@@ -86,7 +85,7 @@ export default function HeroSection() {
               fontFamily: "var(--font-playfair), Georgia, serif",
             }}
           >
-            <span className="sr-only">PLOYBAY - Quà Tặng Phụ Kiện Da Nam Cao Cấp: </span>
+            <span className="sr-only">Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp: </span>
             <span className="block text-white text-[2.2rem] sm:text-[3rem] md:text-[3.4rem] lg:text-[3.6rem] xl:text-[4rem] leading-[1.1] font-bold tracking-tight">
               Khẳng định bản lĩnh
             </span>
@@ -110,7 +109,7 @@ export default function HeroSection() {
             }`}
             style={{ transitionDelay: "270ms" }}
           >
-            <strong>PLOYBAY</strong> Từ đầu những năm 2000, khi những món quà còn giản dị, chúng tôi bắt đầu tạo nên những sản phẩm da đầu tiên bằng tất cả sự tỉ mỉ và tâm huyết. Không chỉ là ví da hay thắt lưng, mỗi sản phẩm đều được chọn lựa kĩ từ chất liệu, thiết kế cho tới từng đường may hoàn thiện. Chúng tôi tin rằng, những món quà đẹp nhất không nằm ở giá trị vật chất mà là cảm xúc khi người nhận mở món quà ra. Mỗi chiếc hộp được trao đi là một kỉ niệm được lưu giữ. Và chúng tôi tự hào khi trở thành một phần trong khoảnh khắc ấy. Hơn 20 năm đồng hành cùng khách hàng, chúng tôi vẫn giữ trọn vẹn giá trị đầu. Sang trọng và tinh tế
+            <strong>Swordsman</strong> Từ đầu những năm 2000, khi những món quà còn giản dị, chúng tôi bắt đầu tạo nên những sản phẩm da đầu tiên bằng tất cả sự tỉ mỉ và tâm huyết. Không chỉ là ví da hay thắt lưng, mỗi sản phẩm đều được chọn lựa kĩ từ chất liệu, thiết kế cho tới từng đường may hoàn thiện. Chúng tôi tin rằng, những món quà đẹp nhất không nằm ở giá trị vật chất mà là cảm xúc khi người nhận mở món quà ra. Mỗi chiếc hộp được trao đi là một kỉ niệm được lưu giữ. Và chúng tôi tự hào khi trở thành một phần trong khoảnh khắc ấy. Hơn 20 năm đồng hành cùng khách hàng, chúng tôi vẫn giữ trọn vẹn giá trị đầu. Sang trọng và tinh tế
           </p>
 
           {/* CTA Buttons */}
@@ -123,7 +122,7 @@ export default function HeroSection() {
             {/* Primary — button-in-button pattern */}
             <Link
               href="/vi-da-cao-cap"
-              title="Khám phá bộ sưu tập ví da nam cao cấp PLOYBAY"
+              title="Khám phá bộ sưu tập ví da nam cao cấp Swordsman"
               className="group inline-flex items-center justify-between gap-2 pl-6 pr-2 py-2 bg-[#8C6239] hover:bg-[#734d29] text-white font-semibold rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-[#8C6239]/20 w-fit"
             >
               <span>Khám phá bộ sưu tập</span>
@@ -241,19 +240,18 @@ export default function HeroSection() {
           <div className="relative p-2 bg-white/[0.025] ring-1 ring-white/[0.07] rounded-[2.5rem]">
             {/* Inner core */}
             <div
-              className="relative overflow-hidden rounded-[2rem] w-full aspect-[3/4] md:aspect-[4/5] flex items-center justify-center bg-black/40"
+              className="relative overflow-hidden rounded-[2rem] w-full aspect-[9/16] bg-black/40"
               style={{
                 boxShadow: "inset 0 1px 1px rgba(255,255,255,0.06)",
               }}
             >
-              <Image
-                src="/logo.png"
-                alt="PLOYBAY Logo"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 43vw"
-                className="object-contain p-12"
-                unoptimized
+              <video
+                src="/video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover rounded-xl"
               />
 
               {/* Inner vignette — bottom */}
@@ -307,10 +305,10 @@ export default function HeroSection() {
             aria-label="Thông tin liên hệ"
           >
             <a
-              href="mailto:contact@ploybay.vn"
+              href="mailto:contact@swordsman.vn"
               className="text-white/25 hover:text-white/50 text-[10px] tracking-wide transition-colors duration-300"
             >
-              contact@ploybay.vn
+              contact@swordsman.vn
             </a>
             <a
               href="tel:09xxxxxxxx"

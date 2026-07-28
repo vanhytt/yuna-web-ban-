@@ -76,7 +76,7 @@ export default function CategoryPage({
   useEffect(() => {
     const loadProducts = async () => {
       if (!checkConnection()) {
-        const saved = localStorage.getItem("ploybay_admin_products");
+        const saved = localStorage.getItem("swordsman_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -85,7 +85,7 @@ export default function CategoryPage({
               name: item.name,
               price: item.salePrice,
               originalPrice: item.originalPrice,
-              brand: "PLOYBAY",
+              brand: "Swordsman",
               image: item.image,
               category: [item.category],
             }));
@@ -111,14 +111,14 @@ export default function CategoryPage({
             name: item.name,
             price: Number(item.price),
             originalPrice: item.original_price ? Number(item.original_price) : undefined,
-            brand: "PLOYBAY",
+            brand: "Swordsman",
             image: item.image || "",
             category: [item.category || "vi-da-cao-cap"],
           }));
           setProducts(mapped);
         } else {
           // Supabase trả về 0 sản phẩm → fallback về localStorage
-          const saved = localStorage.getItem("ploybay_admin_products");
+          const saved = localStorage.getItem("swordsman_admin_products");
           if (saved) {
             try {
               const parsed = JSON.parse(saved);
@@ -127,7 +127,7 @@ export default function CategoryPage({
                 name: item.name,
                 price: item.salePrice || item.price || 0,
                 originalPrice: item.originalPrice || item.original_price,
-                brand: "PLOYBAY",
+                brand: "Swordsman",
                 image: item.image,
                 category: [normalizeCategorySlug(item.category)],
               }));
@@ -139,7 +139,7 @@ export default function CategoryPage({
         }
       } catch (err) {
         console.warn("Lỗi khi tải sản phẩm từ Supabase:", err);
-        const saved = localStorage.getItem("ploybay_admin_products");
+        const saved = localStorage.getItem("swordsman_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -148,7 +148,7 @@ export default function CategoryPage({
               name: item.name,
               price: item.salePrice,
               originalPrice: item.originalPrice,
-              brand: "PLOYBAY",
+              brand: "Swordsman",
               image: item.image,
               category: [item.category],
             }));

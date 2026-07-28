@@ -28,7 +28,7 @@ const allProducts: Product[] = [
     name: "Ví da nam Premium Classic Handcrafted",
     price: 850000,
     originalPrice: 1200000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
     category: ["vi-da-cao-cap"],
   },
@@ -37,7 +37,7 @@ const allProducts: Product[] = [
     name: "Ví đứng Saffiano Black Edition",
     price: 1250000,
     originalPrice: 1800000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80",
     category: ["vi-da-cao-cap"],
   },
@@ -46,7 +46,7 @@ const allProducts: Product[] = [
     name: "Thắt lưng da bò nguyên tấm Luxury Brass",
     price: 950000,
     originalPrice: 1450000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1624222247344-550fb8ecf78d?w=600&q=80",
     category: ["that-lung-da"],
   },
@@ -55,7 +55,7 @@ const allProducts: Product[] = [
     name: "Thắt lưng công sở khóa tự động Premium",
     price: 790000,
     originalPrice: 1150000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80",
     category: ["that-lung-da"],
   },
@@ -64,7 +64,7 @@ const allProducts: Product[] = [
     name: "Giftset Quý Ông Lịch Lãm (Ví & Thắt lưng)",
     price: 1750000,
     originalPrice: 2500000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1549439602-43ebca2327af?w=600&q=80",
     category: ["bo-qua-tang"],
   },
@@ -73,7 +73,7 @@ const allProducts: Product[] = [
     name: "Giftset Quý Ông Thành Đạt Premium (Ví & Bút ký)",
     price: 1490000,
     originalPrice: 2100000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80",
     category: ["bo-qua-tang"],
   },
@@ -82,7 +82,7 @@ const allProducts: Product[] = [
     name: "Bao da chìa khóa Handmade Leather",
     price: 350000,
     originalPrice: 500000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&q=80",
     category: ["phu-kien-da"],
   },
@@ -91,7 +91,7 @@ const allProducts: Product[] = [
     name: "Bao đựng thẻ Minimalist Card Holder",
     price: 420000,
     originalPrice: 600000,
-    brand: "PLOYBAY",
+    brand: "Swordsman",
     image: "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
     category: ["phu-kien-da"],
   }
@@ -123,7 +123,7 @@ export default function ProductDetailPage({
       setLoading(true);
       
       const loadLocalFallback = () => {
-        const saved = localStorage.getItem("ploybay_admin_products");
+        const saved = localStorage.getItem("swordsman_admin_products");
         if (saved) {
           try {
             const parsed = JSON.parse(saved);
@@ -134,7 +134,7 @@ export default function ProductDetailPage({
                 name: found.name,
                 price: found.salePrice,
                 originalPrice: found.originalPrice,
-                brand: "PLOYBAY",
+                brand: "Swordsman",
                 image: found.image,
                 category: [normalizeCategorySlug(found.category)],
                 description: found.description || ""
@@ -154,7 +154,7 @@ export default function ProductDetailPage({
         if (foundStatic) {
           setProduct({
             ...foundStatic,
-            description: "Sản phẩm phụ kiện da nam cao cấp của PLOYBAY được chế tác hoàn toàn thủ công từ chất liệu da thật nhập khẩu thượng hạng, đem lại vẻ ngoài lịch lãm, tinh tế cho quý ông."
+            description: "Sản phẩm phụ kiện da nam cao cấp của Swordsman được chế tác hoàn toàn thủ công từ chất liệu da thật nhập khẩu thượng hạng, đem lại vẻ ngoài lịch lãm, tinh tế cho quý ông."
           });
           setActiveImage(getProductImage(foundStatic.image));
         } else {
@@ -184,7 +184,7 @@ export default function ProductDetailPage({
             name: data.name,
             price: Number(data.price),
             originalPrice: data.original_price ? Number(data.original_price) : undefined,
-            brand: "PLOYBAY",
+            brand: "Swordsman",
             image: data.image || "https://images.unsplash.com/photo-1627124356238-3dbb4d5ce4d4?w=600&q=80",
             category: [normalizeCategorySlug(data.category)],
             description: data.description || ""
@@ -362,7 +362,7 @@ export default function ProductDetailPage({
               {/* Brief Intro */}
               <div className="text-sm text-gray-600 space-y-3 mb-6 leading-relaxed">
                 <p>
-                  Sản phẩm phụ kiện da nam cao cấp của PLOYBAY được chế tác từ chất liệu da thật nhập khẩu cao cấp, hoàn thiện tỉ mỉ bởi các nghệ nhân lành nghề, mang lại đẳng cấp và sự sang trọng cho phái mạnh.
+                  Sản phẩm phụ kiện da nam cao cấp của Swordsman được chế tác từ chất liệu da thật nhập khẩu cao cấp, hoàn thiện tỉ mỉ bởi các nghệ nhân lành nghề, mang lại đẳng cấp và sự sang trọng cho phái mạnh.
                 </p>
                 <ul className="space-y-1.5 pl-1">
                   <li className="flex items-center gap-2">
@@ -467,7 +467,7 @@ export default function ProductDetailPage({
             </h3>
             <div className="prose max-w-none text-gray-600 text-sm leading-relaxed whitespace-pre-line">
               {product.description || `Sản phẩm này hiện đang được cập nhật thông tin chi tiết. 
-              Vui lòng liên hệ với bộ phận chăm sóc khách hàng hoặc Hotline của PLOYBAY để được tư vấn đầy đủ nhất.`}
+              Vui lòng liên hệ với bộ phận chăm sóc khách hàng hoặc Hotline của Swordsman để được tư vấn đầy đủ nhất.`}
             </div>
           </div>
         </div>

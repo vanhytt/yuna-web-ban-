@@ -20,7 +20,7 @@ export default function Home() {
         <div className="animate-fade-in opacity-0 translate-y-5 transition-all duration-800 ease-out" style={{ animationFillMode: 'forwards', animationDelay: '100ms' }}>
           <Image
             src="/banner.png"
-            alt="PLOYBAY Banner"
+            alt="Swordsman Banner"
             width={1991}
             height={789}
             priority

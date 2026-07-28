@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/admin/',
       },
     ],
-    sitemap: 'https://ploybay.vn/sitemap.xml',
+    sitemap: 'https://swordsman.vn/sitemap.xml',
   }
 }

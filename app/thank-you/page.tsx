@@ -32,7 +32,7 @@ function ThankYouContent() {
             Thanh toán thành công!
           </h1>
           <p className="text-gray-600 mb-6">
-            Cảm ơn bạn đã mua sắm tại PLOYBAY. Đơn hàng của bạn đã được ghi nhận và đang được xử lý.
+            Cảm ơn bạn đã mua sắm tại Swordsman. Đơn hàng của bạn đã được ghi nhận và đang được xử lý.
           </p>
 
           {orderCode && (
@@ -41,7 +41,7 @@ function ThankYouContent() {
                 Mã giao dịch (PayOS)
               </span>
               <span className="text-lg font-bold text-[#8B5A2B] tracking-wide">
-                PB{orderCode}
+                SW{orderCode}
               </span>
             </div>
           )}

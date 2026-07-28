@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     const { orderCode, amount, description } = webhookData;
 
-    // Lấy metadata đơn hàng từ description (dạng "PBxxxxxx")
+    // Lấy metadata đơn hàng từ description (dạng "SWxxxxxx")
     // Phần thông tin chi tiết KH (tên, SĐT, địa chỉ, sản phẩm) được lưu tạm
     // ở phía client và gửi kèm qua header X-Order-Meta nếu có,
     // hoặc lấy từ payOS paymentLink nếu đã lưu buyerName, buyerPhone, buyerAddress.
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     // Chuẩn bị payload cập nhật trạng thái gửi về Google Sheet
     const sheetPayload = {
       action: "update_status",
-      orderId: description || `PB${orderCode}`,
+      orderId: description || `SW${orderCode}`,
       status: "ĐÃ THANH TOÁN (Tiền đã về)",
       totalPrice: amount,
       paymentMethod: "payOS QR",
@@ -78,5 +78,5 @@ export async function POST(request: NextRequest) {
 
 // payOS cũng dùng GET để xác thực webhook URL khi đăng ký
 export async function GET() {
-  return NextResponse.json({ status: "ok", service: "PLOYBAY payOS Webhook" });
+  return NextResponse.json({ status: "ok", service: "Swordsman payOS Webhook" });
 }

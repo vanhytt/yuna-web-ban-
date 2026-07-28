@@ -85,7 +85,7 @@ export default function ProductsAdminPage() {
 
   /* ── Helper: load from localStorage ── */
   const loadFromLocalStorage = () => {
-    const saved = localStorage.getItem("ploybay_admin_products");
+    const saved = localStorage.getItem("swordsman_admin_products");
     if (saved) {
       try {
         setProducts(JSON.parse(saved));
@@ -324,7 +324,7 @@ export default function ProductsAdminPage() {
     // Luôn cập nhật localStorage dù Supabase thành công hay thất bại
     const updated = products.filter((p) => p.id !== id);
     setProducts(updated);
-    localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
+    localStorage.setItem("swordsman_admin_products", JSON.stringify(updated));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -372,13 +372,13 @@ export default function ProductsAdminPage() {
           // Fallback: lưu vào localStorage khi Supabase lỗi
           const updated = [...products, newProduct];
           setProducts(updated);
-          localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
+          localStorage.setItem("swordsman_admin_products", JSON.stringify(updated));
           showToast("Supabase chưa sẵn sàng. Đã lưu sản phẩm offline!", "info");
         }
       } else {
         const updated = [...products, newProduct];
         setProducts(updated);
-        localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
+        localStorage.setItem("swordsman_admin_products", JSON.stringify(updated));
         showToast("Đã thêm sản phẩm thành công (Offline)!", "success");
       }
     } else {
@@ -397,13 +397,13 @@ export default function ProductsAdminPage() {
           // Fallback: cập nhật localStorage khi Supabase lỗi
           const updated = products.map((p) => (p.id === formData.id ? (formData as Product) : p));
           setProducts(updated);
-          localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
+          localStorage.setItem("swordsman_admin_products", JSON.stringify(updated));
           showToast("Supabase chưa sẵn sàng. Đã cập nhật sản phẩm offline!", "info");
         }
       } else {
         const updated = products.map((p) => (p.id === formData.id ? (formData as Product) : p));
         setProducts(updated);
-        localStorage.setItem("ploybay_admin_products", JSON.stringify(updated));
+        localStorage.setItem("swordsman_admin_products", JSON.stringify(updated));
         showToast("Đã cập nhật sản phẩm thành công (Offline)!", "success");
       }
     }
