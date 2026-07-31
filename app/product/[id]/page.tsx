@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
+import NewsGrid from "../../components/NewsGrid";
 import Footer from "../../components/Footer";
 import FloatingButtons from "../../components/FloatingButtons";
 import { ShoppingCart, Heart, Shield, RefreshCw, Truck, Check, Loader2 } from "lucide-react";
@@ -362,17 +363,17 @@ export default function ProductDetailPage({
               {/* Brief Intro */}
               <div className="text-sm text-gray-600 space-y-3 mb-6 leading-relaxed">
                 <p>
-                  Sản phẩm phụ kiện da nam cao cấp của Swordsman được chế tác từ chất liệu da thật nhập khẩu cao cấp, hoàn thiện tỉ mỉ bởi các nghệ nhân lành nghề, mang lại đẳng cấp và sự sang trọng cho phái mạnh.
+                  Sản phẩm phụ kiện da nam cao cấp của Swordsman được chế tác từ chất liệu da cao cấp, hoàn thiện tỉ mỉ bởi các nghệ nhân lành nghề, mang lại đẳng cấp vì sự sang trọng cho phái mạnh
                 </p>
                 <ul className="space-y-1.5 pl-1">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#C59B27]" /> Da thật 100% nhập khẩu thượng hạng.
+                    <Check className="w-4 h-4 text-[#C59B27]" /> Sản phẩm đi cùng túi hộp hãng như hình.
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#C59B27]" /> Hoàn thiện thủ công tinh xảo, bền bỉ.
+                    <Check className="w-4 h-4 text-[#C59B27]" /> Bảo hành lên đến 12 tháng cho da PU cao cấp
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#C59B27]" /> Bảo hành chính hãng da 12 tháng.
+                    <Check className="w-4 h-4 text-[#C59B27]" /> Bảo hành lên đến 36 tháng cho da bò
                   </li>
                 </ul>
               </div>
@@ -472,7 +473,7 @@ export default function ProductDetailPage({
           </div>
         </div>
       </main>
-
+      <NewsGrid />
       <Footer />
       <FloatingButtons />
     </div>

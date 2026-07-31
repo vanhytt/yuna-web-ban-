@@ -213,36 +213,19 @@ export default function ProductGrid() {
               </span>
             )}
 
-            {/* Product Image Area */}
-            <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
-              <Link href={"/product/" + product.id} className="w-full h-full block relative overflow-hidden">
-                <Image
-                  src={getProductImage(product.image)}
-                  alt={product.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </Link>
-              {/* Hover Actions */}
-              <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                <Link
-                  href={"/product/" + product.id}
-                  className="w-10 h-10 rounded-full bg-white text-gray-700 hover:text-[#C59B27] flex items-center justify-center shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-110 active:scale-95"
-                  aria-label="Quick View"
-                >
-                  <Eye className="w-5 h-5" />
-                </Link>
-                 <button
-                    onClick={(e) => handleAddToCart(e, product)}
-                    className="w-10 h-10 rounded-full bg-[#C59B27] text-white hover:bg-[#a17b1d] flex items-center justify-center shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 hover:scale-110 active:scale-95 cursor-pointer"
-                    aria-label="Add to Cart"
-                  >
-                    <ShoppingCart className="w-5 h-5" />
-                  </button>
-              </div>
-            </div>
+             {/* Product Image Area */}
+             <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
+               <Link href={"/product/" + product.id} className="w-full h-full block relative overflow-hidden">
+                 <Image
+                   src={getProductImage(product.image)}
+                   alt={product.name}
+                   fill
+                   className="object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                   loading="lazy"
+                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                 />
+               </Link>
+             </div>
 
             {/* Product Info */}
             <div className="p-3 md:p-4 flex flex-col flex-1">
@@ -255,29 +238,39 @@ export default function ProductGrid() {
                  </h3>
                </Link>
 
-               {/* Add to Cart Notification */}
-               {showNotification?.id === product.id && showNotification?.show && (
-                 <div className="text-center text-xs text-green-600 font-semibold mb-1">
-                   ✓ Đã thêm vào giỏ
-                 </div>
-               )}
+                {/* Add to Cart Notification */}
+                {showNotification?.id === product.id && showNotification?.show && (
+                  <div className="text-center text-xs text-green-600 font-semibold mb-1">
+                    ✓ Đã thêm vào giỏ
+                  </div>
+                )}
 
-               {/* Rating summary */}
-              <div className="flex items-center gap-1 my-1.5">
-                <span className="text-[10px] text-gray-400 font-medium">
-                  ({product.reviewsCount} đánh giá)
-                </span>
-              </div>
+                {/* Rating summary */}
+               <div className="flex items-center gap-1 my-1.5">
+                 <span className="text-[10px] text-gray-400 font-medium">
+                   ({product.reviewsCount} đánh giá)
+                 </span>
+               </div>
 
-              {/* Price Details */}
-              <div className="mt-auto pt-2 flex flex-col">
-                <span className="text-xs text-gray-400 line-through">
-                  {formatPrice(product.originalPrice)}
-                </span>
-                <span className="text-sm md:text-base font-extrabold text-[#D32F2F] mt-0.5">
-                  {formatPrice(product.salePrice)}
-                </span>
-              </div>
+               {/* Price Details */}
+               <div className="mt-auto pt-2 flex flex-col mb-3">
+                 <span className="text-xs text-gray-400 line-through">
+                   {formatPrice(product.originalPrice)}
+                 </span>
+                 <span className="text-sm md:text-base font-extrabold text-[#D32F2F] mt-0.5">
+                   {formatPrice(product.salePrice)}
+                 </span>
+               </div>
+
+               {/* Add to Cart Button */}
+               <button
+                 onClick={(e) => handleAddToCart(e, product)}
+                 className="w-full py-2.5 md:py-3 px-3 md:px-4 bg-[#C59B27] hover:bg-[#a17b1d] text-white font-bold text-xs md:text-sm rounded-lg transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+                 aria-label="Add to Cart"
+               >
+                 <ShoppingCart className="w-4 h-4" />
+                 <span>Thêm vào giỏ</span>
+               </button>
             </div>
           </div>
         ))}

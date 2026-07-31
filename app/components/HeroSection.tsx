@@ -1,15 +1,25 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { Volume2, VolumeX } from "lucide-react";
 
 export default function HeroSection() {
   const [visible, setVisible] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 60);
     return () => clearTimeout(t);
   }, []);
+
+  const handleToggleMute = () => {
+    setIsMuted(!isMuted);
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+    }
+  };
 
   const ease = "transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]";
 
@@ -246,13 +256,28 @@ export default function HeroSection() {
               }}
             >
               <video
+                ref={videoRef}
                 src="/video.mp4"
                 autoPlay
                 loop
-                muted
+                muted={isMuted}
                 playsInline
                 className="w-full h-full object-cover rounded-xl"
               />
+
+              {/* Mute/Unmute Button */}
+              <button
+                onClick={handleToggleMute}
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white p-2 backdrop-blur-sm transition-all duration-200 flex items-center justify-center hover:scale-110 active:scale-95"
+                aria-label={isMuted ? "Bật tiếng" : "Tắt tiếng"}
+                title={isMuted ? "Bật tiếng" : "Tắt tiếng"}
+              >
+                {isMuted ? (
+                  <VolumeX className="w-5 h-5" />
+                ) : (
+                  <Volume2 className="w-5 h-5" />
+                )}
+              </button>
 
               {/* Inner vignette — bottom */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#131110]/65 via-[#131110]/10 to-transparent" />

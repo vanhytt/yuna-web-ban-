@@ -5,10 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import NewsGrid from "../components/NewsGrid";
 import Footer from "../components/Footer";
 import FloatingButtons from "../components/FloatingButtons";
 import { ShoppingCart, ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { supabase, getProductImage, normalizeCategorySlug } from "../../lib/supabase";
+import { useCart } from "../context/CartContext";
 
 /* ───────── TYPES ───────── */
 interface Product {
@@ -66,6 +68,8 @@ export default function CategoryPage({
   const [selectedPrices, setSelectedPrices] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState("default");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const { addToCart } = useCart();
+  const [showNotification, setShowNotification] = useState<number | null>(null);
 
   const checkConnection = () => {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -211,6 +215,23 @@ export default function CategoryPage({
   }, [category, selectedPrices, sortBy, products]);
 
   const activeFilterCount = selectedPrices.length;
+
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault();
+    
+    addToCart({
+      id: String(product.id),
+      title: product.name,
+      price: product.price,
+      thumbnail_url: getProductImage(product.image),
+    });
+
+    // Show notification
+    setShowNotification(product.id);
+    setTimeout(() => {
+      setShowNotification(null);
+    }, 2000);
+  };
 
   /* ──── SIDEBAR CONTENT (reused for desktop & mobile) ──── */
   const FilterSidebar = (
@@ -379,34 +400,42 @@ export default function CategoryPage({
                       )}
                     </div>
 
-                    {/* Info */}
-                    <div className="p-4 flex flex-col gap-2">
-                      <span className="text-[11px] text-[#C59B27] font-semibold uppercase tracking-wider">
-                        {product.brand}
-                      </span>
-                      <Link href={`/product/${product.id}`} className="block">
-                        <h3 className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#C59B27] transition-colors">
-                          {product.name}
-                        </h3>
-                      </Link>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-lg font-bold text-[#C59B27]">
-                          {formatPrice(product.price)}
-                        </span>
-                        {product.originalPrice && (
-                          <span className="text-sm text-gray-400 line-through">
-                            {formatPrice(product.originalPrice)}
-                          </span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => alert(`Đã thêm vào giỏ hàng: ${product.name}`)}
-                        className="mt-2 w-full flex items-center justify-center gap-2 py-2.5 bg-[#C59B27] hover:bg-[#a17b1d] text-white text-sm font-semibold rounded-lg transition-colors duration-200"
-                      >
-                        <ShoppingCart className="w-4 h-4" />
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
+                     {/* Info */}
+                     <div className="p-4 flex flex-col gap-2">
+                       <span className="text-[11px] text-[#C59B27] font-semibold uppercase tracking-wider">
+                         {product.brand}
+                       </span>
+                       <Link href={`/product/${product.id}`} className="block">
+                         <h3 className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#C59B27] transition-colors">
+                           {product.name}
+                         </h3>
+                       </Link>
+                       
+                       {/* Add to Cart Notification */}
+                       {showNotification === product.id && (
+                         <div className="text-center text-xs text-green-600 font-semibold">
+                           ✓ Đã thêm vào giỏ
+                         </div>
+                       )}
+                       
+                       <div className="flex items-center gap-2 mt-1">
+                         <span className="text-lg font-bold text-[#C59B27]">
+                           {formatPrice(product.price)}
+                         </span>
+                         {product.originalPrice && (
+                           <span className="text-sm text-gray-400 line-through">
+                             {formatPrice(product.originalPrice)}
+                           </span>
+                         )}
+                       </div>
+                       <button
+                         onClick={(e) => handleAddToCart(e, product)}
+                         className="mt-2 w-full flex items-center justify-center gap-2 py-2.5 bg-[#C59B27] hover:bg-[#a17b1d] text-white text-sm font-semibold rounded-lg transition-colors duration-200 active:scale-95 cursor-pointer"
+                       >
+                         <ShoppingCart className="w-4 h-4" />
+                         Thêm vào giỏ
+                       </button>
+                     </div>
                   </div>
                 ))}
               </div>
@@ -432,7 +461,7 @@ export default function CategoryPage({
           </div>
         </div>
       </main>
-
+      <NewsGrid />
       <Footer />
       <FloatingButtons />
     </div>
