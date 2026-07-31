@@ -330,16 +330,16 @@ export default function HeroSection() {
             aria-label="Thông tin liên hệ"
           >
             <a
-              href="mailto:contact@swordsman.vn"
+              href="mailto:Adamstore1986@gmail.com"
               className="text-white/25 hover:text-white/50 text-[10px] tracking-wide transition-colors duration-300"
             >
-              contact@swordsman.vn
+              Adamstore1986@gmail.com
             </a>
             <a
-              href="tel:09xxxxxxxx"
+              href="tel:0969985008"
               className="text-white/25 hover:text-white/50 text-[10px] tracking-wide transition-colors duration-300"
             >
-              09xx xxx xxx
+              0969 985 008
             </a>
           </div>
         </div>
