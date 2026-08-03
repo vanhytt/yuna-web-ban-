@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Plus, Search, Edit, Trash2, FileText, X, Check, AlertCircle } from "lucide-react";
+import { Plus, Search, Edit, Trash2, FileText, X, Check, AlertCircle, Upload, Loader2 } from "lucide-react";
 import { supabase } from "../../../lib/supabase";
 
 interface Post {
@@ -66,6 +66,11 @@ export default function PostsAdminPage() {
     thumbnail: "",
     content: ""
   });
+
+  // Drag & drop state
+  const [uploadedImage, setUploadedImage] = useState<string>("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
 
   const checkConnection = () => {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -153,13 +158,131 @@ export default function PostsAdminPage() {
       thumbnail: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80",
       content: ""
     });
+    setUploadedImage("");
     setIsModalOpen(true);
   };
 
   const handleOpenEdit = (post: Post) => {
     setModalMode("edit");
     setFormData(post);
+    setUploadedImage(post.thumbnail || "");
     setIsModalOpen(true);
+  };
+
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const uploadFile = async (file: File) => {
+    setIsUploading(true);
+    const isConfigured = checkConnection();
+
+    if (!file.type.startsWith("image/")) {
+      showToast(`File ${file.name} không phải là ảnh hợp lệ!`, "error");
+      setIsUploading(false);
+      return;
+    }
+
+    if (isConfigured) {
+      try {
+        const fileExt = file.name.split(".").pop();
+        const fileName = `posts/${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+
+        const { data, error } = await supabase.storage
+          .from("product-images")
+          .upload(fileName, file, {
+            cacheControl: "3600",
+            upsert: false
+          });
+
+        if (error) throw error;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from("product-images")
+          .getPublicUrl(fileName);
+
+        setUploadedImage(publicUrl);
+        setFormData((prev) => ({
+          ...prev,
+          thumbnail: publicUrl
+        }));
+        showToast("Đã tải lên ảnh thành công!", "success");
+      } catch (err: any) {
+        console.warn("Storage upload warning (falling back to base64):", err);
+        showToast(`Lỗi upload: ${err.message}. Đang dùng chế độ offline/base64.`, "info");
+        const base64Url = await fileToBase64(file);
+        setUploadedImage(base64Url);
+        setFormData((prev) => ({
+          ...prev,
+          thumbnail: base64Url
+        }));
+      }
+    } else {
+      const base64Url = await fileToBase64(file);
+      setUploadedImage(base64Url);
+      setFormData((prev) => ({
+        ...prev,
+        thumbnail: base64Url
+      }));
+      showToast("Đã tải lên ảnh thành công (Base64)!", "success");
+    }
+    setIsUploading(false);
+  };
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      await uploadFile(e.dataTransfer.files[0]);
+      return;
+    }
+
+    const uriList = e.dataTransfer.getData("text/uri-list");
+    const plainText = e.dataTransfer.getData("text/plain");
+    const imageUrl = uriList || plainText;
+
+    if (imageUrl && (imageUrl.startsWith("http://") || imageUrl.startsWith("https://") || imageUrl.startsWith("data:image/"))) {
+      const cleanUrl = imageUrl.trim().split("\n")[0];
+      setUploadedImage(cleanUrl);
+      setFormData((prev) => ({
+        ...prev,
+        thumbnail: cleanUrl
+      }));
+      showToast("Đã thêm liên kết ảnh kéo thả thành công!", "success");
+    } else {
+      showToast("Không tìm thấy tệp tin hoặc liên kết ảnh hợp lệ!", "error");
+    }
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      await uploadFile(e.target.files[0]);
+    }
+  };
+
+  const removeImage = () => {
+    setUploadedImage("");
+    setFormData((prev) => ({
+      ...prev,
+      thumbnail: ""
+    }));
   };
 
   const handleDelete = async (id: number) => {
@@ -471,27 +594,103 @@ export default function PostsAdminPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Trạng thái</label>
-                  <select
-                    value={formData.status || "Công khai"}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27] bg-white"
-                  >
-                    <option value="Công khai">Công khai</option>
-                    <option value="Nháp">Nháp</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Đường dẫn ảnh đại diện</label>
+              <div>
+                <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5">Trạng thái</label>
+                <select
+                  value={formData.status || "Công khai"}
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27] bg-white"
+                >
+                  <option value="Công khai">Công khai</option>
+                  <option value="Nháp">Nháp</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase text-slate-500 mb-1.5 tracking-wider">
+                  Ảnh đại diện bài viết
+                </label>
+
+                {/* Image Preview */}
+                {uploadedImage && (
+                  <div className="relative group aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-50 mb-4 mt-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={uploadedImage}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                      <button
+                        type="button"
+                        onClick={removeImage}
+                        className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors cursor-pointer"
+                        title="Xóa ảnh"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                      <p className="text-white text-sm font-medium">Xóa ảnh</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Drag and drop Area */}
+                <div
+                  onDragEnter={handleDrag}
+                  onDragOver={handleDrag}
+                  onDragLeave={handleDrag}
+                  onDrop={handleDrop}
+                  className={`relative border-2 border-dashed rounded-2xl p-6 transition-colors flex flex-col items-center justify-center text-center cursor-pointer ${
+                    dragActive
+                      ? "border-[#C59B27] bg-[#C59B27]/5"
+                      : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50"
+                  }`}
+                >
                   <input
-                    type="text"
-                    value={formData.thumbnail || ""}
-                    onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
-                    placeholder="https://images.unsplash.com/..."
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    disabled={isUploading}
                   />
+
+                  {isUploading ? (
+                    <div className="flex flex-col items-center gap-2">
+                      <Loader2 className="w-8 h-8 text-[#C59B27] animate-spin" />
+                      <p className="text-sm font-semibold text-slate-600">Đang tải lên ảnh...</p>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                        <Upload className="w-5 h-5" />
+                      </div>
+                      <p className="text-sm font-semibold text-slate-600">
+                        Kéo thả ảnh hoặc click để chọn file
+                      </p>
+                      <p className="text-xs text-slate-400">
+                        Hỗ trợ PNG, JPG, WEBP. Kéo thả từ web khác cũng được!
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Manual URL Input fallback */}
+                <div className="mt-3">
+                  <details className="text-xs text-slate-400 cursor-pointer">
+                    <summary className="hover:text-slate-600 font-medium">Nhập URL thủ công (Nâng cao)</summary>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        value={formData.thumbnail || ""}
+                        onChange={(e) => {
+                          setFormData({ ...formData, thumbnail: e.target.value });
+                          setUploadedImage(e.target.value);
+                        }}
+                        placeholder="https://images.unsplash.com/..."
+                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#C59B27] focus:ring-1 focus:ring-[#C59B27]"
+                      />
+                    </div>
+                  </details>
                 </div>
               </div>
 
