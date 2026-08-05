@@ -1,8 +1,9 @@
-"use client";
+  "use client";
 
 import React, { useState, useEffect } from "react";
 import { Plus, Search, Edit, Trash2, FileText, X, Check, AlertCircle, Upload, Loader2 } from "lucide-react";
 import { supabase } from "../../../lib/supabase";
+import { compressImage } from "../../../lib/imageCompression";
 
 interface Post {
   id: number;
@@ -188,14 +189,22 @@ export default function PostsAdminPage() {
       return;
     }
 
+    // Tự động nén dung lượng ảnh và đổi định dạng sang webp
+    let compressedFile = file;
+    try {
+      compressedFile = await compressImage(file);
+    } catch (compressErr) {
+      console.error("Lỗi khi nén ảnh:", compressErr);
+    }
+
     if (isConfigured) {
       try {
-        const fileExt = file.name.split(".").pop();
+        const fileExt = compressedFile.name.split(".").pop();
         const fileName = `posts/${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
 
         const { data, error } = await supabase.storage
           .from("product-images")
-          .upload(fileName, file, {
+          .upload(fileName, compressedFile, {
             cacheControl: "3600",
             upsert: false
           });
@@ -211,11 +220,11 @@ export default function PostsAdminPage() {
           ...prev,
           thumbnail: publicUrl
         }));
-        showToast("Đã tải lên ảnh thành công!", "success");
+        showToast("Đã tối ưu & tải lên ảnh thành công!", "success");
       } catch (err: any) {
         console.warn("Storage upload warning (falling back to base64):", err);
         showToast(`Lỗi upload: ${err.message}. Đang dùng chế độ offline/base64.`, "info");
-        const base64Url = await fileToBase64(file);
+        const base64Url = await fileToBase64(compressedFile);
         setUploadedImage(base64Url);
         setFormData((prev) => ({
           ...prev,
@@ -223,13 +232,13 @@ export default function PostsAdminPage() {
         }));
       }
     } else {
-      const base64Url = await fileToBase64(file);
+      const base64Url = await fileToBase64(compressedFile);
       setUploadedImage(base64Url);
       setFormData((prev) => ({
         ...prev,
         thumbnail: base64Url
       }));
-      showToast("Đã tải lên ảnh thành công (Base64)!", "success");
+      showToast("Đã tối ưu & tải lên ảnh thành công (Base64)!", "success");
     }
     setIsUploading(false);
   };
@@ -657,7 +666,7 @@ export default function PostsAdminPage() {
                   {isUploading ? (
                     <div className="flex flex-col items-center gap-2">
                       <Loader2 className="w-8 h-8 text-[#C59B27] animate-spin" />
-                      <p className="text-sm font-semibold text-slate-600">Đang tải lên ảnh...</p>
+                      <p className="text-sm font-semibold text-slate-600">Đang tối ưu & tải ảnh lên...</p>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2">

@@ -1,14 +1,20 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = 'https://swordsman.vn'
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/admin/',
+        disallow: [
+          '/admin',
+          '/admin/*',
+          '/api',
+          '/api/*',
+        ],
       },
     ],
-    sitemap: 'https://swordsman.vn/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

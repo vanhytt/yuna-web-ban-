@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Plus, Search, Edit, Trash2, X, Check, AlertCircle, Upload, Loader2, ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase, getProductImage, getProductGallery } from "../../../lib/supabase";
+import { compressImage } from "../../../lib/imageCompression";
 
 interface Product {
   id: number;
@@ -190,14 +191,22 @@ export default function ProductsAdminPage() {
         continue;
       }
 
+      // Tự động nén dung lượng ảnh và đổi định dạng sang webp
+      let compressedFile = file;
+      try {
+        compressedFile = await compressImage(file);
+      } catch (compressErr) {
+        console.error("Lỗi khi nén ảnh:", compressErr);
+      }
+
       if (isConfigured) {
         try {
-          const fileExt = file.name.split(".").pop();
+          const fileExt = compressedFile.name.split(".").pop();
           const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
 
           const { data, error } = await supabase.storage
             .from(PRODUCT_IMAGES_BUCKET)
-            .upload(fileName, file, {
+            .upload(fileName, compressedFile, {
               cacheControl: "3600",
               upsert: false
             });
@@ -212,11 +221,11 @@ export default function ProductsAdminPage() {
         } catch (err: any) {
           console.warn("Storage upload warning (falling back to base64):", err);
           showToast(`Lỗi upload: ${err.message}. Đang dùng chế độ offline/base64 cho ảnh này.`, "info");
-          const base64Url = await fileToBase64(file);
+          const base64Url = await fileToBase64(compressedFile);
           newUploadedUrls.push(base64Url);
         }
       } else {
-        const base64Url = await fileToBase64(file);
+        const base64Url = await fileToBase64(compressedFile);
         newUploadedUrls.push(base64Url);
       }
     }
@@ -228,7 +237,7 @@ export default function ProductsAdminPage() {
         ...prev,
         image: JSON.stringify(updatedImages)
       }));
-      showToast(`Đã tải lên thành công ${newUploadedUrls.length} ảnh!`, "success");
+      showToast(`Đã tối ưu & tải lên thành công ${newUploadedUrls.length} ảnh!`, "success");
     }
     setIsUploading(false);
   };
@@ -737,7 +746,7 @@ export default function ProductsAdminPage() {
                   {isUploading ? (
                     <div className="flex flex-col items-center gap-2">
                       <Loader2 className="w-8 h-8 text-[#8B5A2B] animate-spin" />
-                      <p className="text-sm font-semibold text-slate-600">Đang tải lên ảnh...</p>
+                      <p className="text-sm font-semibold text-slate-600">Đang tối ưu & tải ảnh lên...</p>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2">

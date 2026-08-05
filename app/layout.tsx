@@ -21,22 +21,42 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
+  metadataBase: new URL("https://swordsman.vn"),
+  title: {
+    default: "Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
+    template: "%s | Swordsman"
+  },
   description: "Thương hiệu quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.",
-  keywords: ['swordsman', 'vi da nam cao cap', 'that lung da nam', 'qua tang quy ong', 'phu kien da nam', 'qua tang nam gioi'],
+  keywords: ['swordsman', 'ví da nam cao cấp', 'thắt lưng da nam', 'quà tặng quý ông', 'phụ kiện da nam', 'quà tặng nam giới', 'ví handmade', 'thắt lưng da thật'],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp | Lịch Lãm & Đẳng Cấp",
     description: "Thương hiệu quà tặng phụ kiện da nam cao cấp (ví da, thắt lưng da, quà tặng quý ông) thủ công tinh xảo, lịch lãm trong từng chi tiết.",
+    url: "https://swordsman.vn",
+    siteName: "Swordsman",
     locale: 'vi_VN',
     type: 'website',
     images: [
       {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/logo.png',
+        width: 800,
+        height: 800,
         alt: 'Swordsman - Quà Tặng Phụ Kiện Da Nam Cao Cấp',
       }
     ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

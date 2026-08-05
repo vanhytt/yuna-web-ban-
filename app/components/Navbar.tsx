@@ -9,6 +9,7 @@ export default function Navbar() {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
 
   const productSubItems = [
+    { label: "Tất cả sản phẩm", href: "/san-pham" },
     { label: "Ví da cao cấp", href: "/vi-da-cao-cap" },
     { label: "Thắt lưng da", href: "/that-lung-da" },
     { label: "Bộ quà tặng (Giftset)", href: "/bo-qua-tang" },
@@ -50,15 +51,14 @@ export default function Navbar() {
 
             {/* Sản phẩm (Dropdown Menu) */}
             <div className="group relative py-2">
-              <button
+              <Link
+                href="/san-pham"
                 className="relative px-3 lg:px-4 py-2 text-sm lg:text-base font-medium tracking-wide transition-colors rounded-md duration-200 whitespace-nowrap inline-flex items-center gap-1.5 cursor-pointer"
-                aria-haspopup="true"
-                aria-expanded="false"
               >
                 <span>Sản phẩm</span>
                 <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#C59B27] transition-all duration-300 group-hover:w-[80%]" />
-              </button>
+              </Link>
               {/* Dropdown container */}
               <div className="absolute top-[85%] left-0 hidden group-hover:block w-56 bg-[#1c1917] border border-[#8C6239]/30 rounded-md shadow-xl py-1.5 z-50">
                 {productSubItems.map((sub, sIdx) => (

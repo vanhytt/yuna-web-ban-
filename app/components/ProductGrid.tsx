@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Eye } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { supabase, getProductImage, getCategoryLabel } from "../../lib/supabase";
 import { useCart } from "../context/CartContext";
 
@@ -14,126 +14,95 @@ interface Product {
   originalPrice: number;
   salePrice: number;
   discount: number;
-  rating: number;
-  reviewsCount: number;
   image: string;
   tag?: string;
-}
-
-interface StoredProduct {
-  id?: number;
-  name?: string;
-  category?: string;
-  originalPrice?: number | string;
-  original_price?: number | string;
-  salePrice?: number | string;
-  price?: number | string;
-  discount?: number;
-  rating?: number;
-  reviewsCount?: number;
-  reviews_count?: number;
-  image?: string;
 }
 
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
   const { addToCart } = useCart();
   const [showNotification, setShowNotification] = useState<{ id: number; show: boolean } | null>(null);
-
-  const checkConnection = () => {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    return !!(url && key && !url.includes("placeholder-url"));
-  };
-
-  const safeParseJSON = (str: string | null): any[] => {
-    if (!str || str === "undefined" || str === "null") return [];
-    try {
-      const parsed = JSON.parse(str);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
-    }
-  };
 
   useEffect(() => {
     let isMounted = true;
 
-    const loadProducts = async () => {
-      setLoading(true);
+    async function fetchProductImage(id: number) {
+      try {
+        const { data, error } = await supabase
+          .from("products")
+          .select("image")
+          .eq("id", id)
+          .single();
 
-      if (!checkConnection()) {
-        const saved = localStorage.getItem("swordsman_admin_products");
-        const parsed = safeParseJSON(saved);
-        if (isMounted) setProducts(parsed);
-        if (isMounted) setLoading(false);
-        return;
-      }
-
-       try {
-         const { data, error } = await supabase
-           .from("products")
-           .select("*")
-           .order("id", { ascending: true })
-           .limit(8);
-
-        if (error) throw error;
-
-        if (data && data.length > 0) {
-           const mapped: Product[] = data.map((item) => {
-             const originalPrice = Number(item.original_price || item.price);
-             const salePrice = Number(item.price);
-             const discount = originalPrice > salePrice ? Math.round(((originalPrice - salePrice) / originalPrice) * 100) : 0;
-
-             return {
-               id: item.id,
-               name: item.name,
-               category: getCategoryLabel(item.category) || "Chưa phân loại",
-               originalPrice,
-               salePrice,
-               discount,
-               rating: Number(item.rating || 5.0),
-               reviewsCount: Number(item.reviews_count || 0),
-               image: item.image || "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?auto=format&fit=crop&w=400&q=80",
-               tag: originalPrice > salePrice ? "Khuyến Mãi" : undefined
-             };
-           }).slice(0, 8);
-
-           if (isMounted) {
-             setProducts(mapped);
-           }
-         } else {
-           const saved = localStorage.getItem("swordsman_admin_products");
-           const parsed = safeParseJSON(saved).slice(0, 8);
-           if (isMounted) setProducts(parsed);
-         }
-       } catch (err) {
-         console.warn("Lỗi khi tải sản phẩm từ Supabase:", err);
-         const saved = localStorage.getItem("swordsman_admin_products");
-         const parsed = safeParseJSON(saved).slice(0, 8);
-         if (isMounted) setProducts(parsed);
-       } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-
-    loadProducts();
-
-    const channel = supabase
-      .channel("home-products-realtime")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "products" },
-        () => {
-          loadProducts();
+        if (error) {
+          console.error(`Lỗi khi tải ảnh cho sản phẩm ${id}:`, error.message);
+          return;
         }
-      )
-      .subscribe();
+
+        if (data && isMounted) {
+          setProducts((prev) =>
+            prev.map((p) => (p.id === id ? { ...p, image: data.image || "no-image" } : p))
+          );
+        }
+      } catch (err) {
+        console.error(`Lỗi không mong muốn khi tải ảnh cho sản phẩm ${id}:`, err);
+      }
+    }
+
+    async function fetchProducts() {
+      try {
+        const { data, error } = await supabase
+          .from("products")
+          .select("id, name, price, original_price, category")
+          .order("id", { ascending: true })
+          .limit(8);
+
+        if (error) {
+          console.error("Lỗi khi tải sản phẩm:", error.message);
+          return;
+        }
+
+        if (data && isMounted) {
+          const mapped: Product[] = data.map((item) => {
+            const originalPrice = Number(item.original_price || item.price);
+            const salePrice = Number(item.price);
+            const discount =
+              originalPrice > salePrice
+                ? Math.round(((originalPrice - salePrice) / originalPrice) * 100)
+                : 0;
+
+            return {
+              id: item.id,
+              name: item.name,
+              category: getCategoryLabel(item.category) || "Chưa phân loại",
+              originalPrice,
+              salePrice,
+              discount,
+              image: "", // Trạng thái đang tải ảnh
+              tag: originalPrice > salePrice ? "Khuyến Mãi" : undefined,
+            };
+          });
+
+          setProducts(mapped);
+
+          // Tải ảnh cho từng sản phẩm song song để tránh timeout do dung lượng ảnh base64 quá lớn
+          data.forEach((item) => {
+            fetchProductImage(item.id);
+          });
+        }
+      } catch (err) {
+        console.error("Lỗi không mong muốn:", err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    fetchProducts();
 
     return () => {
       isMounted = false;
-      supabase.removeChannel(channel);
     };
   }, []);
 
@@ -215,16 +184,28 @@ export default function ProductGrid() {
 
              {/* Product Image Area */}
              <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
-               <Link href={"/product/" + product.id} className="w-full h-full block relative overflow-hidden">
-                 <Image
-                   src={getProductImage(product.image)}
-                   alt={product.name}
-                   fill
-                   className="object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                   loading="lazy"
-                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                 />
-               </Link>
+               {/* Shimmer Placeholder */}
+               {(!product.image || !loadedImages[product.id]) && (
+                 <div className="absolute inset-0 w-full h-full animate-shimmer z-10" />
+               )}
+
+               {product.image !== "" && (
+                 <Link href={"/product/" + product.id} className="w-full h-full block relative overflow-hidden">
+                   <Image
+                     src={getProductImage(product.image === "no-image" ? null : product.image)}
+                     alt={product.name}
+                     fill
+                     className={`object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                       loadedImages[product.id] ? "opacity-100" : "opacity-0"
+                     }`}
+                     loading="lazy"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                     onLoad={() => {
+                       setLoadedImages((prev) => ({ ...prev, [product.id]: true }));
+                     }}
+                   />
+                 </Link>
+               )}
              </div>
 
             {/* Product Info */}
@@ -244,13 +225,6 @@ export default function ProductGrid() {
                     ✓ Đã thêm vào giỏ
                   </div>
                 )}
-
-                {/* Rating summary */}
-               <div className="flex items-center gap-1 my-1.5">
-                 <span className="text-[10px] text-gray-400 font-medium">
-                   ({product.reviewsCount} đánh giá)
-                 </span>
-               </div>
 
                {/* Price Details */}
                <div className="mt-auto pt-2 flex flex-col mb-3">
