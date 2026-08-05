@@ -9,7 +9,7 @@ import NewsGrid from "../../components/NewsGrid";
 import Footer from "../../components/Footer";
 import FloatingButtons from "../../components/FloatingButtons";
 import { ShoppingCart, Heart, Shield, RefreshCw, Truck, Check, Loader2 } from "lucide-react";
-import { getProductImage, getProductGallery, getCategoryLabel, normalizeCategorySlug } from "../../../lib/supabase";
+import { supabase, getProductImage, getProductGallery, getCategoryLabel, normalizeCategorySlug } from "../../../lib/supabase";
 import { useCart } from "../../context/CartContext";
 
 interface Product {
@@ -122,7 +122,37 @@ export default function ProductDetailClient({
       return;
     }
 
-    const loadLocalFallback = () => {
+    const loadData = async () => {
+      setLoading(true);
+      
+      try {
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (!error && data) {
+          const prod = {
+            id: data.id,
+            name: data.name,
+            price: Number(data.price),
+            originalPrice: data.original_price ? Number(data.original_price) : undefined,
+            brand: "Swordsman",
+            image: data.image || "",
+            category: [normalizeCategorySlug(data.category)],
+            description: data.description || ""
+          };
+          setProduct(prod);
+          setActiveImage(getProductImage(prod.image));
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        console.warn("Client fallback fetch error:", err);
+      }
+
+      // Local fallback
       const saved = localStorage.getItem("swordsman_admin_products");
       if (saved) {
         try {
@@ -142,7 +172,7 @@ export default function ProductDetailClient({
             setProduct(prod);
             setActiveImage(getProductImage(prod.image));
             setLoading(false);
-            return true;
+            return;
           }
         } catch (e) {
           // Ignore
@@ -160,10 +190,9 @@ export default function ProductDetailClient({
         setProduct(null);
       }
       setLoading(false);
-      return false;
     };
 
-    loadLocalFallback();
+    loadData();
   }, [initialProduct, id]);
 
   const formatPrice = (n: number) => {

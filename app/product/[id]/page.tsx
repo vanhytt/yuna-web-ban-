@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import { createClient } from "@supabase/supabase-js";
-import { normalizeCategorySlug, getProductImage } from "../../../lib/supabase";
+import { supabase, normalizeCategorySlug, getProductImage } from "../../../lib/supabase";
 import ProductDetailClient from "./ProductDetailClient";
 
 interface Product {
@@ -89,15 +88,8 @@ const allProducts: Product[] = [
   }
 ];
 
-const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
-const supabaseAnonKey = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "").trim();
-
 async function getProduct(id: string): Promise<Product | null> {
-  if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes("placeholder-url")) {
-    return null;
-  }
   try {
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
     const { data, error } = await supabase
       .from("products")
       .select("*")
