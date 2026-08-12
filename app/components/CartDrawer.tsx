@@ -4,6 +4,7 @@ import Image from "next/image";
 import { X, ShoppingBag, Minus, Plus, Trash2, Tag, Loader2, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import { useRouter } from "next/navigation";
 
 function fmt(n: number) {
   return n.toLocaleString("vi-VN") + "₫";
@@ -15,12 +16,13 @@ interface Props {
 }
 
 export default function CartDrawer({ isOpen, onClose }: Props) {
+  const router = useRouter();
   const { cart, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
   const [coupon, setCoupon] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState<"COD" | "QR">("COD");
+  const [paymentMethod, setPaymentMethod] = useState<"cod" | "cash_on_delivery" | "COD" | "QR">("cod");
   const [loading, setLoading] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -67,7 +69,7 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
         .join(' | ');
 
       // ─── COD: gửi đơn thẳng về Google Sheets ───────────────────────────
-      if (paymentMethod === "COD") {
+      if (paymentMethod === "cod" || paymentMethod === "cash_on_delivery" || paymentMethod === "COD") {
         const orderData = {
           timestamp: new Date().toLocaleString('vi-VN'),
           orderId: orderId,
@@ -98,6 +100,7 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
           setName(""); setPhone(""); setAddress(""); setOrderId("");
           setToastMessage(null);
           onClose();
+          router.push("/thank-you");
         }, 2000);
         return;
       }
@@ -311,18 +314,14 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
                   <div className="grid grid-cols-1 gap-2.5">
                     {/* Option 1: COD */}
                     <label
-                      onClick={() => setPaymentMethod("COD")}
-                      className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all duration-200 cursor-pointer ${
-                        paymentMethod === "COD"
-                          ? "border-[#C59B27] bg-[#C59B27]/5 ring-1 ring-[#C59B27]"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
+                      onClick={() => setPaymentMethod("cod")}
+                      className="flex items-start gap-3 p-3.5 rounded-xl border transition-all duration-200 cursor-pointer border-[#C59B27] bg-[#C59B27]/5 ring-1 ring-[#C59B27]"
                     >
                       <input
                         type="radio"
                         name="paymentMethod"
-                        checked={paymentMethod === "COD"}
-                        onChange={() => setPaymentMethod("COD")}
+                        checked={true}
+                        readOnly
                         className="mt-1 accent-[#C59B27] cursor-pointer"
                       />
                       <div className="flex-1">
@@ -335,7 +334,8 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
                       </div>
                     </label>
 
-                    {/* Option 2: VietQR / payOS */}
+                    {/* Option 2: VietQR / payOS (Tạm thời ẩn) */}
+                    {/*
                     <label
                       onClick={() => setPaymentMethod("QR")}
                       className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all duration-200 cursor-pointer ${
@@ -360,10 +360,12 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
                         </p>
                       </div>
                     </label>
+                    */}
                   </div>
                 </div>
 
-                {/* Khối thông tin payOS QR khi chọn chuyển khoản */}
+                {/* Khối thông tin payOS QR khi chọn chuyển khoản (Tạm thời ẩn) */}
+                {/*
                 {paymentMethod === "QR" && (
                   <div className="p-4 bg-gradient-to-b from-[#C59B27]/5 to-gray-50 rounded-xl border border-[#C59B27]/20 space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
                     <div className="flex items-center gap-2.5">
@@ -395,6 +397,7 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
                     </div>
                   </div>
                 )}
+                */}
 
                 <button
                   type="submit"
@@ -404,12 +407,10 @@ export default function CartDrawer({ isOpen, onClose }: Props) {
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{paymentMethod === "COD" ? "Đang gửi đơn..." : "Đang tạo link thanh toán..."}</span>
+                      <span>Đang gửi đơn...</span>
                     </>
-                  ) : paymentMethod === "COD" ? (
-                    <span>ĐẶT HÀNG NGAY (COD)</span>
                   ) : (
-                    <span>THANH TOÁN QUA QR</span>
+                    <span>ĐẶT HÀNG NGAY (COD)</span>
                   )}
                 </button>
               </form>
